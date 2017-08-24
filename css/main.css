@@ -1,0 +1,66 @@
+/**
+ * BASE
+ */
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  color: #333;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/**
+ * HEADER
+ */
+
+header .pure-menu {
+  padding: 0.3em;
+  background: #ff6600;
+}
+
+header .pure-menu-heading {
+  padding: 0.3em;
+  color: white;
+  border: 2px solid white;
+}
+
+header .menu-title {
+  display: inline;
+  margin-left: 5px;
+  color: black;
+  font-size: 1em;
+}
+
+/**
+ * CONTENT
+ */
+
+.content-wrapper {
+  background: #f6f6ef;
+}
+
+/* This is the class used for the footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border-top: 2px solid #ff6600;
+  text-align: center;
+}
