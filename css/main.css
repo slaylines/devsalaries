@@ -53,6 +53,7 @@ header .menu-title {
   margin-left: 5px;
   color: black;
   font-size: 1em;
+  cursor: default;
 }
 
 /**
