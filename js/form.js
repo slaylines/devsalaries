@@ -1,4 +1,11 @@
 (() => {
+  const DEFAULT_OPTION_TEXT = {
+    country: '--- Choose Country ---',
+    city: '--- Choose City ---',
+    currency: '--- Choose Currency ---',
+    jobTitle: '--- Choose Job Title ---',
+  };
+
   const parseFormData = (formData) => {
     const result = {};
 
@@ -14,6 +21,12 @@
     return db.ref().child('entries').push(entry);
   };
 
+  const emptySelect = (select) => {
+    while (select.firstChild) {
+      select.removeChild(select.firstChild);
+    }
+  }
+
   const appendEmptyOption = (select, text) => {
     const option = document.createElement('option');
 
@@ -24,6 +37,7 @@
   };
 
   const appendOptions = (select, values, text) => {
+    emptySelect(select);
     appendEmptyOption(select, text);
 
     values.forEach((value) => {
@@ -44,20 +58,17 @@
       const citySelect = document.querySelector('#city');
 
       citySelect.setAttribute('disabled', true);
-      appendOptions(countrySelect, Object.keys(countries), 'Choose Country');
+      appendOptions(countrySelect, Object.keys(countries), DEFAULT_OPTION_TEXT.country);
 
       countrySelect.addEventListener('change', (event) => {
         const cities = countries[countrySelect.value];
 
-        while (citySelect.firstChild) {
-          citySelect.removeChild(citySelect.firstChild);
-        }
-
         if (cities) {
           citySelect.removeAttribute('disabled');
-          appendOptions(citySelect, cities, 'Choose City');
+          appendOptions(citySelect, cities, DEFAULT_OPTION_TEXT.city);
         } else {
           citySelect.setAttribute('disabled', true);
+          appendOptions(citySelect, [], DEFAULT_OPTION_TEXT.city);
         }
       });
     });
@@ -68,7 +79,7 @@
       return response.json();
     }).then((currencies) => {
       const currencySelect = document.querySelector('#currency');
-      appendOptions(currencySelect, Object.keys(currencies), 'Choose Currency');
+      appendOptions(currencySelect, Object.keys(currencies), DEFAULT_OPTION_TEXT.currency);
     });
   };
 
@@ -77,7 +88,7 @@
       return response.json();
     }).then((jobTitles) => {
       const jobTitleSelect = document.querySelector('#job-title');
-      appendOptions(jobTitleSelect, jobTitles, 'Choose Job Title');
+      appendOptions(jobTitleSelect, jobTitles, DEFAULT_OPTION_TEXT.jobTitle);
     });
   };
 
