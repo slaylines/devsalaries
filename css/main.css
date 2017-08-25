@@ -115,12 +115,12 @@ footer {
 
 .content.form-page {
   margin: auto;
-  text-align: center;
 }
 
 .form-page .ds-button {
+  display: block;
   width: 180px;
-  margin: 20px;
+  margin: 20px auto !important;
   font-size: 1.2em;
 }
 
@@ -128,8 +128,57 @@ footer {
  * MEDIA QUERIES
  */
 
-@media (min-width: 35.5em) {
+/* xs */
+@media (min-width: 30em) {
+  .pure-form .pure-input-xs-1-2 {
+    width: 50% !important;
+  }
+
   body {
     font-size: 1em;
+  }
+
+  .content.form-page {
+    text-align: center;
+  }
+}
+
+/* sm */
+@media (min-width: 35.5em) {
+  .pure-form .pure-input-xs-1-2 {
+    width: 50% !important;
+  }
+}
+
+/* md */
+@media (min-width: 48em) {
+  .pure-form .pure-input-xs-1-2 {
+    width: 50% !important;
+  }
+
+  .pure-form .pure-input-md-1-3 {
+    width: 33% !important;
+  }
+}
+
+/* lg */
+@media (min-width: 64em) {
+  .pure-form .pure-input-xs-1-2 {
+    width: 50% !important;
+  }
+
+  .pure-form .pure-input-md-1-3 {
+    width: 33% !important;
+  }
+}
+
+/* xl */
+@media (min-width: 80em) {
+  .pure-form .pure-input-xs-1-2 {
+    width: 50% !important;
+  }
+
+  .pure-form .pure-input-md-1-3 {
+    width: 33% !important;
   }
 }
