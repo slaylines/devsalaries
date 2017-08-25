@@ -8,11 +8,9 @@
   box-sizing: border-box;
 }
 
-html,
-body,
-main {
-  width: 100vw;
-  height: 100vh;
+html, body {
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -38,7 +36,14 @@ a {
  * HEADER
  */
 
+header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
 header .pure-menu {
+  height: 40px;
   padding: 0.3em;
   background: #ff6600;
 }
@@ -62,13 +67,18 @@ header .menu-title {
  */
 
 main {
+  width: 100%;
+  padding-bottom: 20px; 
+  position: absolute;
+  top: 40px;
   display: flex;
   background: #f6f6ef;
 }
 
 .content {
+  margin: 40px 0;
   width: 100%;
-  padding: 45px 20px;
+  padding: 0 20px;
 }
 
 /**
@@ -78,6 +88,7 @@ main {
 footer {
   position: fixed;
   bottom: 0;
+  height: 40px;
   width: 100%;
   padding: 10px;
   background: #f6f6ef;
@@ -148,6 +159,10 @@ footer {
   .pure-form .pure-input-xs-1-2 {
     width: 50% !important;
   }
+
+  main {
+    height: calc(100% - 40px);
+  }
 }
 
 /* md */
@@ -158,6 +173,10 @@ footer {
 
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
+  }
+
+  main {
+    height: calc(100% - 40px);
   }
 }
 
@@ -170,6 +189,10 @@ footer {
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
   }
+
+  main {
+    height: calc(100% - 40px);
+  }
 }
 
 /* xl */
@@ -181,4 +204,46 @@ footer {
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
   }
+
+  main {
+    height: calc(100% - 40px);
+  }
+}
+
+/**
+ * VIS PAGE
+ */
+
+.vis-page {
+  padding: 0;
+  margin: 0;
+}
+
+.selected {
+  fill: #D1CCF3;
+}
+
+.boundary {
+  fill: #fff;
+  stroke: #999;
+  stroke-width: 0.5px; 
+}
+
+path:not(.selected):hover {
+  fill: #F5EAAD;
+}
+
+.hidden {
+  display: none;
+}
+
+div.tooltip {
+  font-size: 12px;
+  color: #333; 
+  background: #fff; 
+  border-radius: 3px; 
+  box-shadow: 0px 0px 2px 0px #aaa; 
+  padding: 2px 3px; 
+  opacity: 0.95; 
+  position: absolute;
 }
