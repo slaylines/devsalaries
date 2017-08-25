@@ -17,6 +17,7 @@ main {
 
 body {
   color: #333;
+  font-size: 0.8em;
 }
 
 a {
@@ -67,7 +68,7 @@ main {
 
 .content {
   width: 100%;
-  padding: 45px;
+  padding: 45px 20px;
 }
 
 /**
@@ -121,4 +122,14 @@ footer {
   width: 180px;
   margin: 20px;
   font-size: 1.2em;
+}
+
+/**
+ * MEDIA QUERIES
+ */
+
+@media (min-width: 35.5em) {
+  body {
+    font-size: 1em;
+  }
 }
