@@ -10,7 +10,7 @@
     });
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  const initCountries = () => {
     fetch('data/countries.json').then((response) => {
       return response.json();
     }).then((countries) => {
@@ -29,5 +29,29 @@
         appendOptions(citySelect, cities);
       });
     });
+  };
+
+  const initCurrencies = () => {
+    fetch('data/currencies.json').then((response) => {
+      return response.json();
+    }).then((currencies) => {
+      const currencySelect = document.querySelector('#currency');
+      appendOptions(currencySelect, Object.keys(currencies));
+    });
+  };
+
+  const initJobTitles = () => {
+    fetch('data/job-titles.json').then((response) => {
+      return response.json();
+    }).then((jobTitles) => {
+      const jobTitleSelect = document.querySelector('#job-title');
+      appendOptions(jobTitleSelect, jobTitles);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initCountries();
+    initCurrencies();
+    initJobTitles();
   });
 })();
