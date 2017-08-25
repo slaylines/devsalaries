@@ -49,6 +49,7 @@
               id="country"
               name="country"
               class="pure-input-1-3"
+              required
             >
             </select>
           </div>
@@ -61,6 +62,7 @@
               id="city"
               name="city"
               class="pure-input-1-3"
+              required
             >
             </select>
           </div>
@@ -73,6 +75,7 @@
               id="job-title"
               name="jobTitle"
               class="pure-input-1-3"
+              required
             >
             </select>
           </div>
@@ -85,6 +88,7 @@
               id="company-years"
               name="companyYears"
               class="pure-input-1-3"
+              required
             >
               <option value="">Choose Value</option>
               <option value="<1">&lt;1</option>
@@ -105,6 +109,7 @@
               id="exp-years"
               name="expYears"
               class="pure-input-1-3"
+              required
             >
               <option value="">Choose Value</option>
               <option value="<1">&lt;1</option>
@@ -128,6 +133,7 @@
               id="currency"
               name="currency"
               class="pure-input-1-3"
+              required
             >
             </select>
           </div>
@@ -138,8 +144,10 @@
               id="gross-salary"
               name="grossSalary"
               class="pure-input-1-3"
-              type="text"
+              type="number"
               placeholder="30000"
+              min="0"
+              required
             >
           </div>
 
@@ -149,8 +157,10 @@
               id="net-salary"
               name="netSalary"
               class="pure-input-1-3"
-              type="text"
+              type="number"
               placeholder="20000"
+              min="0"
+              required
             >
           </div>
 
@@ -160,6 +170,7 @@
               id="gender"
               name="gender"
               class="pure-input-1-3"
+              required
             >
               <option value="">Choose Gender</option>
               <option value="Male">Male</option>
