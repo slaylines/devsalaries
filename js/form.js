@@ -1,5 +1,31 @@
 (() => {
-  const appendOptions = (select, values) => {
+  const parseFormData = (formData) => {
+    const result = {};
+
+    for (const [key, value] of formData) {
+      result[key] = value;
+    }
+
+    return result;
+  };
+
+  const postEntry = (entry) => {
+    const db = firebase.database();
+    return db.ref().child('entries').push(entry);
+  };
+
+  const appendEmptyOption = (select, text) => {
+    const option = document.createElement('option');
+
+    option.value = '';
+    option.innerText = text;
+
+    select.appendChild(option);
+  };
+
+  const appendOptions = (select, values, text) => {
+    appendEmptyOption(select, text);
+
     values.forEach((value) => {
       const option = document.createElement('option');
 
@@ -17,7 +43,8 @@
       const countrySelect = document.querySelector('#country');
       const citySelect = document.querySelector('#city');
 
-      appendOptions(countrySelect, Object.keys(countries));
+      citySelect.setAttribute('disabled', true);
+      appendOptions(countrySelect, Object.keys(countries), 'Choose Country');
 
       countrySelect.addEventListener('change', (event) => {
         const cities = countries[countrySelect.value];
@@ -26,7 +53,12 @@
           citySelect.removeChild(citySelect.firstChild);
         }
 
-        appendOptions(citySelect, cities);
+        if (cities) {
+          citySelect.removeAttribute('disabled');
+          appendOptions(citySelect, cities, 'Choose City');
+        } else {
+          citySelect.setAttribute('disabled', true);
+        }
       });
     });
   };
@@ -36,7 +68,7 @@
       return response.json();
     }).then((currencies) => {
       const currencySelect = document.querySelector('#currency');
-      appendOptions(currencySelect, Object.keys(currencies));
+      appendOptions(currencySelect, Object.keys(currencies), 'Choose Currency');
     });
   };
 
@@ -45,7 +77,22 @@
       return response.json();
     }).then((jobTitles) => {
       const jobTitleSelect = document.querySelector('#job-title');
-      appendOptions(jobTitleSelect, jobTitles);
+      appendOptions(jobTitleSelect, jobTitles, 'Choose Job Title');
+    });
+  };
+
+  const initForm = () => {
+    const form = document.querySelector('#form');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const entry = parseFormData(formData);
+
+      postEntry(entry).then(() => {
+        window.location.pathname = 'vis.html';
+      });
     });
   };
 
@@ -53,5 +100,6 @@
     initCountries();
     initCurrencies();
     initJobTitles();
+    initForm();
   });
 })();
