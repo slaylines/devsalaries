@@ -28,7 +28,7 @@
     var mouseClicked = false;
 
     var projection = d3.geo.mercator()
-      .scale(140)
+      .scale(Math.min(width, height) * 0.2)
       .translate([width / 2, height / 1.5])
       .rotate([rotated, 0, 0]);
 
