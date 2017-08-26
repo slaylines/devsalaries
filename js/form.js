@@ -36,22 +36,22 @@
     select.appendChild(option);
   };
 
-  const appendOptions = (select, values, text) => {
+  const appendOptions = (select, valueCollection, text) => {
     emptySelect(select);
     appendEmptyOption(select, text);
 
-    values.forEach((value) => {
+    valueCollection.forEach((valueObject) => {
       const option = document.createElement('option');
 
-      option.value = value;
-      option.innerText = value;
+      option.value = valueObject.value || valueObject ;
+      option.innerText = valueObject.text || valueObject;
 
       select.appendChild(option);
     });
   };
 
   const initCountries = () => {
-    fetch('data/countries.json').then((response) => {
+    fetch('data/countries-geo.json').then((response) => {
       return response.json();
     }).then((countries) => {
       const countrySelect = document.querySelector('#country');
@@ -61,7 +61,13 @@
       appendOptions(countrySelect, Object.keys(countries), DEFAULT_OPTION_TEXT.country);
 
       countrySelect.addEventListener('change', (event) => {
-        const cities = countries[countrySelect.value];
+        const citiesList = countries[countrySelect.value];  
+        const cities = citiesList.map((cityObj) => {
+          return {
+            value: cityObj.city,
+            text: `${cityObj.city}, ${cityObj.region}`
+          }
+        });
 
         if (cities) {
           citySelect.removeAttribute('disabled');
