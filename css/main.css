@@ -15,8 +15,11 @@ html, body, main {
 
 body {
   color: #333;
-  font-size: 0.8em;
   background: #f6f6ef;
+}
+
+main, footer {
+  font-size: 0.8em;
 }
 
 a {
@@ -146,7 +149,7 @@ footer {
 .world {
   fill: #fff;
   stroke: #999;
-  stroke-width: 0.5px; 
+  stroke-width: 0.5px;
 }
 
 .country.__selected {
@@ -159,19 +162,18 @@ footer {
 
 .tooltip {
   font-size: 12px;
-  color: #333; 
-  background: #fff; 
-  border-radius: 3px; 
-  box-shadow: 0px 0px 2px 0px #aaa; 
-  padding: 2px 3px; 
-  opacity: 0.95; 
+  color: #333;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 2px 0px #aaa;
+  padding: 2px 3px;
+  opacity: 0.95;
   position: absolute;
 }
 
 .tooltip.__hidden {
   display: none;
 }
-
 
 /**
  * MEDIA QUERIES
@@ -183,7 +185,7 @@ footer {
     width: 50% !important;
   }
 
-  body {
+  main, footer {
     font-size: 1em;
   }
 
