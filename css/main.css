@@ -126,6 +126,12 @@ footer {
   margin: auto;
 }
 
+.form-page sup {
+  color: #db4437;
+  font-size: 1.1em;
+  vertical-align: bottom;
+}
+
 .form-page .ds-button {
   display: block;
   width: 180px;

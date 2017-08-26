@@ -3,7 +3,7 @@
     country: '--- Choose Country ---',
     city: '--- Choose City ---',
     currency: '--- Choose Currency ---',
-    jobTitle: '--- Choose Job Title ---',
+    role: '--- Choose Role ---',
   };
 
   const parseFormData = (formData) => {
@@ -83,12 +83,12 @@
     });
   };
 
-  const initJobTitles = () => {
-    fetch('data/job-titles.json').then((response) => {
+  const initRoles = () => {
+    fetch('data/roles.json').then((response) => {
       return response.json();
-    }).then((jobTitles) => {
-      const jobTitleSelect = document.querySelector('#job-title');
-      appendOptions(jobTitleSelect, jobTitles, DEFAULT_OPTION_TEXT.jobTitle);
+    }).then((roles) => {
+      const roleSelect = document.querySelector('#role');
+      appendOptions(roleSelect, roles, DEFAULT_OPTION_TEXT.role);
     });
   };
 
@@ -110,7 +110,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initCountries();
     initCurrencies();
-    initJobTitles();
+    initRoles();
     initForm();
   });
 })();
