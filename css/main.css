@@ -73,7 +73,7 @@ main {
 
 .content {
   width: 100%;
-  padding: 45px 20px;
+  padding: 40px 20px;
 }
 
 /**
@@ -131,6 +131,49 @@ footer {
 }
 
 /**
+ * VIS PAGE
+ */
+
+.vis-page {
+  padding: 0;
+  margin: 40px 0;
+}
+
+.vis-page .map {
+  height: auto;
+}
+
+.world {
+  fill: #fff;
+  stroke: #999;
+  stroke-width: 0.5px; 
+}
+
+.country.__selected {
+  fill: #D1CCF3;
+}
+
+.country:not(.__selected):hover {
+  fill: #F5EAAD;
+}
+
+.tooltip {
+  font-size: 12px;
+  color: #333; 
+  background: #fff; 
+  border-radius: 3px; 
+  box-shadow: 0px 0px 2px 0px #aaa; 
+  padding: 2px 3px; 
+  opacity: 0.95; 
+  position: absolute;
+}
+
+.tooltip.__hidden {
+  display: none;
+}
+
+
+/**
  * MEDIA QUERIES
  */
 
@@ -146,6 +189,10 @@ footer {
 
   .content.form-page {
     text-align: center;
+  }
+
+  .content.vis-page {
+    height: calc(100% - 80px);
   }
 }
 
@@ -187,42 +234,4 @@ footer {
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
   }
-}
-
-/**
- * VIS PAGE
- */
-
-.vis-page {
-  padding: 0;
-  margin: 0;
-}
-
-.selected {
-  fill: #D1CCF3;
-}
-
-.boundary {
-  fill: #fff;
-  stroke: #999;
-  stroke-width: 0.5px; 
-}
-
-path:not(.selected):hover {
-  fill: #F5EAAD;
-}
-
-.hidden {
-  display: none;
-}
-
-div.tooltip {
-  font-size: 12px;
-  color: #333; 
-  background: #fff; 
-  border-radius: 3px; 
-  box-shadow: 0px 0px 2px 0px #aaa; 
-  padding: 2px 3px; 
-  opacity: 0.95; 
-  position: absolute;
 }
