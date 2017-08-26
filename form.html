@@ -41,36 +41,23 @@
               placeholder="Acme Corporation / Self-Employed"
             >
           </div>
-
-          <div class="pure-control-group">
-            <label for="country">
-              Country
-              <sup>*</sup>
-            </label>
-            <select
-              id="country"
-              name="country"
-              class="pure-input-1 pure-input-xs-1-2 pure-input-md-1-3"
-              required
-            >
-              <option value="">--- Choose Country ---</option>
-            </select>
-          </div>
-
-          <div class="pure-control-group">
-            <label for="city">
-              City
-              <sup>*</sup>
-            </label>
-            <select
-              id="city"
-              name="city"
-              class="pure-input-1 pure-input-xs-1-2 pure-input-md-1-3"
-              disabled
-              required
-            >
-              <option value="">--- Choose City ---</option>
-            </select>
+          
+           <div class="pure-control-group">
+             <label for="city-input">
+                Location
+                <sup>*</sup>
+              </label>
+              <input 
+                type="text" 
+                class="pure-input-1 pure-input-xs-1-2 pure-input-md-1-3" 
+                id="city-input"
+                required 
+                >
+            <div 
+              class="pure-menu pure-menu-scrollable search-cities"
+              id="city-search-results"
+              >
+            </div>
           </div>
 
           <div class="pure-control-group">

@@ -139,6 +139,13 @@ footer {
   font-size: 1.2em;
 }
 
+
+/* Customization to limit height of the menu */
+.form-page .search-cities {
+    margin: 10px 0;
+    max-height: 160px;
+}
+
 /**
  * VIS PAGE
  */
