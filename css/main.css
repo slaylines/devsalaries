@@ -201,9 +201,14 @@ footer {
   box-shadow: 4px 2px 20px 10px #f6f6ef;
 }
 
+.title {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: baseline;
+}
+
 .location {
   font-size: 1.35em;
-  margin-bottom: 20px;
 }
 
 .people {
@@ -219,12 +224,45 @@ footer {
 }
 
 .salary {
-  padding-top: 5px;
   display: flex;
 }
 
 .salary span {
   width: 100px;
+}
+
+.lists {
+  margin-bottom: 20px;
+}
+
+.list {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.list .__bordered {
+  border-bottom: 1px solid #666;
+}
+
+.show-all {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #428bca;
+  border-bottom: 1px dotted;
+  cursor: pointer;
+}
+
+.notice {
+  color: #999;
+  font-size: 12px;
+  font-weight: lighter;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.notice .fa-asterisk {
+  color: #aaa;
+  font-size: 10px;
 }
 
 /**

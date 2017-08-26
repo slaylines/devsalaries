@@ -28,18 +28,48 @@
   <main>
     <div class="vis-page content" id="content">
       <div id="map"></div>
-      <div id="data" rv-show="loaded">
-        <div class="location" rv-text="statistics.location | location"></div>
+      <div id="data" rv-show="statistics.loaded">
+        <div class="title">
+          <div class="location" rv-text="statistics.location | location"></div>
+          <div class="notice">
+            <i class="fa fa-asterisk"></i>
+            salaries are shown in USD
+          </div>
+        </div>
         <div class="people" rv-show="statistics.count">
           <span rv-show="statistics.count.male" title="Males">          
-            <span class="fa fa-mars"></span>{statistics.count.male}
+            <i class="fa fa-mars"></i>{statistics.count.male}
           </span>
           <span rv-show="statistics.count.female" title="Females">
-            <span class="fa fa-venus"></span>{statistics.count.female}
+            <i class="fa fa-venus"></i>{statistics.count.female}
           </span>
           <span rv-show="statistics.count.other" title="Others">
-            <span class="fa fa-neuter"></span>{statistics.count.other}
+            <i class="fa fa-neuter"></i>{statistics.count.other}
           <span>
+        </div>
+        <div class="lists">
+          <div class="list" rv-show="statistics.companies">
+            <span class="__bordered">Companies</span>:
+            {statistics.companies.values | companies statistics.companies.showAll}
+            <span
+              class="show-all"
+              rv-hide="statistics.companies.showAll"
+              rv-on-click="statistics.onShowAllCompanies"
+            >
+              show all
+            </span>
+          </div>
+          <div class="list" rv-show="statistics.roles">
+            <span class="__bordered">Roles</span>:
+            {statistics.roles.values | roles statistics.roles.showAll}
+            <span
+              class="show-all"
+              rv-hide="statistics.roles.showAll"
+              rv-on-click="statistics.onShowAllRoles"
+            >
+              show all
+            </span>
+          </div>
         </div>
         <div class="salary" rv-show="statistics.netSalary">
           <span>Net salary:</span>
