@@ -151,12 +151,15 @@ footer {
  */
 
 .vis-page {
+  width: 100%;
   padding: 0;
   margin: 40px 0;
+  display: flex;
 }
 
-.vis-page .map {
-  height: auto;
+.vis-page #map {
+  height: 100%;
+  width: 60%;
 }
 
 .world {
@@ -186,6 +189,42 @@ footer {
 
 .tooltip.__hidden {
   display: none;
+}
+
+.vis-page #data {
+  overflow: auto;
+  padding: 40px 50px 40px 30px;
+  width: 40%;
+
+  -webkit-box-shadow: 4px 2px 20px 10px #f6f6ef;
+  -moz-box-shadow: 4px 2px 20px 10px #f6f6ef;
+  box-shadow: 4px 2px 20px 10px #f6f6ef;
+}
+
+.location {
+  font-size: 1.35em;
+  margin-bottom: 20px;
+}
+
+.people {
+  margin: 10px 0;
+}
+
+.people .fa {
+  padding-right: 3px;
+}
+
+.people span:not(:first-child) {
+  padding-left: 10px;
+}
+
+.salary {
+  padding-top: 5px;
+  display: flex;
+}
+
+.salary span {
+  width: 100px;
 }
 
 /**

@@ -10,6 +10,7 @@
 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -26,7 +27,29 @@
 
   <main>
     <div class="vis-page content" id="content">
-      <div class="map" id="map"></div>
+      <div id="map"></div>
+      <div id="data">
+        <div class="location" rv-text="statistics.location | location"></div>
+        <div class="people" rv-show="statistics.count">
+          <span rv-show="statistics.count.male" title="Males">          
+            <span class="fa fa-mars"></span>{statistics.count.male}
+          </span>
+          <span rv-show="statistics.count.female" title="Females">
+            <span class="fa fa-venus"></span>{statistics.count.female}
+          </span>
+          <span rv-show="statistics.count.other" title="Others">
+            <span class="fa fa-neuter"></span>{statistics.count.other}
+          <span>
+        </div>
+        <div class="salary" rv-show="statistics.netSalary">
+          <span>Net salary:</span>
+          <div id="net-salary"></div> 
+        </div>
+        <div class="salary" rv-show="statistics.netSalary">
+          <span>Gross salary:</span>
+          <div id="gross-salary"></div> 
+        </div>
+      </div>
     </div>
   </main>
 
@@ -42,7 +65,9 @@
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
-  <script type="text/javascript" src="js/worldMap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.9.6/rivets.bundled.min.js"></script>
+  <script type="text/javascript" src="js/world-map.js"></script>
+  <script type="text/javascript" src="js/salary-sparkline.js"></script>
   <script type="text/javascript" src="js/vis.js"></script>
 </body>
 </html>

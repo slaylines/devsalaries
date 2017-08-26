@@ -1,24 +1,16 @@
-function initWorldMap() {
-  // map is on the right on larger screens and on the top on smaller
-  var content = document.getElementById('content');
-  var width = 0,
-      height = 0,
+function initWorldMap(onSelectCountry) {
+  var map = document.getElementById('map');
+  var width = map.clientWidth,
+      height = map.clientHeight,
       shift = -10;
 
-  if (content.clientWidth >= 1000) {
-    width = content.clientWidth / 1.5;
-    height = content.clientHeight;
-  } else {
-    width = content.clientWidth;
-    height = content.clientHeight / 2;
-  }
-
-  var tooltipLeft = document.getElementById('map').offsetLeft + 10;
-  var tooltipTop = document.getElementById('map').offsetTop + 10;
+  var tooltipLeft = map.offsetLeft + 10;
+  var tooltipTop = map.offsetTop + 10;
 
   var s = 1;
   var initX;
   var mouseClicked = false;
+  var selectedCountry = '';
 
   var projection = d3.geo.mercator()
     .scale(Math.min(width, height) * 0.2)
@@ -54,9 +46,9 @@ function initWorldMap() {
       .data(topojson.feature(world, world.countries).features)
       .enter().append('path')
       .attr('class', 'country')
-      .attr('name', function(d) {return d.properties.name;})
-      .attr('id', function(d) { return d.id;})
-      .on('click', selectCountry)
+      .attr('name', function(d) { return d.properties.name; })
+      .attr('id', function(d) { return d.id; })
+      .on('click', onClick)
       .on('mousemove', showTooltip)
       .on('mouseout',  function(d,i) {
           tooltip.classed('__hidden', true);
@@ -90,9 +82,13 @@ function initWorldMap() {
       .html(label);
   }
 
-  function selectCountry() {
-    d3.select('.__selected').classed('__selected', false);
-    d3.select(this).classed('__selected', true);
+  function onClick(country) {
+    if (selectedCountry !== this.id) {
+      selectedCountry = this.id;
+      d3.select('.__selected').classed('__selected', false);
+      d3.select(this).classed('__selected', true);
+      onSelectCountry(this.id);
+    }
   }
 
   function onZoomMap() {
