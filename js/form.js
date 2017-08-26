@@ -101,6 +101,13 @@
       const formData = new FormData(form);
       const entry = parseFormData(formData);
 
+      // Add timestamp in ms since 1 January 1970 00:00:00 UTC.
+      entry.createdAt = new Date().getTime();
+
+      // Fix types.
+      entry.grossSalary = +entry.grossSalary;
+      entry.netSalary = +entry.netSalary;
+
       postEntry(entry).then(() => {
         window.location.pathname = 'vis.html';
       });
