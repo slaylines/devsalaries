@@ -28,7 +28,7 @@
   <main>
     <div class="vis-page content" id="content">
       <div id="map"></div>
-      <div id="data">
+      <div id="data" rv-show="loaded">
         <div class="location" rv-text="statistics.location | location"></div>
         <div class="people" rv-show="statistics.count">
           <span rv-show="statistics.count.male" title="Males">          

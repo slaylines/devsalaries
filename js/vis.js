@@ -18,10 +18,14 @@
   document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data');
     const statistics = {};
+    const loaded = true;
 
     rivets.bind(
       dataContainer,
-      {statistics}
+      {
+        loaded,
+        statistics
+      }
     );
 
     const onSelectCountry = (id) => {
