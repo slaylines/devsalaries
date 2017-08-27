@@ -129,7 +129,7 @@
         entry.netSalary = +entry.netSalary;
 
         postEntry(entry).then(() => {
-          window.location.pathname = 'vis.html';
+          window.location.href = 'vis.html';
         }).catch((error) => {
           console.error(error);
         });
