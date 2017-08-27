@@ -1,0 +1,15 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "tehcookies.github.io/devsalaries helper scripts for data processing.",
+  "main": "index.js",
+  "repository": "https://github.com/tehcookies/devsalaries",
+  "author": "TehCookies",
+  "license": "MIT",
+  "dependencies": {
+    "@google/maps": "^0.4.3",
+    "dotenv": "^4.0.0",
+    "moment": "2.18.1",
+    "sleep": "^5.1.1"
+  }
+}
