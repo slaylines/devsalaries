@@ -41,23 +41,24 @@
               placeholder="Acme Corporation / Self-Employed"
             >
           </div>
-          
-           <div class="pure-control-group">
-             <label for="city-input">
-                Location
-                <sup>*</sup>
-              </label>
-              <input 
-                type="text" 
-                class="pure-input-1 pure-input-xs-1-2 pure-input-md-1-3" 
-                id="city-input"
-                required 
-                >
-            <div 
-              class="pure-menu pure-menu-scrollable search-cities"
-              id="city-search-results"
-              >
-            </div>
+
+          <div class="pure-control-group">
+            <label for="location">
+              Location
+              <sup>*</sup>
+            </label>
+            <input
+              id="search"
+              class="pure-input-1 pure-input-xs-1-2 pure-input-md-1-3"
+              type="text"
+              placeholder="London, United Kingdom"
+              required
+            >
+            <input
+              id="location"
+              name="location"
+              type="hidden"
+            >
           </div>
 
           <div class="pure-control-group">
@@ -206,6 +207,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB04_ki__EXD7ODTEV02e1l3jfunVplVtE&libraries=places&language=en"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
   <script type="text/javascript" src="js/form.js"></script>
 </body>
