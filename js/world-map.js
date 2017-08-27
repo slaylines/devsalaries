@@ -1,4 +1,4 @@
-function initWorldMap(onSelectCountry) {
+function initWorldMap(onSelectLocation) {
   var map = document.getElementById('map');
   var width = map.clientWidth,
       height = map.clientHeight,
@@ -87,7 +87,7 @@ function initWorldMap(onSelectCountry) {
       selectedCountry = this.id;
       d3.select('.__selected').classed('__selected', false);
       d3.select(this).classed('__selected', true);
-      onSelectCountry(this.id);
+      onSelectLocation(this.id);
     }
   }
 

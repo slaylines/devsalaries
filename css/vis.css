@@ -128,3 +128,13 @@
 .vis-years-charts {
   display: flex;
 }
+
+.vis-years-charts .__shift {
+  margin-left: 20px;
+}
+
+.vis-years-title {
+  font-size: 12px;
+  margin-left: 35px;
+  margin-bottom: 5px;
+}

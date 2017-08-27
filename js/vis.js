@@ -86,10 +86,33 @@
         ],
         showAll: false
       },
+      yearsCompany: [
+        {name: '0', count: 11},
+        {name: '1', count: 8},
+        {name: '2', count: 9},
+        {name: '3', count: 4},
+        {name: '4', count: 6},
+        {name: '5', count: 3},
+        {name: '5+', count: 1}
+      ],
+      yearsTotal: [
+        {name: '0', count: 3},
+        {name: '1', count: 5},
+        {name: '2', count: 7},
+        {name: '3', count: 11},
+        {name: '4', count: 5},
+        {name: '5', count: 1},
+        {name: '6', count: 0},
+        {name: '7', count: 3},
+        {name: '8', count: 4},
+        {name: '9', count: 3},
+        {name: '10', count: 1},
+        {name: '10+', count: 2}
+      ],
       onShowAllCompanies: onShowAllCompanies,
       onShowAllRoles: onShowAllRoles,
       loaded: true
-    }
+    };
 
     rivets.bind(
       dataContainer,
@@ -104,6 +127,7 @@
     initWorldMap(onSelectLocation);
     initSparkline('net-salary', statistics.netSalary, statistics.grossSalary);
     initSparkline('gross-salary', statistics.grossSalary, statistics.netSalary);
-    //initBarChart('years-company', statistics.yearsCompany);
+    initBarChart('years-company', statistics.yearsCompany);
+    initBarChart('years-total', statistics.yearsTotal);
   });
 })();

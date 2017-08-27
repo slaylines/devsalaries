@@ -82,8 +82,15 @@
             <div id="gross-salary"></div> 
           </div>
         </div>
-        <div class="vis-years-charts">
-          
+        <div class="vis-years-charts" id="vis-years-charts">
+          <div rv-show="statistics.yearsCompany">
+            <div class="vis-years-title">Years in company</div>
+            <div id="years-company"></div>
+          </div>
+          <div class="__shift" rv-show="statistics.yearsTotal">
+            <div class="vis-years-title">Total experience</div>
+            <div id="years-total"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,11 +106,13 @@
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
   <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.9.6/rivets.bundled.min.js"></script>
   <script type="text/javascript" src="js/world-map.js"></script>
   <script type="text/javascript" src="js/salary-sparkline.js"></script>
+  <script type="text/javascript" src="js/years-bar-chart.js"></script>
   <script type="text/javascript" src="js/vis.js"></script>
 </body>
 </html>
