@@ -29,7 +29,10 @@
 
   <main>
     <div class="pure-g vis-page content" id="content">
-      <div class="pure-u-1" id="map"></div>
+      <div class="pure-u-1" id="map" name="mapContainer">
+        <svg />
+        <div class="vis-tooltip __hidden" />
+      </div>
       <div class="pure-u-1" id="data" rv-show="statistics.loaded">
         <div class="vis-title">
           <div class="vis-location" rv-text="statistics.location | location"></div>

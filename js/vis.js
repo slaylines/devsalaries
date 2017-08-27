@@ -47,6 +47,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data');
+    const map = worldMap();
 
     const onShowAllCompanies = () => {
       statistics.companies.showAll = true;
@@ -124,12 +125,16 @@
       {statistics}
     );
 
+    window.addEventListener('resize', function() {
+      map.resizeMap();
+    });
+
     const onSelectLocation = (id) => {
       // id - 3 letter code
       // get data for location, fill in statistics object
     };
 
-    initWorldMap(onSelectLocation);
+    map.initWorldMap(onSelectLocation);
     initSparkline('net-salary', statistics.netSalary, statistics.grossSalary);
     initSparkline('gross-salary', statistics.grossSalary, statistics.netSalary);
     initBarChart('years-company', statistics.yearsCompany);

@@ -153,7 +153,7 @@
   }
 }
 
-/* lg */
+/* lg, xl */
 @media (min-width: 64em) {
   .vis-page #map {
     margin: 0;
@@ -163,26 +163,13 @@
 
   .vis-page #data {
     position: absolute;
+    top: 40px;
     right: 0;
     z-index: 10;
     width: 34em;
     height: calc(100% - 40px);
-  }
-}
-
-/* xl */
-@media (min-width: 80em) {
-  .vis-page #map {
-    margin: 0;
-    width: calc(100% - 34em);
-    height: 100%;
-  }
-
-  .vis-page #data {
-    position: absolute;
-    right: 0;
-    z-index: 10;
-    width: 34em;
-    height: calc(100% - 40px);
+    -webkit-box-shadow: 4px 2px 10px 8px #999;
+    -moz-box-shadow: 4px 2px 10px 8px #999;
+    box-shadow: 4px 2px 10px 8px #999;
   }
 }
