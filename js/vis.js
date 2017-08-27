@@ -130,11 +130,19 @@
     });
 
     const onSelectLocation = (id) => {
-      // id - 3 letter code
+      // id - 2 letter code
       // get data for location, fill in statistics object
     };
 
-    map.initWorldMap(onSelectLocation);
+    const countries = [
+      {name: 'Germany', code: 'DE'},
+      {name: 'Ireland', code: 'IE'},
+      {name: 'Italy', code: 'IT'},
+      {name: 'New Zealand', code: 'NZ'},
+      {name: 'United States', code: 'US'}
+    ];
+
+    map.initWorldMap(onSelectLocation, countries);
     initSparkline('net-salary', statistics.netSalary, statistics.grossSalary);
     initSparkline('gross-salary', statistics.grossSalary, statistics.netSalary);
     initBarChart('years-company', statistics.yearsCompany);

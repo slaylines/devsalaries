@@ -40,21 +40,20 @@ function worldMap() {
       .attr('d', path);
   }
 
-  function showTooltip(d) {
-    const label = d.properties.name;
+  function showTooltip(name) {
     const mouse = d3.mouse(svg.node())
-      .map(function(d) { return parseInt(d); } );
+      .map(function(v) { return parseInt(v); } );
     tooltip.classed('__hidden', false)
       .attr('style', 'left:' + (mouse[0] + tooltipLeft) + 'px;top:' + (mouse[1] + tooltipTop) + 'px')
-      .html(label);
+      .html(name);
   }
 
-  function onClick(country) {
-    if (selectedCountry !== this.id) {
-      selectedCountry = this.id;
+  function onClick(id) {
+    if (selectedCountry !== id) {
+      selectedCountry = id;
       d3.select('.__selected').classed('__selected', false);
-      d3.select(this).classed('__selected', true);
-      onSelectLocation(this.id);
+      d3.select('#' + id).classed('__selected', true);
+      onSelectLocation(id);
     }
   }
 
@@ -82,6 +81,8 @@ function worldMap() {
     g.attr('transform', 'translate(' + t + ')scale(' + scale + ')');
     d3.selectAll('.vis-world')
       .style('stroke-width', 0.5 / scale);
+
+    // TODO: call for cities
   }
 
   function resizeMap() {
@@ -111,7 +112,7 @@ function worldMap() {
     onShiftMap(initX);
   }
 
-  function initWorldMap(onSelect) {
+  function initWorldMap(onSelect, avaliableCountries) {
     map = document.getElementById('map');
     tooltip = d3.select('#map .vis-tooltip');
     g = svg.append('g');
@@ -129,15 +130,26 @@ function worldMap() {
         .data(topojson.feature(world, world.countries).features)
         .enter().append('path')
         .attr('class', 'vis-country')
-        .attr('name', function(d) { return d.properties.name; })
         .attr('id', function(d) { return d.id; })
-        .on('click', onClick)
-        .on('mousemove', showTooltip)
-        .on('mouseout',  function(d,i) {
-            tooltip.classed('__hidden', true);
-         })
-        .attr('d', path);
+        .attr('d', path)
+        .each(function(d) {
+          const item = d3.select(this);
+          const filter = avaliableCountries.filter((country) => country.code === d.id);
+          if (filter.length > 0) {
+            item
+              .on('click', function(d) { onClick(d.id); })
+              .on('mousemove', function(d) { showTooltip(filter[0].name); })
+              .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
+          } else {
+            item
+              .attr('class', 'vis-country __disabled');
+          }
+        });
     });
+  }
+
+  function showCities(avaliableCities) {
+    // TODO
   }
 
   return {

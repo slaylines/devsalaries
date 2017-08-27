@@ -1,5 +1,4 @@
 function initBarChart(divId, data) {
-  // TODO: calculate width as half of container
   // TODO: show value on hover of each bar
   const marginLeft = 40,
       marginBottom = 20,

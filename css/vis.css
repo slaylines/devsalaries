@@ -21,17 +21,18 @@
 /* map graph styles */
 
 .vis-world {
-  fill: #fff;
+  fill: #f5eaad;
   stroke: #999;
   stroke-width: 0.5px;
 }
 
-.vis-country.__selected {
-  fill: #D1CCF3;
+.vis-country.__disabled {
+  fill: #f6f6f2 !important;
 }
 
-.vis-country:not(.__selected):hover {
-  fill: #F5EAAD;
+.vis-country.__selected,
+.vis-country:hover {
+  fill: #d1ccf3;
 }
 
 .vis-tooltip {
