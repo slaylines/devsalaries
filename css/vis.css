@@ -3,7 +3,6 @@
  */
 
 .vis-page {
-  width: 100%;
   padding: 0;
   margin: 40px 0;
   display: flex;
@@ -11,13 +10,11 @@
 
 .vis-page #map {
   height: 100%;
-  width: 60%;
 }
 
 .vis-page #data {
   overflow: auto;
   padding: 40px 50px 40px 30px;
-  width: 40%;
 
   -webkit-box-shadow: 4px 2px 20px 10px #f6f6ef;
   -moz-box-shadow: 4px 2px 20px 10px #f6f6ef;
@@ -137,4 +134,40 @@
   font-size: 12px;
   margin-left: 35px;
   margin-bottom: 5px;
+}
+
+/**
+ * MEDIA QUERIES
+ */
+
+/* sm */
+@media (min-width: 35.5em) {
+  .vis-page #map {
+    margin: 0 5%;
+    height: 90%;
+  }
+}
+
+ /* md */
+@media (min-width: 48em) {
+  .vis-page #map {
+    margin: 0 5%;
+    height: 90%;
+  }
+}
+
+/* lg */
+@media (min-width: 64em) {
+  .vis-page #map {
+    margin: 0;
+    height: 100%;
+  }
+}
+
+/* xl */
+@media (min-width: 80em) {
+  .vis-page #map {
+    margin: 0;
+    height: 100%;
+  }
 }
