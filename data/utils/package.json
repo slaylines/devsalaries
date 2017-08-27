@@ -6,9 +6,14 @@
   "repository": "https://github.com/tehcookies/devsalaries",
   "author": "TehCookies",
   "license": "MIT",
+  "scripts": {
+    "convert": "node convert.js",
+    "seed": "node seed.js"
+  },
   "dependencies": {
     "@google/maps": "0.4.3",
     "dotenv": "4.0.0",
+    "firebase": "4.3.0",
     "moment": "2.18.1",
     "sleep": "5.1.1"
   }
