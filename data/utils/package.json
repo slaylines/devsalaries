@@ -7,9 +7,9 @@
   "author": "TehCookies",
   "license": "MIT",
   "dependencies": {
-    "@google/maps": "^0.4.3",
-    "dotenv": "^4.0.0",
+    "@google/maps": "0.4.3",
+    "dotenv": "4.0.0",
     "moment": "2.18.1",
-    "sleep": "^5.1.1"
+    "sleep": "5.1.1"
   }
 }
