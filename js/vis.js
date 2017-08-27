@@ -43,6 +43,11 @@
   document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data');
 
+    // TODO: Remove this after data layer integration.
+    getEntries().then((response) => {
+      console.log(response.val());
+    });
+
     const onShowAllCompanies = () => {
       statistics.companies.showAll = true;
     };
