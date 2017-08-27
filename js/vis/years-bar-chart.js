@@ -1,8 +1,10 @@
 function initBarChart(divId, data) {
+  // TODO: calculate width as half of container
+  // TODO: show value on hover of each bar
   var marginLeft = 40,
       marginBottom = 20,
-      width = 200 - marginLeft,
-      height = 200 * 0.6 - marginBottom;
+      width = 240 - marginLeft,
+      height = 240 * 0.6 - marginBottom;
 
   var div = d3.select('#' + divId);
   div.selectAll('svg').remove()
@@ -29,7 +31,7 @@ function initBarChart(divId, data) {
 
   g.append('g')
     .attr('class', 'axis')
-    .call(d3.axisLeft(y).ticks(5))
+    .call(d3.axisLeft(y).ticks(data.length / 2))
     .append('text')
     .attr('transform', 'rotate(-90)')
     .attr('y', 6)

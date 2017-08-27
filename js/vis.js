@@ -4,49 +4,49 @@
     return db.ref('entries').once('value');
   };
 
-  rivets.formatters.location = function (location) {
-    if (!location) {
-      return '';
-    }
-    const {city, country} = location;
-    if (city) {
-      return `${city}, ${country}`;
-    }
-    return country;
-  };
+  // init rivets formatters
+  const initFormatters = () => {
+    rivets.formatters.location = function (location) {
+      if (!location) {
+        return '';
+      }
+      const {city, country} = location;
+      if (city) {
+        return `${city}, ${country}`;
+      }
+      return country;
+    };
 
-  rivets.formatters.companies = function (values, showAll) {
-    if (!values) {
-      return '';
-    }
-    if (showAll) {
-      return values.join(', ');
-    }
-    return values.slice(0, 5).join(', ');
-  };
+    rivets.formatters.companies = function (values, showAll) {
+      if (!values) {
+        return '';
+      }
+      if (showAll) {
+        return values.join(', ');
+      }
+      return values.slice(0, 5).join(', ');
+    };
 
-  rivets.formatters.roles = function (values, showAll) {
-    if (!values) {
-      return '';
-    }
-    if (showAll) {
+    rivets.formatters.roles = function (values, showAll) {
+      if (!values) {
+        return '';
+      }
+      if (showAll) {
+        return values
+          .map((val) => `${val.name} (${val.count})`)
+          .join(', ');
+      }
       return values
+        .slice(0, 3)
         .map((val) => `${val.name} (${val.count})`)
         .join(', ');
-    }
-    return values
-      .slice(0, 3)
-      .map((val) => `${val.name} (${val.count})`)
-      .join(', ');
+    };
   };
+
+  initFormatters();
 
   document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data');
-
-    // TODO: Remove this after data layer integration.
-    getEntries().then((response) => {
-      console.log(response.val());
-    });
 
     const onShowAllCompanies = () => {
       statistics.companies.showAll = true;
@@ -92,16 +92,16 @@
         showAll: false
       },
       yearsCompany: [
-        {name: '0', count: 11},
+        {name: '<1', count: 11},
         {name: '1', count: 8},
         {name: '2', count: 9},
         {name: '3', count: 4},
         {name: '4', count: 6},
         {name: '5', count: 3},
-        {name: '5+', count: 1}
+        {name: '>5', count: 1}
       ],
       yearsTotal: [
-        {name: '0', count: 3},
+        {name: '<1', count: 3},
         {name: '1', count: 5},
         {name: '2', count: 7},
         {name: '3', count: 11},
@@ -112,7 +112,7 @@
         {name: '8', count: 4},
         {name: '9', count: 3},
         {name: '10', count: 1},
-        {name: '10+', count: 2}
+        {name: '>10', count: 2}
       ],
       onShowAllCompanies: onShowAllCompanies,
       onShowAllRoles: onShowAllRoles,

@@ -14,8 +14,7 @@
 
 .vis-page #data {
   overflow: auto;
-  padding: 40px 50px 40px 30px;
-
+  padding: 40px 30px 40px 30px;
   -webkit-box-shadow: 4px 2px 20px 10px #f6f6ef;
   -moz-box-shadow: 4px 2px 20px 10px #f6f6ef;
   box-shadow: 4px 2px 20px 10px #f6f6ef;
@@ -127,7 +126,7 @@
 }
 
 .vis-years-charts .__shift {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .vis-years-title {
