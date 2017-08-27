@@ -1,22 +1,23 @@
 function worldMap() {
-  var map;
+  let map;
 
-  var width = 0;
-  var height = 0;
-  var shift = 0;
+  let width = 0;
+  let height = 0;
+  let shift = 0;
 
-  var tooltipLeft = 0;
-  var tooltipTop = 0;
-  var tooltip;
+  let tooltipLeft = 0;
+  let tooltipTop = 0;
+  let tooltip;
 
-  var scale = 1;
-  var initX = 0;
-  var mouseClicked = false;
-  var selectedCountry = '';
+  let scale = 1;
+  let initX = 0;
+  let mouseClicked = false;
+  let selectedCountry = '';
+  let zoomExtent = [1, 10];
 
-  var onSelectLocation;
+  let onSelectLocation;
 
-  var projection, path, zoom, g;
+  let projection, path, zoom, g;
 
   function onStartPanning() {
     d3.event.preventDefault();
@@ -29,7 +30,7 @@ function worldMap() {
     mouseClicked = false;
   };
 
-  var svg = d3.select('#map svg')
+  const svg = d3.select('#map svg')
     .on('mousedown', onStartPanning)
     .on('mouseup', onEndPanning);
 
@@ -40,8 +41,8 @@ function worldMap() {
   }
 
   function showTooltip(d) {
-    var label = d.properties.name;
-    var mouse = d3.mouse(svg.node())
+    const label = d.properties.name;
+    const mouse = d3.mouse(svg.node())
       .map(function(d) { return parseInt(d); } );
     tooltip.classed('__hidden', false)
       .attr('style', 'left:' + (mouse[0] + tooltipLeft) + 'px;top:' + (mouse[1] + tooltipTop) + 'px')
@@ -58,9 +59,9 @@ function worldMap() {
   }
 
   function onZoomMap() {
-    var t = d3.event.translate;
+    const t = d3.event.translate;
+    const h = 0;
     scale = d3.event.scale;
-    var h = 0;
 
     t[0] = Math.min(
       (width/height) * (scale - 1),
@@ -115,7 +116,7 @@ function worldMap() {
     tooltip = d3.select('#map .vis-tooltip');
     g = svg.append('g');
     onSelectLocation = onSelect;
-    zoom = d3.behavior.zoom().scaleExtent([1, 5])
+    zoom = d3.behavior.zoom().scaleExtent(zoomExtent)
 
     resizeMap();
 
