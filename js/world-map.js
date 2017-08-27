@@ -33,7 +33,7 @@ function initWorldMap(onSelectCountry) {
 
   var tooltip = d3.select('#map')
     .append('div')
-    .attr('class', 'tooltip __hidden');
+    .attr('class', 'vis-tooltip __hidden');
 
   var g = svg.append('g');
 
@@ -41,11 +41,11 @@ function initWorldMap(onSelectCountry) {
     if(error) return console.error(error);
 
     g.append('g')
-      .attr('class', 'world')
-      .selectAll('world')
+      .attr('class', 'vis-world')
+      .selectAll('vis-world')
       .data(topojson.feature(world, world.countries).features)
       .enter().append('path')
-      .attr('class', 'country')
+      .attr('class', 'vis-country')
       .attr('name', function(d) { return d.properties.name; })
       .attr('id', function(d) { return d.id; })
       .on('click', onClick)
@@ -113,7 +113,7 @@ function initWorldMap(onSelectCountry) {
     }
 
     g.attr('transform', 'translate(' + t + ')scale(' + s + ')');
-    d3.selectAll('.world')
+    d3.selectAll('.vis-world')
       .style('stroke-width', 0.5 / s);
   }
 };
