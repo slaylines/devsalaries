@@ -14,10 +14,8 @@
 
 .vis-page #data {
   overflow: auto;
-  padding: 40px 30px 40px 30px;
-  -webkit-box-shadow: 4px 2px 20px 10px #f6f6ef;
-  -moz-box-shadow: 4px 2px 20px 10px #f6f6ef;
-  box-shadow: 4px 2px 20px 10px #f6f6ef;
+  padding: 40px 16px;
+  background: #f6f6ef;
 }
 
 /* map graph styles */
@@ -159,7 +157,16 @@
 @media (min-width: 64em) {
   .vis-page #map {
     margin: 0;
+    width: calc(100% - 34em);
     height: 100%;
+  }
+
+  .vis-page #data {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    width: 34em;
+    height: calc(100% - 40px);
   }
 }
 
@@ -167,6 +174,15 @@
 @media (min-width: 80em) {
   .vis-page #map {
     margin: 0;
+    width: calc(100% - 34em);
     height: 100%;
+  }
+
+  .vis-page #data {
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    width: 34em;
+    height: calc(100% - 40px);
   }
 }

@@ -44,6 +44,7 @@ header {
   position: absolute;
   width: 100%;
   top: 0;
+  z-index: 100;
 }
 
 header .pure-menu {
@@ -85,6 +86,7 @@ main {
 
 footer {
   position: fixed;
+  z-index: 100;
   bottom: 0;
   height: 40px;
   width: 100%;
