@@ -156,8 +156,7 @@
 
   const processEntries = (entries, rates) => {
     const values = Object.values(entries);
-    const filtered = filterInvalidEntries(values);
-    const converted = convertToUsd(filtered, rates);
+    const converted = convertToUsd(values, rates);
 
     return converted;
   };
@@ -165,10 +164,12 @@
   const convertToUsd = (entries, rates) => {
     return entries.map((entry) => {
       const rate = rates[entry.currency];
+
       if (rate && entry.currency !== 'USD') {
         entry.netSalary /= rate;
         entry.grossSalary /= rate;
       }
+
       return entry;
     });
   };
@@ -199,13 +200,13 @@
 
   const updateRates = (db) => {
     fetch(XCHANGE_API_URL)
-    .then((resp) => resp.json())
-    .then((data) => {
-      let rates = data.rates;
-      // convert to ms
-      rates.timestamp = data.timestamp * 1000;
-      db.ref().child('rates').set(rates);
-    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        let rates = data.rates;
+        // convert to ms
+        rates.timestamp = data.timestamp * 1000;
+        db.ref().child('rates').set(rates);
+      });
   };
 
 
