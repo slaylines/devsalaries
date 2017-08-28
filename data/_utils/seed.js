@@ -1,4 +1,6 @@
-const DATA_FILE = '../entries.json';
+const ENTRIES_FILE = '../entries.json';
+const ROLES_FILE = '../roles.json';
+const CURRENCIES_FILE = '../currencies.json';
 
 const config = {
   apiKey: 'AIzaSyB04_ki__EXD7ODTEV02e1l3jfunVplVtE',
@@ -10,13 +12,32 @@ const config = {
 };
 
 const firebase = require('firebase');
-const data = require(DATA_FILE);
+const entries = require(ENTRIES_FILE);
+const roles = require(ROLES_FILE);
+const currencies = require(CURRENCIES_FILE);
 const app = firebase.initializeApp(config);
 const db = firebase.database();
 
-data.forEach((entry) => {
+entries.forEach((entry) => {
   db.ref().child('entries').push(entry);
-  process.stdout.write('');
 });
 
-process.stdout.write(' ✔');
+process.stdout.write('✔');
+
+firebase.database().ref().child('roles').set(
+  roles.reduce((acc, role) => {
+    acc[role] = true;
+    return acc;
+  }, {})
+);
+
+process.stdout.write('✔');
+
+firebase.database().ref().child('currencies').set(
+  currencies.reduce((acc, currency) => {
+    acc[currency] = true;
+    return acc;
+  }, {})
+);
+
+process.stdout.write('✔');

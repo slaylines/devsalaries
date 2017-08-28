@@ -62,15 +62,14 @@
   const getCurrencies = () => {
     const db = firebase.database();
     return db.ref('currencies').once('value').then((response) => {
-      debugger;
-      return Object.values(response.val());
+      return Object.keys(response.val());
     });
   };
 
   const getRoles = () => {
     const db = firebase.database();
     return db.ref('roles').once('value').then((response) => {
-      return Object.values(response.val());
+      return Object.keys(response.val());
     });
   };
 
