@@ -48,12 +48,12 @@ function worldMap() {
       .html(name);
   }
 
-  function onClick(id) {
+  function onClick(id, name) {
     if (selectedCountry !== id) {
       selectedCountry = id;
       d3.select('.__selected').classed('__selected', false);
       d3.select('#' + id).classed('__selected', true);
-      onSelectLocation(id);
+      onSelectLocation(id, name);
     }
   }
 
@@ -137,7 +137,7 @@ function worldMap() {
           const filter = avaliableCountries.filter((country) => country.code === d.id);
           if (filter.length > 0) {
             item
-              .on('click', function(d) { onClick(d.id); })
+              .on('click', function(d) { onClick(d.id, filter[0].name); })
               .on('mousemove', function(d) { showTooltip(filter[0].name); })
               .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
           } else {

@@ -8,6 +8,8 @@
     {page}
   );
 
+  const minShownCompanies = 5;
+  const minShownRoles = 3;
   const initFormatters = () => {
     rivets.formatters.location = function (location) {
       if (!location) {
@@ -27,7 +29,7 @@
       if (showAll) {
         return values.join(', ');
       }
-      return values.slice(0, 5).join(', ');
+      return values.slice(0, minShownCompanies).join(', ');
     };
 
     rivets.formatters.roles = function (values, showAll) {
@@ -40,7 +42,7 @@
           .join(', ');
       }
       return values
-        .slice(0, 3)
+        .slice(0, minShownRoles)
         .map((val) => `${val.name} (${val.count})`)
         .join(', ');
     };
@@ -53,17 +55,35 @@
     initBarChart('years-total', statistics.expYears);
   };
 
-  const onSelectLocation = (id) => {
-    // id - 2 letter code
-    // get data for location, fill in statistics object
-  };
-
   const sortYearsArray = (years) => {
     return years.sort((a, b) => {
       if (a.name[0] === '<' || b.name[0] === '>') { return -1; }
       if (a.name[0] === '>' || b.name[0] === '<') { return 1; }
-      return a.count - b.count;
+      return a.name - b.name;
     });
+  };
+
+  const updateStatistics = (statistics, newStats, location, isWorld) => {
+    statistics.location = location;
+    statistics.gender = newStats.gender.reduce((res, item) => {
+      res[item.name] = item.count;
+      return res;
+    }, {});
+    statistics.netSalary = newStats.netSalary;
+    statistics.grossSalary = newStats.grossSalary;
+    statistics.company = isWorld || !newStats.company.length
+      ? null
+      : {
+        values: newStats.company.sort((a, b) => a.localeCompare(b)),
+        showAll: newStats.company.length <= minShownCompanies
+      },
+    statistics.role = {
+      values: newStats.role.sort((a, b) => b.count - a.count),
+      showAll: newStats.role.length <= minShownRoles
+    };
+    statistics.companyYears = sortYearsArray(newStats.companyYears);
+    statistics.expYears = sortYearsArray(newStats.expYears);
+    statistics.loading = false;
   };
 
   initFormatters();
@@ -76,14 +96,6 @@
       map.resizeMap();
     });
 
-    const statistics = {
-      loading: true
-    };
-    rivets.bind(
-      dataContainer,
-      {statistics}
-    );
-
     const onShowAllCompanies = () => {
       statistics.company.showAll = true;
     };
@@ -91,31 +103,29 @@
       statistics.role.showAll = true;
     };
 
+    const statistics = {
+      loading: true,
+      onShowAllCompanies: onShowAllCompanies,
+      onShowAllRoles: onShowAllRoles
+    };
+    rivets.bind(
+      dataContainer,
+      {statistics}
+    );
+
+    const onSelectLocation = (id, name) => {
+      statistics.loading = true;
+      const newStats = DS.DataApi.getCountryData(id);
+      updateStatistics(statistics, newStats, { country: name });
+    }
+
     DS.DataApi.init(firebase).then(() => {
-      countries = DS.DataApi.getEnabledCountries();
+      const countries = DS.DataApi.getEnabledCountries();
       map.initWorldMap(onSelectLocation, countries);
 
       const newStats = DS.DataApi.getWorldData();
-      statistics.location = newStats.location;
-      statistics.gender = newStats.gender.reduce((res, item) => {
-        res[item.name] = item.count;
-        return res;
-      }, {});
-      statistics.netSalary = newStats.netSalary;
-      statistics.grossSalary = newStats.grossSalary;
-      statistics.company = null;
-      statistics.role = {
-        values: newStats.role.sort((a, b) => b.count - a.count),
-        showAll: false
-      };
-      statistics.companyYears = sortYearsArray(newStats.companyYears);
-      statistics.expYears = sortYearsArray(newStats.expYears);
-      statistics.onShowAllCompanies = onShowAllCompanies;
-      statistics.onShowAllRoles = onShowAllRoles;
-      statistics.loading = false;
-
+      updateStatistics(statistics, newStats, null, true);
       initDataGraphs(statistics);
-
       page.loading = false;
     });
   });

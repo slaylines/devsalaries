@@ -241,7 +241,7 @@
 
     getCountryData(code) {
       const entries = this.entries.filter((entry) => {
-        return entry.country.code === code;
+        return entry.location.country.code === code;
       });
 
       return new VisData(entries);

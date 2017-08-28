@@ -121,6 +121,7 @@
   color: #428bca;
   border-bottom: 1px dotted;
   cursor: pointer;
+  display: inline-block;
 }
 
 .vis-salary-charts {
