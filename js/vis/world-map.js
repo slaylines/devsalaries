@@ -1,4 +1,5 @@
 function worldMap() {
+  // TODO: show world data when click outside countries
   let map;
 
   let width = 0;

@@ -1,5 +1,7 @@
 function initBarChart(divId, data) {
   // TODO: show value on hover of each bar
+  // TODO: label x axis
+  // TODO: last y labels are cut
   const marginLeft = 40,
       marginBottom = 20,
       width = 240 - marginLeft,

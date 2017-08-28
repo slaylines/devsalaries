@@ -1,4 +1,5 @@
 function initSparkline(divId, mainSalary, salary) {
+  // TODO: revision - show full box with quantiles
   const width = 300,
       height = 31,
       padding = 10,
@@ -18,7 +19,7 @@ function initSparkline(divId, mainSalary, salary) {
 
   const min = padding + width * (mainSalary.min - minValue) / (maxValue - minValue);
   const max = padding + width * (mainSalary.max - minValue) / (maxValue - minValue);
-  const mean = padding + width * (mainSalary.mean - minValue) / (maxValue - minValue);
+  const median = padding + width * (mainSalary.quantiles[50] - minValue) / (maxValue - minValue);
 
   const div = d3.select('#' + divId);
   div.selectAll('svg').remove();
@@ -53,26 +54,26 @@ function initSparkline(divId, mainSalary, salary) {
 
   g.append('circle')
     .style('fill', accentColor)
-    .attr('cx', mean)
+    .attr('cx', median)
     .attr('cy', top)
     .attr('r', radius);
 
   // add text values - shift by half of width
-  const meanText = g.append('text')
-    .text(mainSalary.mean.toFixed(2))
+  const medianText = g.append('text')
+    .text(mainSalary.quantiles[50].toFixed(0))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', accentColor);
-  let textWidth = meanText.node().getComputedTextLength();
-  let textX = mean - textWidth / 2;
+  let textWidth = medianText.node().getComputedTextLength();
+  let textX = median - textWidth / 2;
   if (textX < 0) { textX = 0; }
   if (textX + textWidth > width + padding * 2) { textX = width + padding * 2; }
-  meanText
+  medianText
     .attr('x', textX)
     .attr('y', 10);
 
   const minText = g.append('text')
-    .text(mainSalary.min.toFixed(2))
+    .text(mainSalary.min.toFixed(0))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', mainColor);
@@ -82,7 +83,7 @@ function initSparkline(divId, mainSalary, salary) {
     .attr('y', height - 1);
 
   const maxText = g.append('text')
-    .text(mainSalary.max.toFixed(2))
+    .text(mainSalary.max.toFixed(0))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', mainColor);

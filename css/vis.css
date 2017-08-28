@@ -134,6 +134,7 @@
 
 .vis-salary {
   display: flex;
+  width: 420px;
   align-items: center;
 }
 
@@ -143,6 +144,7 @@
 
 .vis-salary span {
   width: 100px;
+  margin-right: 5px;
 }
 
 .vis-years-charts {
