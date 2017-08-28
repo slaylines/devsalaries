@@ -71,7 +71,7 @@
     });
   };
 
-  const updateStatistics = (statistics, newStats, location, isWorld) => {
+  const updateStatistics = (statistics, newStats, location) => {
     statistics.location = location;
     statistics.gender = newStats.gender.reduce((res, item) => {
       res[item.name] = item.count;
@@ -79,12 +79,12 @@
     }, {});
     statistics.netSalary = newStats.netSalary;
     statistics.grossSalary = newStats.grossSalary;
-    statistics.company = isWorld || !newStats.company.length
-      ? null
-      : {
+    statistics.company = location && newStats.company.length
+      ? {
         values: newStats.company.sort((a, b) => a.localeCompare(b)),
         showAll: newStats.company.length <= minShownCompanies
-      },
+      }
+      : null,
     statistics.role = {
       values: newStats.role.sort((a, b) => b.count - a.count),
       showAll: newStats.role.length <= minShownRoles
@@ -119,18 +119,22 @@
     );
 
     const onSelectLocation = (id, name) => {
-      const newStats = DS.DataApi.getCountryData(id);
-      updateStatistics(statistics, newStats, { country: name });
-      initDataGraphs(statistics);
+      if (id) {
+        const newStats = DS.DataApi.getCountryData(id);
+        updateStatistics(statistics, newStats, { country: name });
+        initDataGraphs(statistics);
+      } else {
+        const newStats = DS.DataApi.getWorldData();
+        updateStatistics(statistics, newStats, null);
+        initDataGraphs(statistics);
+      }
     }
 
     DS.DataApi.init(firebase).then(() => {
       const countries = DS.DataApi.getEnabledCountries();
       DS.WorldMap.init(onSelectLocation, countries);
 
-      const newStats = DS.DataApi.getWorldData();
-      updateStatistics(statistics, newStats, null, true);
-      initDataGraphs(statistics);
+      onSelectLocation();
       page.loading = false;
     });
   });

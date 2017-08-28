@@ -32,6 +32,7 @@
   };
 
   const svg = d3.select('#map svg')
+    .on('click', function() { onClick(''); })
     .on('mousedown', onStartPanning)
     .on('mouseup', onEndPanning);
 
@@ -50,11 +51,17 @@
   };
 
   function onClick(id, name) {
+    d3.event.preventDefault();
+    d3.event.stopPropagation();
     if (selectedCountry !== id) {
       selectedCountry = id;
       d3.select('.__selected').classed('__selected', false);
-      d3.select('#' + id).classed('__selected', true);
-      onSelectLocation(id, name);
+      if (id) {
+        d3.select('#' + id).classed('__selected', true);
+        onSelectLocation(id, name);
+      } else {
+        onSelectLocation();
+      }
     }
   };
 
@@ -128,7 +135,7 @@
       tooltip = d3.select('#map .vis-tooltip');
       g = svg.append('g');
       onSelectLocation = onSelect;
-      zoom = d3.behavior.zoom().scaleExtent(zoomExtent)
+      zoom = d3.behavior.zoom().scaleExtent(zoomExtent);
 
       resizeMap();
 
@@ -148,7 +155,7 @@
             const filter = avaliableCountries.filter((country) => country.code === d.id);
             if (filter.length > 0) {
               item
-                .on('mousedown', function(d) { onClick(d.id, filter[0].name); })
+                .on('click', function(d) { onClick(d.id, filter[0].name); })
                 .on('mousemove', function(d) { showTooltip(filter[0].name); })
                 .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
             } else {
