@@ -2,8 +2,10 @@ const ENTRIES_FILE = '../entries.json';
 const ROLES_FILE = '../roles.json';
 const CURRENCIES_FILE = '../currencies.json';
 
+require('dotenv').config();
+
 const config = {
-  apiKey: 'AIzaSyB04_ki__EXD7ODTEV02e1l3jfunVplVtE',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'dev-salaries.firebaseapp.com',
   databaseURL: 'https://dev-salaries.firebaseio.com',
   projectId: 'dev-salaries',
