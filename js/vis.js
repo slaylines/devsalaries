@@ -52,10 +52,10 @@
   };
 
   const initDataGraphs = (statistics) => {
-    initSparkline('net-salary', statistics.netSalary, statistics.grossSalary);
-    initSparkline('gross-salary', statistics.grossSalary, statistics.netSalary);
-    initBarChart('years-company', statistics.companyYears);
-    initBarChart('years-total', statistics.expYears);
+    DS.Sparkline.init('net-salary', statistics.netSalary, statistics.grossSalary);
+    DS.Sparkline.init('gross-salary', statistics.grossSalary, statistics.netSalary);
+    DS.BarGraph.init('years-company', statistics.companyYears);
+    DS.BarGraph.init('years-total', statistics.expYears);
   };
 
   const sortYearsArray = (years) => {
@@ -92,10 +92,9 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const dataContainer = document.getElementById('data');
-    const map = worldMap();
 
     window.addEventListener('resize', function() {
-      map.resizeMap();
+      DS.WorldMap.resize();
     });
 
     const onShowAllCompanies = () => {
@@ -122,7 +121,7 @@
 
     DS.DataApi.init(firebase).then(() => {
       const countries = DS.DataApi.getEnabledCountries();
-      map.initWorldMap(onSelectLocation, countries);
+      DS.WorldMap.init(onSelectLocation, countries);
 
       const newStats = DS.DataApi.getWorldData();
       updateStatistics(statistics, newStats, null, true);

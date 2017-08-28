@@ -1,4 +1,4 @@
-function worldMap() {
+((window) => {
   // TODO: show world data when click outside countries
   let map;
 
@@ -39,7 +39,7 @@ function worldMap() {
     projection.rotate([shift + (endX - initX) * 360 / (scale * width), 0, 0])
     g.selectAll('path')
       .attr('d', path);
-  }
+  };
 
   function showTooltip(name) {
     const mouse = d3.mouse(svg.node())
@@ -47,7 +47,7 @@ function worldMap() {
     tooltip.classed('__hidden', false)
       .attr('style', 'left:' + (mouse[0] + tooltipLeft) + 'px;top:' + (mouse[1] + tooltipTop) + 'px')
       .html(name);
-  }
+  };
 
   function onClick(id, name) {
     if (selectedCountry !== id) {
@@ -56,7 +56,7 @@ function worldMap() {
       d3.select('#' + id).classed('__selected', true);
       onSelectLocation(id, name);
     }
-  }
+  };
 
   function onZoomMap() {
     const t = d3.event.translate;
@@ -84,7 +84,7 @@ function worldMap() {
       .style('stroke-width', 0.5 / scale);
 
     // TODO: call for cities
-  }
+  };
 
   function resizeMap() {
     scale = 1;
@@ -111,50 +111,57 @@ function worldMap() {
       .call(zoom);
 
     onShiftMap(initX);
-  }
-
-  function initWorldMap(onSelect, avaliableCountries) {
-    map = document.getElementById('map');
-    tooltip = d3.select('#map .vis-tooltip');
-    g = svg.append('g');
-    onSelectLocation = onSelect;
-    zoom = d3.behavior.zoom().scaleExtent(zoomExtent)
-
-    resizeMap();
-
-    d3.json('data/topology.json', function(error, world) {
-      if(error) return console.error(error);
-
-      g.append('g')
-        .attr('class', 'vis-world')
-        .selectAll('vis-world')
-        .data(topojson.feature(world, world.countries).features)
-        .enter().append('path')
-        .attr('class', 'vis-country')
-        .attr('id', function(d) { return d.id; })
-        .attr('d', path)
-        .each(function(d) {
-          const item = d3.select(this);
-          const filter = avaliableCountries.filter((country) => country.code === d.id);
-          if (filter.length > 0) {
-            item
-              .on('mousedown', function(d) { onClick(d.id, filter[0].name); })
-              .on('mousemove', function(d) { showTooltip(filter[0].name); })
-              .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
-          } else {
-            item
-              .attr('class', 'vis-country __disabled');
-          }
-        });
-    });
-  }
-
-  function showCities(avaliableCities) {
-    // TODO
-  }
-
-  return {
-    initWorldMap,
-    resizeMap
   };
-};
+
+  // Public methods
+  const WorldMap = {
+    resize() {
+      resizeMap();
+    },
+
+    showCities(avaliableCities) {
+      // TODO
+    },
+
+    init(onSelect, avaliableCountries) {
+      map = document.getElementById('map');
+      tooltip = d3.select('#map .vis-tooltip');
+      g = svg.append('g');
+      onSelectLocation = onSelect;
+      zoom = d3.behavior.zoom().scaleExtent(zoomExtent)
+
+      resize();
+
+      d3.json('data/topology.json', function(error, world) {
+        if(error) return console.error(error);
+
+        g.append('g')
+          .attr('class', 'vis-world')
+          .selectAll('vis-world')
+          .data(topojson.feature(world, world.countries).features)
+          .enter().append('path')
+          .attr('class', 'vis-country')
+          .attr('id', function(d) { return d.id; })
+          .attr('d', path)
+          .each(function(d) {
+            const item = d3.select(this);
+            const filter = avaliableCountries.filter((country) => country.code === d.id);
+            if (filter.length > 0) {
+              item
+                .on('mousedown', function(d) { onClick(d.id, filter[0].name); })
+                .on('mousemove', function(d) { showTooltip(filter[0].name); })
+                .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
+            } else {
+              item
+                .attr('class', 'vis-country __disabled');
+            }
+          });
+      });
+    },
+  };
+
+  // Expose API globally.
+  window.DS = Object.assign({}, window.DS || {}, {
+    WorldMap
+  });
+})(window);
