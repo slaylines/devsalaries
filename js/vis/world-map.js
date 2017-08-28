@@ -130,7 +130,7 @@
       onSelectLocation = onSelect;
       zoom = d3.behavior.zoom().scaleExtent(zoomExtent)
 
-      resize();
+      resizeMap();
 
       d3.json('data/topology.json', function(error, world) {
         if(error) return console.error(error);
