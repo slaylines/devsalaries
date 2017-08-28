@@ -152,10 +152,10 @@
    * PRIVATE METHODS
    */
 
-  const processEntries = (entries) => {
+  const processEntries = (entries, rates) => {
     const values = Object.values(entries);
     const filtered = filterInvalidEntries(values);
-    const converted = convertToUsd(filtered);
+    const converted = convertToUsd(filtered, rates);
 
     return converted;
   };
@@ -165,9 +165,16 @@
     return entries;
   };
 
-  // TODO: convert salaries to USD.
-  const convertToUsd = (entries) => {
-    return entries;
+  const convertToUsd = (entries, rates) => {
+    return entries.map((entry) => {
+      const rate = rates[entry.currency];
+      // if rate exists
+      if (rate) {
+        entry.netSalary /= rate;
+        entry.grossSalary /= rate;
+      }
+      return entry;
+    });
   };
 
   const isInRect = ({ lat, lon }, { x, y, width, height }) => {
@@ -185,6 +192,29 @@
     return code;
   };
 
+  // check if currency rates is outdated
+  const isRatesOld = (rates) => {
+    const currentTime = new Date().getTime();
+    // one day in ms
+    const validityPeriod = 24 * 60 * 60 * 60 * 1000;
+
+    return currentTime > rates.timestamp + validityPeriod;
+  };
+
+  const updateRates = (db) => {
+    const key = 'c7dcb6596c4245b1b38f9b282bf8abe1';
+    const url = `https://openexchangerates.org/api/latest.json?app_id=${key}&base=USD`;
+    fetch(url)
+    .then((resp) => resp.json())
+    .then((data) => {
+      let rates = data.rates;
+      // convert to ms
+      rates.timestamp = data.timestamp * 1000;
+      db.ref().child('rates').set(rates);
+    })
+  };
+
+
   /**
    * PUBLIC API
    */
@@ -193,19 +223,29 @@
     init(firebase) {
       this.db = firebase.database();
 
-      return this.getEntries().then((entries) => {
-        // Flatten and filter entries, convert salaries to USD.
-        this.entries = processEntries(entries.val());
+      return Promise.all([this.getEntries(), this.getRates()])
+        .then(([entries, rates]) => {
+          // Flatten and filter entries, convert salaries to USD.
+          rates = rates.val()
+          this.entries = processEntries(entries.val(), rates);
 
-        // Freeze DataApi object after initialization;
-        Object.freeze(this);
-      }).catch((err) => {
-        console.error(err);
-      });
+          if (isRatesOld(rates)) {
+            updateRates(this.db)
+          }
+
+          // Freeze DataApi object after initialization;
+          Object.freeze(this);
+        }).catch((err) => {
+          console.error(err);
+        });
     },
 
     getEntries() {
       return this.db.ref('entries').once('value');
+    },
+
+    getRates() {
+      return this.db.ref('rates').once('value');
     },
 
     getEnabledCountries() {
