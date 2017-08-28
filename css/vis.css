@@ -18,6 +18,18 @@
   background: #f6f6ef;
 }
 
+.vis-page .loading-cover {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 40px);
+  z-index: 100;
+  background: #f6f6ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
 /* map graph styles */
 
 .vis-world {

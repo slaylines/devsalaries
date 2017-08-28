@@ -1,4 +1,13 @@
 (() => {
+  const coverContainer = document.getElementById('cover');
+  const page = {
+    loading: true
+  };
+  rivets.bind(
+    coverContainer,
+    {page}
+  );
+
   const initFormatters = () => {
     rivets.formatters.location = function (location) {
       if (!location) {
@@ -68,7 +77,7 @@
     });
 
     const statistics = {
-      loaded: false
+      loading: true
     };
     rivets.bind(
       dataContainer,
@@ -85,7 +94,6 @@
     DS.DataApi.init(firebase).then(() => {
       countries = DS.DataApi.getEnabledCountries();
       map.initWorldMap(onSelectLocation, countries);
-
 
       const newStats = DS.DataApi.getWorldData();
       statistics.location = newStats.location;
@@ -104,9 +112,11 @@
       statistics.expYears = sortYearsArray(newStats.expYears);
       statistics.onShowAllCompanies = onShowAllCompanies;
       statistics.onShowAllRoles = onShowAllRoles;
-      statistics.loaded = true;
+      statistics.loading = false;
 
       initDataGraphs(statistics);
+
+      page.loading = false;
     });
   });
 })();
