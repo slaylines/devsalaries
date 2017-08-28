@@ -18,26 +18,38 @@ const currencies = require(CURRENCIES_FILE);
 const app = firebase.initializeApp(config);
 const db = firebase.database();
 
-entries.forEach((entry) => {
-  db.ref().child('entries').push(entry);
+const seedRoles = () => {
+  firebase.database().ref().child('roles').set(
+    roles.reduce((acc, role) => {
+      acc[role] = true;
+      return acc;
+    }, {})
+  );
+
+  process.stdout.write('✔');
+};
+
+const seedCurrencies = () => {
+  firebase.database().ref().child('currencies').set(
+    currencies.reduce((acc, currency) => {
+      acc[currency] = true;
+      return acc;
+    }, {})
+  );
+
+  process.stdout.write('✔');
+};
+
+const seedEntries = () => {
+  entries.forEach((entry) => {
+    db.ref().child('entries').push(entry).catch((error) => {
+      console.log(entry);
+    });
+  });
+
+  process.stdout.write('✔');
+};
+
+Promise.all([seedRoles(), seedCurrencies()]).then(() => {
+  seedEntries();
 });
-
-process.stdout.write('✔');
-
-firebase.database().ref().child('roles').set(
-  roles.reduce((acc, role) => {
-    acc[role] = true;
-    return acc;
-  }, {})
-);
-
-process.stdout.write('✔');
-
-firebase.database().ref().child('currencies').set(
-  currencies.reduce((acc, currency) => {
-    acc[currency] = true;
-    return acc;
-  }, {})
-);
-
-process.stdout.write('✔');
