@@ -114,6 +114,7 @@
     const onSelectLocation = (id, name) => {
       const newStats = DS.DataApi.getCountryData(id);
       updateStatistics(statistics, newStats, { country: name });
+      initDataGraphs(statistics);
     }
 
     DS.DataApi.init(firebase).then(() => {
