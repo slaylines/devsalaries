@@ -1,8 +1,8 @@
 function initSparkline(divId, mainSalary, salary) {
-  const width = 180,
-      height = 21,
+  const width = 300,
+      height = 31,
       padding = 10,
-      top = 5,
+      top = 15,
       radius = 3;
 
   const mainColor = '#333',
@@ -18,8 +18,7 @@ function initSparkline(divId, mainSalary, salary) {
 
   const min = padding + width * (mainSalary.min - minValue) / (maxValue - minValue);
   const max = padding + width * (mainSalary.max - minValue) / (maxValue - minValue);
-  const av = padding + width * (mainSalary.average - minValue) / (maxValue - minValue);
-
+  const mean = padding + width * (mainSalary.mean - minValue) / (maxValue - minValue);
 
   const div = d3.select('#' + divId);
   div.selectAll('svg').remove();
@@ -54,23 +53,23 @@ function initSparkline(divId, mainSalary, salary) {
 
   g.append('circle')
     .style('fill', accentColor)
-    .attr('cx', av)
+    .attr('cx', mean)
     .attr('cy', top)
     .attr('r', radius);
 
   // add text values - shift by half of width
-  const avText = g.append('text')
-    .text(mainSalary.average)
+  const meanText = g.append('text')
+    .text(mainSalary.mean.toFixed(2))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', accentColor);
-  let textWidth = avText.node().getComputedTextLength();
-  avText
-    .attr('x', av - textWidth / 2)
-    .attr('y', height - 1);
+  let textWidth = meanText.node().getComputedTextLength();
+  meanText
+    .attr('x', mean - textWidth / 2)
+    .attr('y', 10);
 
   const minText = g.append('text')
-    .text(mainSalary.min)
+    .text(mainSalary.min.toFixed(2))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', mainColor);
@@ -80,7 +79,7 @@ function initSparkline(divId, mainSalary, salary) {
     .attr('y', height - 1);
 
   const maxText = g.append('text')
-    .text(mainSalary.max)
+    .text(mainSalary.max.toFixed(2))
     .attr('font-family', fontFamily)
     .attr('font-size', fontSize)
     .attr('fill', mainColor);

@@ -88,7 +88,7 @@ function worldMap() {
   function resizeMap() {
     scale = 1;
     width = map.clientWidth;
-    height = map.clientWidth;
+    height = map.clientHeight;
 
     tooltipLeft = map.offsetLeft + 10;
     tooltipTop = map.offsetTop + 10;

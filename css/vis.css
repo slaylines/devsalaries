@@ -14,7 +14,7 @@
 
 .vis-page #data {
   overflow: auto;
-  padding: 40px 16px;
+  padding: 20px 16px;
   background: #f6f6ef;
 }
 
@@ -96,12 +96,15 @@
   margin-bottom: 5px;
 }
 
+.vis-list .__margin {
+  margin-right: 8px;
+}
+
 .vis-list .__bordered {
   border-bottom: 1px solid #666;
 }
 
 .vis-show-all {
-  margin-left: 8px;
   font-size: 12px;
   color: #428bca;
   border-bottom: 1px dotted;
@@ -114,6 +117,11 @@
 
 .vis-salary {
   display: flex;
+  align-items: center;
+}
+
+.vis-salary.__shift {
+  margin-top: 5px;
 }
 
 .vis-salary span {

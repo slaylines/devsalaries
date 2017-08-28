@@ -41,35 +41,39 @@
             salaries are shown in USD
           </div>
         </div>
-        <div class="vis-people" rv-show="statistics.count">
-          <span rv-show="statistics.count.male" title="Males">
-            <i class="fa fa-mars"></i>{statistics.count.male}
+        <div class="vis-people" rv-show="statistics.gender">
+          <span rv-show="statistics.gender.Male" title="Males">
+            <i class="fa fa-mars"></i>{statistics.gender.Male}
           </span>
-          <span rv-show="statistics.count.female" title="Females">
-            <i class="fa fa-venus"></i>{statistics.count.female}
+          <span rv-show="statistics.gender.Female" title="Females">
+            <i class="fa fa-venus"></i>{statistics.gender.Female}
           </span>
-          <span rv-show="statistics.count.other" title="Others">
-            <i class="fa fa-neuter"></i>{statistics.count.other}
+          <span rv-show="statistics.gender.Other" title="Others">
+            <i class="fa fa-neuter"></i>{statistics.gender.Other}
           <span>
         </div>
         <div class="vis-lists">
-          <div class="vis-list" rv-show="statistics.companies">
+          <div class="vis-list" rv-show="statistics.company">
             <span class="__bordered">Companies</span>:
-            {statistics.companies.values | companies statistics.companies.showAll}
+            <span class="__margin">
+              {statistics.company.values | companies statistics.company.showAll}
+            </span>
             <span
               class="vis-show-all"
-              rv-hide="statistics.companies.showAll"
+              rv-hide="statistics.company.showAll"
               rv-on-click="statistics.onShowAllCompanies"
             >
               show all
             </span>
           </div>
-          <div class="vis-list" rv-show="statistics.roles">
+          <div class="vis-list" rv-show="statistics.role">
             <span class="__bordered">Roles</span>:
-            {statistics.roles.values | roles statistics.roles.showAll}
+            <span class="__margin">
+              {statistics.role.values | roles statistics.role.showAll}
+            </span>
             <span
               class="vis-show-all"
-              rv-hide="statistics.roles.showAll"
+              rv-hide="statistics.role.showAll"
               rv-on-click="statistics.onShowAllRoles"
             >
               show all
@@ -81,17 +85,17 @@
             <span>Net salary:</span>
             <div id="net-salary"></div>
           </div>
-          <div class="vis-salary" rv-show="statistics.netSalary">
+          <div class="vis-salary __shift" rv-show="statistics.netSalary">
             <span>Gross salary:</span>
             <div id="gross-salary"></div>
           </div>
         </div>
         <div class="vis-years-charts" id="vis-years-charts">
-          <div rv-show="statistics.yearsCompany">
-            <div class="vis-years-title">Years in company</div>
+          <div rv-show="statistics.companyYears">
+            <div class="vis-years-title">Years in last company</div>
             <div id="years-company"></div>
           </div>
-          <div class="__shift" rv-show="statistics.yearsTotal">
+          <div class="__shift" rv-show="statistics.expYears">
             <div class="vis-years-title">Total experience</div>
             <div id="years-total"></div>
           </div>
