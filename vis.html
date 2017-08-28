@@ -63,10 +63,9 @@
             </span>
             <span
               class="vis-show-all"
-              rv-hide="statistics.company.showAll"
               rv-on-click="statistics.onShowAllCompanies"
             >
-              show all
+              {statistics.company.showAll | showAll}
             </span>
           </div>
           <div class="vis-list" rv-show="statistics.role">
@@ -76,10 +75,9 @@
             </span>
             <span
               class="vis-show-all"
-              rv-hide="statistics.role.showAll"
               rv-on-click="statistics.onShowAllRoles"
             >
-              show all
+              {statistics.role.showAll | showAll}
             </span>
           </div>
         </div>

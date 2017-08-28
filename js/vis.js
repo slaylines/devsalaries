@@ -1,5 +1,4 @@
 (() => {
-  // TODO: add 'hide all' buttons
   // TODO: zoom in to see cities
 
   const coverContainer = document.getElementById('cover');
@@ -48,6 +47,12 @@
         .slice(0, minShownRoles)
         .map((val) => `${val.name} (${val.count})`)
         .join(', ');
+    };
+
+    rivets.formatters.showAll = function (value) {
+      return value
+        ? 'hide all'
+        : 'show all';
     };
   };
 
@@ -98,10 +103,10 @@
     });
 
     const onShowAllCompanies = () => {
-      statistics.company.showAll = true;
+      statistics.company.showAll = !statistics.company.showAll;
     };
     const onShowAllRoles = () => {
-      statistics.role.showAll = true;
+      statistics.role.showAll = !statistics.role.showAll;
     };
 
     const statistics = {
