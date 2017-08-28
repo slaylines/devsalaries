@@ -1,4 +1,8 @@
 (() => {
+  /**
+   * CONSTANTS
+   */
+
   const DEFAULT_OPTION_TEXT = {
     currency: '--- Choose Currency ---',
     role: '--- Choose Role ---',
@@ -7,6 +11,10 @@
   const SEARCH_CONFIG = {
     types: ['(cities)'],
   };
+
+  /**
+   * DOM HELPERS
+   */
 
   const emptySelect = (select) => {
     while (select.firstChild) {
@@ -47,10 +55,33 @@
     return result;
   };
 
+  /**
+   * FIREBASE API METHODS
+   */
+
+  const getCurrencies = () => {
+    const db = firebase.database();
+    return db.ref('currencies').once('value').then((response) => {
+      debugger;
+      return Object.values(response.val());
+    });
+  };
+
+  const getRoles = () => {
+    const db = firebase.database();
+    return db.ref('roles').once('value').then((response) => {
+      return Object.values(response.val());
+    });
+  };
+
   const postEntry = (entry) => {
     const db = firebase.database();
     return db.ref().child('entries').push(entry);
   };
+
+  /**
+   * EVENT HANDLERS
+   */
 
   const onLocationSelected = (place) => {
     const locationInput = document.querySelector('#location');
@@ -72,6 +103,10 @@
     locationInput.value = JSON.stringify({ city, country, coords });
   };
 
+  /**
+   * INITIALIZERS
+   */
+
   const initSearch = () => {
     const searchInput = document.querySelector('#search');
     const locationInput = document.querySelector('#location');
@@ -90,18 +125,14 @@
   };
 
   const initCurrencies = () => {
-    fetch('data/currencies.json').then((response) => {
-      return response.json();
-    }).then((currencies) => {
+    getCurrencies().then((currencies) => {
       const currencySelect = document.querySelector('#currency');
-      appendOptions(currencySelect, Object.keys(currencies), DEFAULT_OPTION_TEXT.currency);
+      appendOptions(currencySelect, currencies, DEFAULT_OPTION_TEXT.currency);
     });
   };
 
   const initRoles = () => {
-    fetch('data/roles.json').then((response) => {
-      return response.json();
-    }).then((roles) => {
+    getRoles().then((roles) => {
       const roleSelect = document.querySelector('#role');
       appendOptions(roleSelect, roles, DEFAULT_OPTION_TEXT.role);
     });
@@ -139,6 +170,10 @@
       }
     });
   };
+
+  /**
+   * MAIN
+   */
 
   document.addEventListener('DOMContentLoaded', () => {
     initSearch();
