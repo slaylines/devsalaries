@@ -64,8 +64,11 @@ function initSparkline(divId, mainSalary, salary) {
     .attr('font-size', fontSize)
     .attr('fill', accentColor);
   let textWidth = meanText.node().getComputedTextLength();
+  let textX = mean - textWidth / 2;
+  if (textX < 0) { textX = 0; }
+  if (textX + textWidth > width + padding * 2) { textX = width + padding * 2; }
   meanText
-    .attr('x', mean - textWidth / 2)
+    .attr('x', textX)
     .attr('y', 10);
 
   const minText = g.append('text')
@@ -86,6 +89,6 @@ function initSparkline(divId, mainSalary, salary) {
   textWidth = maxText.node().getComputedTextLength();
 
   maxText
-    .attr('x', Math.min(max + textWidth / 2, width + padding * 1.5) - textWidth)
+    .attr('x', Math.min(max + textWidth / 2, width + padding * 2) - textWidth)
     .attr('y', height - 1);
 };
