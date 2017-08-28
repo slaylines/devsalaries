@@ -148,17 +148,21 @@
 }
 
 .vis-years-charts {
+  font-size: 12px;
   display: flex;
 }
 
 .vis-years-charts .__shift {
   margin-left: 10px;
+  margin-top: 14px;
 }
 
-.vis-years-title {
-  font-size: 12px;
+.vis-years-x-title {
+  text-align: right;
+}
+
+.vis-years-y-title {
   margin-left: 35px;
-  margin-bottom: 5px;
 }
 
 /**
