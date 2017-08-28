@@ -83,7 +83,6 @@
     };
     statistics.companyYears = sortYearsArray(newStats.companyYears);
     statistics.expYears = sortYearsArray(newStats.expYears);
-    statistics.loading = false;
   };
 
   initFormatters();
@@ -104,7 +103,6 @@
     };
 
     const statistics = {
-      loading: true,
       onShowAllCompanies: onShowAllCompanies,
       onShowAllRoles: onShowAllRoles
     };
@@ -114,7 +112,6 @@
     );
 
     const onSelectLocation = (id, name) => {
-      statistics.loading = true;
       const newStats = DS.DataApi.getCountryData(id);
       updateStatistics(statistics, newStats, { country: name });
     }

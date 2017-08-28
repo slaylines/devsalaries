@@ -9,12 +9,15 @@
 }
 
 .vis-page #map {
-  height: 100%;
+  margin: 0 20px;
+  width: calc(100% - 40px);
+  height: 50%;
 }
 
 .vis-page #data {
+  width: 34em;
   overflow: auto;
-  padding: 20px 16px;
+  padding: 20px 16px 60px;
   background: #f6f6ef;
 }
 
@@ -26,7 +29,8 @@
   background: #f6f6ef;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  padding-top: 40px;
   font-size: 40px;
 }
 
@@ -162,16 +166,28 @@
 /* sm */
 @media (min-width: 35.5em) {
   .vis-page #map {
-    margin: 0 5%;
-    height: 90%;
+    margin: 0 20px;
+    width: calc(100% - 40px);
+    height: 50%;
+  }
+
+  .vis-page .loading-cover {
+    padding-top: 0;
+    align-items: center;
   }
 }
 
  /* md */
 @media (min-width: 48em) {
   .vis-page #map {
-    margin: 0 5%;
-    height: 90%;
+    margin: 0 20px;
+    width: calc(100% - 40px);
+    height: 50%;
+  }
+
+  .vis-page .loading-cover {
+    padding-top: 0;
+    align-items: center;
   }
 }
 
@@ -188,7 +204,6 @@
     top: 40px;
     right: 0;
     z-index: 10;
-    width: 34em;
     height: calc(100% - 40px);
     -webkit-box-shadow: 4px 2px 10px 8px #999;
     -moz-box-shadow: 4px 2px 10px 8px #999;
