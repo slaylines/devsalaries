@@ -3,9 +3,8 @@
   const BarGraph = {
     init(divId, data) {
     // TODO: show value on hover of each bar
-    // TODO: label x axis
     const margin = {top: 10, right: 0, bottom: 16, left: 40};
-    const width = 20 * data.length;
+    const width = 18 * data.length;
     const height = 120;
 
     const div = d3.select('#' + divId);

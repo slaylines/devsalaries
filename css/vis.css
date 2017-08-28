@@ -6,6 +6,7 @@
   padding: 0;
   margin: 40px 0;
   display: flex;
+  font-size: 14px;
 }
 
 .vis-page #map {
@@ -72,6 +73,7 @@
   margin-bottom: 20px;
   display: flex;
   align-items: baseline;
+  min-width: 27em;
 }
 
 .vis-location {
@@ -108,7 +110,6 @@
 }
 
 .vis-list {
-  font-size: 14px;
   margin-bottom: 5px;
 }
 
