@@ -6,7 +6,7 @@ function initBarChart(divId, data) {
       height = 240 * 0.6 - marginBottom;
 
   const div = d3.select('#' + divId);
-  div.selectAll('svg').remove()
+  div.selectAll('svg').remove();
 
   const svg = div
     .append('svg')

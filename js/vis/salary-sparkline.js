@@ -22,7 +22,7 @@ function initSparkline(divId, mainSalary, salary) {
 
 
   const div = d3.select('#' + divId);
-  div.selectAll('svg').remove()
+  div.selectAll('svg').remove();
 
   const svg = div
     .append('svg')
