@@ -103,7 +103,7 @@
       return entry[prop];
     });
 
-    return uniq(array);
+    return uniq(array).filter((item) => item);
   };
 
   const groupStats = (entries, prop) => {
