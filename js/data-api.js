@@ -162,11 +162,6 @@
     return converted;
   };
 
-  // TODO: filter invalid data.
-  const filterInvalidEntries = (entries) => {
-    return entries;
-  };
-
   const convertToUsd = (entries, rates) => {
     return entries.map((entry) => {
       const rate = rates[entry.currency];
@@ -224,10 +219,13 @@
 
       return Promise.all([this.getEntries(), this.getRates()])
         .then(([entries, rates]) => {
-          // Flatten and filter entries, convert salaries to USD.
-          rates = rates.val()
-          this.entries = processEntries(entries.val(), rates);
+          rates = rates.val();
+          entries = entries.val();
 
+          // Flatten and filter entries, convert salaries to USD.
+          this.entries = processEntries(entries, rates);
+
+          // Update rates on the server side if they are old.
           if (isRatesOld(rates)) {
             updateRates(this.db)
           }
