@@ -163,8 +163,7 @@
 
   const convertToUsd = (entries, rates) => {
     return entries.map((entry) => {
-      const rate = rates[entry.currency];
-
+      const rate = rates && rates[entry.currency];
       if (rate && entry.currency !== 'USD') {
         entry.netSalary /= rate;
         entry.grossSalary /= rate;
@@ -195,7 +194,7 @@
     // one day in ms
     const validityPeriod = 24 * 60 * 60 * 60 * 1000;
 
-    return currentTime > rates.timestamp + validityPeriod;
+    return !rates || currentTime > rates.timestamp + validityPeriod;
   };
 
   const updateRates = (db) => {
