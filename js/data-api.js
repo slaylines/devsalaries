@@ -5,6 +5,8 @@
 
   const MIN_ENTRIES_FOR_VISDATA = 1;
   const QUANTILES = [5, 25, 50, 75, 95];
+  const XCHANGE_API_KEY = 'c7dcb6596c4245b1b38f9b282bf8abe1';
+  const XCHANGE_API_URL = `https://openexchangerates.org/api/latest.json?app_id=${XCHANGE_API_KEY}&base=USD`;
 
   /**
    * HELPERS
@@ -168,8 +170,7 @@
   const convertToUsd = (entries, rates) => {
     return entries.map((entry) => {
       const rate = rates[entry.currency];
-      // if rate exists
-      if (rate) {
+      if (rate && entry.currency !== 'USD') {
         entry.netSalary /= rate;
         entry.grossSalary /= rate;
       }
@@ -202,9 +203,7 @@
   };
 
   const updateRates = (db) => {
-    const key = 'c7dcb6596c4245b1b38f9b282bf8abe1';
-    const url = `https://openexchangerates.org/api/latest.json?app_id=${key}&base=USD`;
-    fetch(url)
+    fetch(XCHANGE_API_URL)
     .then((resp) => resp.json())
     .then((data) => {
       let rates = data.rates;
