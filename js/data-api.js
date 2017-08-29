@@ -7,6 +7,10 @@
   const QUANTILES = [5, 25, 50, 75, 95];
   const XCHANGE_API_KEY = 'c7dcb6596c4245b1b38f9b282bf8abe1';
   const XCHANGE_API_URL = `https://openexchangerates.org/api/latest.json?app_id=${XCHANGE_API_KEY}&base=USD`;
+  const DOMAIN = {
+    companyYears: ['<1', '1', '2', '3', '4', '5', '>5'],
+    expYears: ['<1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '>10'],
+  };
 
   /**
    * HELPERS
@@ -25,9 +29,14 @@
     });
   };
 
-  const groupCount = (array) => {
+  const groupCount = (array, domain) => {
     const groups = {};
     const result = [];
+
+    // Put zero counts if domain is defined.
+    if (domain) {
+      domain.forEach((item) => groups[item] = 0);
+    }
 
     // Group and count items in groups.
     array.forEach((item) => {
@@ -113,7 +122,7 @@
       return entry[prop];
     });
 
-    return groupCount(array);
+    return groupCount(array, DOMAIN[prop]);
   };
 
   const aggrStats = (entries, prop) => {
