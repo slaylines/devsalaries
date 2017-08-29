@@ -26,6 +26,7 @@ header .download-link {
   float: right;
   text-decoration: none;
   line-height: 30px;
+  color: black;
 }
 
 /* map graph styles */
