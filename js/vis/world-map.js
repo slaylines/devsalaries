@@ -4,7 +4,11 @@
   let map;
   let width = 0;
   let height = 0;
-  let shift = 0;
+
+  // main svg element
+  const svg = d3
+    .select('#map svg')
+    .on('click', function() { onClick(''); });
 
   // variables for tooltip container
   let tooltip;
@@ -12,57 +16,32 @@
   let tooltipTop = 0;
 
   // variables and constants for navigation
-  let initX = 0;
-  let scale = 1;
-  let mouseClicked = false;
-  const zoomExtent = [1, 50];
+  let initScale;
+  const maxZoomExtent = 30;
   const minZoomForCities = 3;
 
   // currently selected locations
   let selectedCountry = '';
-  let selectedCity;
+  let selectedCity = null;
 
-  // constants for
+  // font size and shift for city markers
   const fontAwesomeSize = 20;
-  const markerRadius = 5.52;
+  const markerShift = 5.71;
 
   // callback for selection
   let onSelectLocation;
 
-  // d3js variables for rerendering map
-  let projection, path, zoom, mainGroup, citiesGroup;
+  // variables for rerendering map
+  const projection = d3.geo.mercator();
+  const path = d3.geo
+    .path()
+    .projection(projection);
+  let zoom;
+
+  let mainGroup, mapGroup, citiesGroup;
 
   // array of avaliable cities
   let cities;
-
-  // mouseDown handler on svg
-  function onStartPanning() {
-    d3.event.preventDefault();
-    initX = d3.mouse(this)[0];
-    mouseClicked = true;
-  };
-
-  // mouseDown handler on svg
-  function onEndPanning() {
-    shift = shift + ((d3.mouse(this)[0] - initX) * 360 / (scale * width));
-    mouseClicked = false;
-  };
-
-  // main svg element, when clicked - select all world
-  const svg = d3.select('#map svg')
-    .on('click', function() { onClick(''); })
-    .on('mousedown', onStartPanning)
-    .on('mouseup', onEndPanning);
-
-  // panning map
-  function onShiftMap(endX) {
-    projection.rotate([shift + (endX - initX) * 360 / (scale * width), 0, 0])
-    mainGroup.selectAll('path')
-      .attr('d', path);
-
-    // update cities markers while panning
-    updateCities();
-  };
 
   // show tooltip near mouse pointer with given text
   function showTooltip(name) {
@@ -111,52 +90,24 @@
     }
   };
 
-  // get [lon, lat] coordinates of point on screen
-  function getPoint(x, y) {
-    const container = mainGroup.node();
-    const svg = container.ownerSVGElement || container;
-    let point = svg.createSVGPoint();
-    point.x = x, point.y = y;
-    point = point.matrixTransform(container.getScreenCTM().inverse());
-    return projection.invert([point.x, point.y]);
-  }
-
   // zooming map
   function onZoomMap() {
-    const transform = d3.event.translate;
-    const h = 0;
-    const oldScale = scale;
-    scale = d3.event.scale;
+    projection
+      .translate(zoom.translate())
+      .scale(zoom.scale());
 
-    transform[0] = Math.min(
-      (width/height) * (scale - 1),
-      Math.max(width * (1 - scale), transform[0])
-    );
+    mainGroup.selectAll('path')
+      .attr('d', path);
 
-    transform[1] = Math.min(
-      h * (scale - 1) + h * scale,
-      Math.max(height * (1 - scale) - h * scale, transform[1])
-    );
-
-    zoom.translate(transform);
-    if (mouseClicked) {
-      onShiftMap(d3.mouse(this)[0]);
-      return;
+    if (cities) {
+      updateCities();
     }
-
-    mainGroup.attr('transform', `translate(${transform})scale(${scale})`);
-    d3.selectAll('.vis-world')
-      .style('stroke-width', 0.5 / scale);
-    d3.selectAll('.vis-city')
-      .attr('font-size', fontAwesomeSize / scale);
-
-    updateCities();
   };
 
   // rerender cities after pan or zoom
   function updateCities() {
     citiesGroup
-      .style('display', scale < minZoomForCities ? 'none' : 'inline-block')
+      .style('display', zoom.scale() < initScale * minZoomForCities ? 'none' : 'inline-block')
       .selectAll('.vis-city')
       .remove()
 
@@ -170,10 +121,10 @@
           : 'vis-city';
       })
       .attr('id', function(d) { return getCityId(d.coords, d.city); })
-      .attr('x', function(d) { return projection([d.coords.lon, d.coords.lat])[0] - markerRadius / scale; })
+      .attr('x', function(d) { return projection([d.coords.lon, d.coords.lat])[0] - markerShift; })
       .attr('y', function(d) { return projection([d.coords.lon, d.coords.lat])[1]; })
-      .attr("font-family","FontAwesome")
-      .attr('font-size', fontAwesomeSize / scale)
+      .attr('font-family','FontAwesome')
+      .attr('font-size', fontAwesomeSize)
       .text(function(d) { return '\uf041'; })
       .on('click', function(d) {
         onClick(d.coords, {city: d.city, country: d.country}, true);
@@ -181,6 +132,16 @@
       .on('mousemove', function(d) { showTooltip(d.city); })
       .on('mouseout',  function() { tooltip.classed('__hidden', true); });
   };
+
+  // get [lon, lat] coordinates of point on screen
+  function getPoint(x, y) {
+    const container = mainGroup.node();
+    const svg = container.ownerSVGElement || container;
+    let point = svg.createSVGPoint();
+    point.x = x, point.y = y;
+    point = point.matrixTransform(container.getScreenCTM().inverse());
+    return projection.invert([point.x, point.y]);
+  }
 
   // get and store list of avaliable cities
   function getCities() {
@@ -197,49 +158,40 @@
 
   // init map after loading or resize
   function initMap() {
-    scale = 1;
     width = map.clientWidth;
     height = map.clientHeight;
+    initScale = (Math.min(width, height) - 1) / 2 / Math.PI;
 
     tooltipLeft = map.offsetLeft + 10;
     tooltipTop = map.offsetTop + 10;
 
-    projection = d3.geo.mercator()
-      .scale(Math.min(width, height) * 0.2)
+    zoom = d3.behavior.zoom()
       .translate([width / 2, height / 1.5])
-      .rotate([shift, 0, 0]);
-
-    zoom = d3.behavior
-      .zoom()
-      .scaleExtent(zoomExtent)
+      .scale(initScale)
+      .scaleExtent([initScale, maxZoomExtent * initScale])
       .on('zoom', onZoomMap);
-
-    path = d3.geo
-      .path()
-      .projection(projection);
 
     svg
       .attr('width', width)
       .attr('height', height)
-      .call(zoom);
+      .call(zoom)
+      .call(zoom.event);
   }
 
   // Public methods
   const WorldMap = {
     resize() {
       initMap();
-      onShiftMap(initX);
       updateCities();
     },
 
     init(onSelect, avaliableCountries) {
       onSelectLocation = onSelect;
-
       map = document.getElementById('map');
       tooltip = d3.select('#map .vis-tooltip');
 
       mainGroup = svg.append('g');
-      const mapGroup = mainGroup
+      mapGroup = mainGroup
         .append('g')
         .attr('class', 'vis-world');
       citiesGroup = mainGroup

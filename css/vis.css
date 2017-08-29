@@ -15,6 +15,11 @@
   height: 50%;
 }
 
+.vis-data #map svg {
+  fill: none;
+  pointer-events: all;
+}
+
 .vis-page #data {
   width: 34em;
   overflow: auto;
