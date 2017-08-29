@@ -151,6 +151,7 @@ footer {
 }
 
 .form-page .error-container {
+  margin: 1em 0;
   height: 1em;
 }
 

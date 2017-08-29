@@ -16,7 +16,7 @@
    * DOM HELPERS
    */
 
-   let model = {
+  const model = {
     page: {
       loading: false
     },
@@ -25,7 +25,8 @@
       netSalaryError: false,
       serverError: false
     },
-    onSalaryBlur: isSalaryValid
+    onSalaryBlur: isSalaryValid,
+    onLocationBlur: isLocationValid,
   };
 
   const emptySelect = (select) => {
@@ -68,36 +69,37 @@
     return result;
   };
 
-  const isLocationValid = (entry) => {
+  function isLocationValid () {
     const searchInput = document.querySelector('#search');
+    const locationInput = document.querySelector('#location');
+    const isValid = !!locationInput.value;
 
-    const isValid = entry.location;
     model.form.locationError = !isValid;
 
-    if (isValid) return true;
-    searchInput.value = '';
-    searchInput.focus();
-    return false;
-  };
+    if (!isValid) {
+      searchInput.value = '';
+      searchInput.focus();
+    }
+
+    return isValid;
+  }
 
   function isSalaryValid () {
     const netSalaryInput = document.querySelector('#net-salary');
     const grossSalaryInput = document.querySelector('#gross-salary');
-
     const isValid = +netSalaryInput.value <= +grossSalaryInput.value;
+
     model.form.netSalaryError = !isValid;
 
-    if (isValid) return true;
-    model.form.netSalaryError = true;
-    netSalaryInput.focus();
-    return false;
+    if (!isValid) {
+      netSalaryInput.focus();
+    }
+
+    return isValid;
   }
 
-  const isFormValid = (entry) => {
-    return [
-      isLocationValid(entry),
-      isSalaryValid(entry),
-    ].every( _ => _ );
+  const isFormValid = () => {
+    return isLocationValid() && isSalaryValid();
   }
 
   /**
@@ -200,10 +202,11 @@
 
       const entry = parseFormData(form);
 
-      if (!isFormValid(entry)) {
+      if (!isFormValid()) {
         submitButton.disabled = true;
         return;
-     }
+      }
+
       // Add timestamp in ms since 1 January 1970 00:00:00 UTC.
       entry.createdAt = new Date().getTime();
 
@@ -213,11 +216,12 @@
       entry.netSalary = +entry.netSalary;
 
       model.page.loading = true;
+
       postEntry(entry).then(() => {
-        model.page.loading = false;
         window.location.href = 'vis.html';
       }).catch((error) => {
-        model.serverError = true;
+        model.page.loading = false;
+        model.form.serverError = true;
         console.error(error);
       });
     });
