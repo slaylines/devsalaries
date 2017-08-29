@@ -39,11 +39,13 @@ header .download-link {
 
 .vis-country.__disabled {
   fill: #f6f6f2 !important;
+  cursor: default;
 }
 
 .vis-country.__selected,
 .vis-country:hover {
   fill: #d1ccf3;
+  cursor: default;
 }
 
 .vis-tooltip {
@@ -59,6 +61,18 @@ header .download-link {
 
 .vis-tooltip.__hidden {
   display: none;
+}
+
+.vis-city {
+  fill: #333;
+  opacity: 0.6;
+  cursor: default;
+}
+
+.vis-city.__selected,
+.vis-city:hover {
+  fill: #ff6600;
+  opacity: 1;
 }
 
 /* data panel styles */

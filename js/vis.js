@@ -1,6 +1,4 @@
 (() => {
-  // TODO: zoom in to see cities
-
   const coverContainer = document.getElementById('cover');
   const page = {
     loading: true
@@ -19,7 +17,7 @@
       }
       const {city, country} = location;
       if (city) {
-        return `${city}, ${country}`;
+        return `${city}, ${country.name}`;
       }
       return country;
     };
@@ -82,12 +80,14 @@
     statistics.company = location && newStats.company.length
       ? {
         values: newStats.company.sort((a, b) => a.localeCompare(b)),
-        showAll: newStats.company.length <= minShownCompanies
+        showAll: newStats.company.length <= minShownCompanies,
+        visible: newStats.company.length > minShownCompanies
       }
       : null,
     statistics.role = {
       values: newStats.role.sort((a, b) => b.count - a.count),
-      showAll: newStats.role.length <= minShownRoles
+      showAll: newStats.role.length <= minShownRoles,
+      visible: newStats.role.length > minShownRoles
     };
     statistics.companyYears = sortYearsArray(newStats.companyYears);
     statistics.expYears = sortYearsArray(newStats.expYears);
@@ -128,9 +128,15 @@
 
     const onSelectLocation = (id, name) => {
       if (id) {
-        const newStats = DS.DataApi.getCountryData(id);
-        updateStatistics(statistics, newStats, { country: name });
-        initDataGraphs(statistics);
+        if (typeof(id) === 'string') {
+          const newStats = DS.DataApi.getCountryData(id);
+          updateStatistics(statistics, newStats, { country: name });
+          initDataGraphs(statistics);
+        } else {
+          const newStats = DS.DataApi.getCityData({...name, coords: id});
+          updateStatistics(statistics, newStats, { city: name.city, country: name.country });
+          initDataGraphs(statistics);
+        }
       } else {
         const newStats = DS.DataApi.getWorldData();
         updateStatistics(statistics, newStats, null);
