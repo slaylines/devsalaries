@@ -17,7 +17,7 @@
    */
 
   const uniq = (array) => {
-    return [...new Set(array)];
+    return Array.from(new Set(array));
   };
 
   const uniqBy = (array, key) => {
@@ -79,7 +79,7 @@
     // percentiles - an array of all percentiles to calculate,
     // e.g. [5, 25, 50, 75, 95].
     quantiles(array, percentiles) {
-      const clone = [...array];
+      const clone = array.slice(0);
       const len = clone.length;
       const result = {};
 

@@ -133,7 +133,7 @@
           updateStatistics(statistics, newStats, { country: name });
           initDataGraphs(statistics);
         } else {
-          const newStats = DS.DataApi.getCityData({...name, coords: id});
+          const newStats = DS.DataApi.getCityData({city: name.city, country: name.country, coords: id});
           updateStatistics(statistics, newStats, { city: name.city, country: name.country });
           initDataGraphs(statistics);
         }
