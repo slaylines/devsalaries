@@ -45,12 +45,13 @@
     });
   };
 
-  const parseFormData = (formData) => {
+  const parseFormData = (form) => {
     const result = {};
+    const elements = form.querySelectorAll('input, select');
 
-    for (const [key, value] of formData) {
-      result[key] = value;
-    }
+    elements.forEach(({ name, value }) => {
+      if (name) result[name] = value;
+    });
 
     return result;
   };
@@ -144,8 +145,7 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const formData = new FormData(form);
-      const entry = parseFormData(formData);
+      const entry = parseFormData(form);
 
       // If location is presented then post data.
       // Otherwise clear search input and focus it.
