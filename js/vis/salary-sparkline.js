@@ -2,11 +2,11 @@
   // Sparkline graph object
   const Sparkline = {
     init(divId, mainSalary, salary) {
-      // TODO: revision - show full box with quantiles
       const width = 300;
-      const height = 31;
-      const padding = 10;
-      const top = 15;
+      const height = 38;
+      const padding = 11;
+      const top = height / 2;
+      const barHeight = 5.5;
       const radius = 3;
 
       const mainColor = '#333',
@@ -22,7 +22,9 @@
 
       const min = padding + width * (mainSalary.min - minValue) / (maxValue - minValue);
       const max = padding + width * (mainSalary.max - minValue) / (maxValue - minValue);
+      const minQ = padding + width * (mainSalary.quantiles[25] - minValue) / (maxValue - minValue);
       const median = padding + width * (mainSalary.quantiles[50] - minValue) / (maxValue - minValue);
+      const maxQ = padding + width * (mainSalary.quantiles[75] - minValue) / (maxValue - minValue);
 
       const div = d3.select('#' + divId);
       div.selectAll('svg').remove();
@@ -34,32 +36,51 @@
 
       const g = svg.append('g');
 
-      // add line
+      // add main line
       g.append('line')
         .style('stroke', lineColor)
         .attr('x1', min)
         .attr('y1', top)
+        .attr('x2', minQ)
+        .attr('y2', top);
+
+      g.append('line')
+        .style('stroke', lineColor)
+        .attr('x1', maxQ)
+        .attr('y1', top)
         .attr('x2', max)
         .attr('y2', top);
 
-      // add 3 points on line
-      g.append('circle')
-        .style('fill', mainColor)
-        .attr('cx', min)
-        .attr('cy', top)
-        .attr('r', radius);
+      // add min and max points on line
+      [min, max].forEach((value) => {
+        g.append('circle')
+          .style('fill', mainColor)
+          .attr('cx', value)
+          .attr('cy', top)
+          .attr('r', radius);
+      });
 
-      g.append('circle')
-        .style('fill', mainColor)
-        .attr('cx', max)
-        .attr('cy', top)
-        .attr('r', radius);
+      // add quantile lines
+      [minQ, median, maxQ].forEach((value) => {
+        const isMedian = value === median;
+        g.append('line')
+          .style('stroke', isMedian ? accentColor : mainColor)
+          .style('stroke-width', isMedian ? 2 : 1)
+          .attr('x1', value)
+          .attr('y1', top - barHeight)
+          .attr('x2', value)
+          .attr('y2', top + barHeight);
+      });
 
-      g.append('circle')
-        .style('fill', accentColor)
-        .attr('cx', median)
-        .attr('cy', top)
-        .attr('r', radius);
+      // add additional lines
+      [-barHeight, barHeight].forEach((h) => {
+        g.append('line')
+          .style('stroke', lineColor)
+          .attr('x1', minQ)
+          .attr('y1', top + h)
+          .attr('x2', maxQ)
+          .attr('y2', top + h);
+      });
 
       // add text values - shift by half of width
       const medianText = g.append('text')
@@ -91,7 +112,6 @@
         .attr('font-size', fontSize)
         .attr('fill', mainColor);
       textWidth = maxText.node().getComputedTextLength();
-
       maxText
         .attr('x', Math.min(max + textWidth / 2, width + padding * 2) - textWidth)
         .attr('y', height - 1);
