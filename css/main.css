@@ -216,10 +216,6 @@ footer {
 
 /* md */
 @media (min-width: 48em) {
-  .pure-form .pure-input-xs-1-2 {
-    width: 50% !important;
-  }
-
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
   }
@@ -227,22 +223,8 @@ footer {
 
 /* lg */
 @media (min-width: 64em) {
-  .pure-form .pure-input-xs-1-2 {
-    width: 50% !important;
-  }
-
-  .pure-form .pure-input-md-1-3 {
-    width: 33% !important;
-  }
 }
 
 /* xl */
 @media (min-width: 80em) {
-  .pure-form .pure-input-xs-1-2 {
-    width: 50% !important;
-  }
-
-  .pure-form .pure-input-md-1-3 {
-    width: 33% !important;
-  }
 }
