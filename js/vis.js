@@ -93,6 +93,14 @@
     statistics.expYears = sortYearsArray(newStats.expYears);
   };
 
+  const initDownloadLink = () => {
+    const downloadLink = document.querySelector('.download-link');
+    const json = DS.DataApi.getRawData();
+    const href = `data:text/json;charset=utf-8,${encodeURIComponent(json)}`;
+
+    downloadLink.setAttribute('href', href);
+  };
+
   initFormatters();
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -136,6 +144,9 @@
 
       onSelectLocation();
       page.loading = false;
+
+      // When data is available, enable download link in the header.
+      initDownloadLink();
     });
   });
 })();

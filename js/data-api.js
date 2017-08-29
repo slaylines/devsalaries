@@ -231,6 +231,9 @@
           rates = rates.val();
           entries = entries.val();
 
+          // Store raw JSON data for downloads.
+          this.raw = JSON.stringify(entries, null, 2);
+
           // Flatten and filter entries, convert salaries to USD.
           this.entries = processEntries(entries, rates);
 
@@ -295,6 +298,10 @@
 
     getWorldData() {
       return new VisData(this.entries);
+    },
+
+    getRawData() {
+      return this.raw;
     },
   };
 
