@@ -119,13 +119,27 @@ footer .sharing .social-link {
   margin: auto;
 }
 
-.home-page .buttons {
-  margin-top: 20px;
+.home-page .description-title {
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.home-page .description p {
+  margin: 5px 0 10px 0;
+  line-height: 1.3;
+}
+
+.home-page .description .nowrap {
+  white-space: nowrap;
+}
+
+.home-page .description a .fa {
+  text-decoration: underline;
 }
 
 .home-page .buttons .ds-button {
   width: 180px;
-  margin: 20px;
+  margin: 10px 20px;
   font-size: 1.2em;
 }
 
