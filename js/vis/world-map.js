@@ -1,5 +1,4 @@
 ((window) => {
-
   // variables for map container
   let map;
   let width = 0;

@@ -1,4 +1,5 @@
 (() => {
+  //TODO: zoom in to see cities
   const coverContainer = document.getElementById('cover');
   const page = {
     loading: true

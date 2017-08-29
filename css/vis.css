@@ -42,6 +42,12 @@ header .download-link {
   stroke-width: 0.5px;
 }
 
+.vis-country {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
 .vis-country.__disabled {
   fill: #f6f6f2 !important;
   cursor: default;
@@ -173,6 +179,17 @@ header .download-link {
 
 .vis-years-y-title {
   margin-left: 35px;
+}
+
+.vis-years-charts .axis {
+  font: 10px sans-serif;
+}
+
+.vis-years-charts .axis path,
+.vis-years-charts .axis line {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
 }
 
 /**
