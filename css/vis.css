@@ -22,19 +22,6 @@
   background: #f6f6ef;
 }
 
-.vis-page .loading-cover {
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 40px);
-  z-index: 100;
-  background: #f6f6ef;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  padding-top: 40px;
-  font-size: 40px;
-}
-
 header .download-link {
   float: right;
   text-decoration: none;

@@ -16,6 +16,18 @@
    * DOM HELPERS
    */
 
+   let model = {
+    page: {
+      loading: false
+    },
+    form: {
+      locationError: false,
+      netSalaryError: false,
+      serverError: false
+    },
+    onSalaryBlur: isSalaryValid
+  };
+
   const emptySelect = (select) => {
     while (select.firstChild) {
       select.removeChild(select.firstChild);
@@ -55,6 +67,38 @@
 
     return result;
   };
+
+  const isLocationValid = (entry) => {
+    const searchInput = document.querySelector('#search');
+
+    const isValid = entry.location;
+    model.form.locationError = !isValid;
+
+    if (isValid) return true;
+    searchInput.value = '';
+    searchInput.focus();
+    return false;
+  };
+
+  function isSalaryValid () {
+    const netSalaryInput = document.querySelector('#net-salary');
+    const grossSalaryInput = document.querySelector('#gross-salary');
+
+    const isValid = +netSalaryInput.value <= +grossSalaryInput.value;
+    model.form.netSalaryError = !isValid;
+
+    if (isValid) return true;
+    model.form.netSalaryError = true;
+    netSalaryInput.focus();
+    return false;
+  }
+
+  const isFormValid = (entry) => {
+    return [
+      isLocationValid(entry),
+      isSalaryValid(entry),
+    ].every( _ => _ );
+  }
 
   /**
    * FIREBASE API METHODS
@@ -101,26 +145,35 @@
     };
 
     locationInput.value = JSON.stringify({ city, country, coords });
+    model.form.locationError = false;
   };
 
   /**
    * INITIALIZERS
    */
 
+  const bindFormContainer = () => {
+    const formContainer = document.getElementById('form-container');
+    rivets.bind(formContainer, model);
+  }
+
   const initSearch = () => {
     const searchInput = document.querySelector('#search');
     const locationInput = document.querySelector('#location');
+    const submitButton = document.querySelector('#submit-btn');
     const autocomplete = new google.maps.places.Autocomplete(searchInput, SEARCH_CONFIG);
 
     // Reset hidden location input when user types new query.
     searchInput.addEventListener('input', () => {
       locationInput.value = '';
+      submitButton.disabled = true;
     });
 
     // Set hidden location input when user chooses autocomplete result.
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
       onLocationSelected(place);
+      submitButton.disabled = false;
     });
   };
 
@@ -139,34 +192,34 @@
   };
 
   const initForm = () => {
+    const submitButton = document.querySelector('#submit-btn');
     const form = document.querySelector('#form');
-    const searchInput = document.querySelector('#search');
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
       const entry = parseFormData(form);
 
-      // If location is presented then post data.
-      // Otherwise clear search input and focus it.
-      if (entry.location) {
-        // Add timestamp in ms since 1 January 1970 00:00:00 UTC.
-        entry.createdAt = new Date().getTime();
+      if (!isFormValid(entry)) {
+        submitButton.disabled = true;
+        return;
+     }
+      // Add timestamp in ms since 1 January 1970 00:00:00 UTC.
+      entry.createdAt = new Date().getTime();
 
-        // Fix types.
-        entry.location = JSON.parse(entry.location);
-        entry.grossSalary = +entry.grossSalary;
-        entry.netSalary = +entry.netSalary;
+      // Fix types.
+      entry.location = JSON.parse(entry.location);
+      entry.grossSalary = +entry.grossSalary;
+      entry.netSalary = +entry.netSalary;
 
-        postEntry(entry).then(() => {
-          window.location.href = 'vis.html';
-        }).catch((error) => {
-          console.error(error);
-        });
-      } else {
-        searchInput.value = '';
-        searchInput.focus();
-      }
+      model.page.loading = true;
+      postEntry(entry).then(() => {
+        model.page.loading = false;
+        window.location.href = 'vis.html';
+      }).catch((error) => {
+        model.serverError = true;
+        console.error(error);
+      });
     });
   };
 
@@ -175,6 +228,7 @@
    */
 
   document.addEventListener('DOMContentLoaded', () => {
+    bindFormContainer();
     initSearch();
     initCurrencies();
     initRoles();
