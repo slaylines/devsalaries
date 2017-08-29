@@ -184,11 +184,6 @@ header .download-link {
     width: calc(100% - 40px);
     height: 50%;
   }
-
-  .vis-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
-  }
 }
 
 /* lg, xl */

@@ -212,11 +212,6 @@ footer {
   .pure-form .pure-input-xs-1-2 {
     width: 50% !important;
   }
-
-  .form-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
-  }
 }
 
 /* md */
@@ -227,11 +222,6 @@ footer {
 
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
-  }
-
-  .form-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
   }
 }
 
@@ -244,11 +234,6 @@ footer {
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
   }
-
-  .form-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
-  }
 }
 
 /* xl */
@@ -259,10 +244,5 @@ footer {
 
   .pure-form .pure-input-md-1-3 {
     width: 33% !important;
-  }
-
-  .form-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
   }
 }
