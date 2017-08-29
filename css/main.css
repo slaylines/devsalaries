@@ -209,9 +209,6 @@ footer {
 
 /* sm */
 @media (min-width: 35.5em) {
-  .pure-form .pure-input-xs-1-2 {
-    width: 50% !important;
-  }
 }
 
 /* md */
