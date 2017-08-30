@@ -16,7 +16,7 @@
 }
 
 .vis-data #map svg {
-  fill: none;
+  fill: transparent;
   pointer-events: all;
 }
 
@@ -25,6 +25,11 @@
   overflow: auto;
   padding: 20px 16px 80px;
   background: #f6f6ef;
+}
+
+.vis-page #data svg {
+  fill: none;
+  pointer-events: all;
 }
 
 header .download-link {
@@ -68,6 +73,7 @@ header .download-link {
   padding: 2px 3px;
   opacity: 0.95;
   position: absolute;
+  pointer-events: none;
 }
 
 .vis-tooltip.__hidden {
@@ -164,6 +170,7 @@ header .download-link {
 }
 
 .vis-years-charts {
+  position: relative;
   font-size: 12px;
   display: flex;
 }

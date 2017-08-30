@@ -1,7 +1,23 @@
 ((window) => {
   // Years bar graphs graph object
+  //
+  let tooltipLeft = 0;
+  let tooltipTop = 0;
+  let tooltip;
+
+  // show tooltip near mouse pointer with given text
+  function showTooltip(svg, x, y, name) {
+    const mouse = d3.mouse(svg.node())
+      .map(function(v) { return parseInt(v); } );
+      console.log(mouse)
+    tooltip.classed('__hidden', false)
+      .attr('style', 'left:' + x + 'px;top:' + y + 'px')
+      .html(name);
+  }
+
   const BarGraph = {
     init(divId, data) {
+      tooltip = d3.select('#data .vis-tooltip');
       // TODO: show value on hover of each bar
       const margin = {top: 10, right: 0, bottom: 20, left: 40};
       const width = 18 * data.length;
@@ -42,7 +58,9 @@
         .attr('x', function(d) { return x(d.name); })
         .attr('y', function(d) { return y(d.count); })
         .attr('width', x.rangeBand())
-        .attr('height', function(d) { return height - y(d.count); });
+        .attr('height', function(d) { return height - y(d.count); })
+        .on('mousemove', function(d) { console.log(x(d.name), width, x.rangeBand());  showTooltip(svg, (x(d.name) + 14) / 2, y(d.count), d.count); })
+        .on('mouseleave',  function() { console.log('out'); tooltip.classed('__hidden', true); });
 
       g.append('g')
         .attr('class', 'axis')
