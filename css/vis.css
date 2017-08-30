@@ -4,11 +4,12 @@
 
 .vis-page {
   padding: 0;
-  margin: 40px 0;
-  display: flex;
   font-size: 14px;
 }
 
+// TODO: Remove margin and set width to 100%
+//       when touch events are properly handled.
+//       (check media queries too)
 .vis-page #map {
   margin: 0 20px;
   width: calc(100% - 40px);
@@ -23,29 +24,30 @@
 .vis-page #data {
   width: 34em;
   overflow: auto;
-  padding: 20px 16px 80px;
+  padding: 20px 16px;
   background: #f6f6ef;
 }
 
 header .download-link {
   float: right;
+  margin-right: 10px;
   text-decoration: none;
   line-height: 30px;
   color: black;
 }
 
-/* map graph styles */
+header .download-text {
+  display: none;
+}
+
+/**
+ * MAP GRAPH
+ */
 
 .vis-world {
   fill: #f5eaad;
   stroke: #999;
   stroke-width: 0.5px;
-}
-
-.vis-country {
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
 }
 
 .vis-country.__disabled {
@@ -86,13 +88,14 @@ header .download-link {
   opacity: 1;
 }
 
-/* data panel styles */
+/**
+ * DATA PANEL
+ */
 
 .vis-title {
   margin-bottom: 20px;
   display: flex;
   align-items: baseline;
-  min-width: 27em;
 }
 
 .vis-location {
@@ -110,6 +113,15 @@ header .download-link {
 .vis-notice .fa-asterisk {
   color: #aaa;
   font-size: 10px;
+}
+
+.vis-table-link {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.vis-table-link .fa-table {
+  font-size: 1.5em;
 }
 
 .vis-people {
@@ -193,6 +205,39 @@ header .download-link {
 }
 
 /**
+ * TABLE
+ */
+
+.vis-table-modal {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: #f6f6ef;
+  overflow: scroll;
+}
+
+.vis-table-control {
+  width: 100%;
+  height: 100%;
+}
+
+#modal-table {
+  margin: 0 auto;
+}
+
+.pure-table thead th {
+}
+
+.pure-table tbody tr:hover {
+  background: #d1ccf3;
+}
+
+/**
  * MEDIA QUERIES
  */
 
@@ -204,19 +249,13 @@ header .download-link {
     height: 50%;
   }
 
-  .vis-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
+  header .download-text {
+    display: initial;
   }
 }
 
  /* md */
 @media (min-width: 48em) {
-  .vis-page #map {
-    margin: 0 20px;
-    width: calc(100% - 40px);
-    height: 50%;
-  }
 }
 
 /* lg, xl */
@@ -229,10 +268,10 @@ header .download-link {
 
   .vis-page #data {
     position: absolute;
-    top: 40px;
+    top: 0;
     right: 0;
     z-index: 10;
-    height: calc(100% - 40px);
+    height: 100%;
     -webkit-box-shadow: 4px 2px 10px 8px #999;
     -moz-box-shadow: 4px 2px 10px 8px #999;
     box-shadow: 4px 2px 10px 8px #999;

@@ -38,10 +38,11 @@
   </header>
 
   <main>
+    <div class="loading-cover" rv-if="page.loading">
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+
     <div class="form-page content" id="form-container">
-      <div class="loading-cover" rv-if="page.loading">
-        <i class="fa fa-spinner fa-spin"></i>
-      </div>
       <form id="form" class="pure-form pure-form-aligned">
         <fieldset>
           <div class="pure-control-group">

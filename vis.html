@@ -28,7 +28,7 @@
 </head>
 <body>
   <header>
-    <div class="pure-menu pure-menu-horizontal">
+    <div class="pure-menu pure-menu-horizontal pure-menu-fixed">
       <a class="pure-menu-heading" href="index.html">
         DS
       </a>
@@ -38,16 +38,17 @@
 
       <a href="#" class="download-link" download="salaries.json">
         <i class="fa fa-download"></i>
-        Download JSON
+        <span class="download-text">Download JSON</span>
       </a>
     </div>
   </header>
 
   <main>
+    <div class="loading-cover" id="cover" rv-show="page.loading">
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+
     <div class="pure-g vis-page content" id="content">
-      <div class="loading-cover" id="cover" rv-show="page.loading">
-        <i class="fa fa-spinner fa-spin"></i>
-      </div>
       <div class="pure-u-1" id="map" name="mapContainer">
         <svg></svg>
         <div class="vis-tooltip __hidden"></div>
@@ -58,6 +59,9 @@
           <div class="vis-notice">
             <i class="fa fa-asterisk"></i>
             salaries are shown in USD
+          </div>
+          <div class="vis-table-link" rv-on-click="table.onTableLinkClick">
+            <i class="fa fa-table"></i>
           </div>
         </div>
         <div class="vis-people" rv-show="statistics.gender">
@@ -113,13 +117,42 @@
           <div rv-show="statistics.companyYears">
             <div class="vis-years-y-title">Number of people</div>
             <div id="years-company"></div>
-            <div class="vis-years-x-title">Years in last company</div>
+            <div class="vis-years-x-title">Years at last company</div>
           </div>
           <div class="__shift" rv-show="statistics.expYears">
             <div id="years-total"></div>
             <div class="vis-years-x-title">Total experience</div>
           </div>
         </div>
+      </div>
+      <div class="vis-table-modal pure-u-1">
+        <table id="modal-table" class="pure-table pure-table-bordered">
+          <thead>
+            <tr>
+              <th width="30%">Location</th>
+              <th width="20%">Role</th>
+              <th width="15%">Experience, years<br/>(company / total)</th>
+              <th width="20%">Salary, USD<br/>(gross / net)</th>
+              <th width="15%">Gender</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Moscow, Russia</td>
+              <td>Full Stack Developer</td>
+              <td>1 / 5</td>
+              <td>100000 / 50000</td>
+              <td>Male</td>
+            </tr>
+            <tr>
+              <td>Moscow, Russia</td>
+              <td>Full Stack Developer</td>
+              <td>1 / 5</td>
+              <td>100000 / 50000</td>
+              <td>Male</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </main>
@@ -158,8 +191,9 @@
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
   <script src="https://d3js.org/d3.v3.js"></script>
   <script src="https://d3js.org/topojson.v1.min.js"></script>
-  <script type="text/javascript" src="js/firebase.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.9.6/rivets.bundled.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="js/firebase.js"></script>
   <script type="text/javascript" src="js/data-api.js"></script>
   <script type="text/javascript" src="js/vis/world-map.js"></script>
   <script type="text/javascript" src="js/vis/salary-sparkline.js"></script>

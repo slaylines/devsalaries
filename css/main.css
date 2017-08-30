@@ -8,9 +8,16 @@
   box-sizing: border-box;
 }
 
-html, body, main {
+html, body {
   width: 100%;
   height: 100%;
+}
+
+main, .content {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -36,15 +43,26 @@ a {
   background-color: black;
 }
 
+.loading-cover {
+  position: fixed;
+  display: flex;
+  z-index: 30;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: #f6f6ef;
+  font-size: 40px;
+}
+
 /**
  * HEADER
  */
 
 header {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  z-index: 100;
+  position: relative;
+  z-index: 40;
 }
 
 header .pure-menu {
@@ -63,7 +81,7 @@ header .menu-title {
   display: inline;
   margin-left: 5px;
   color: black;
-  font-size: 1em;
+  font-size: 0.9em;
   cursor: default;
 }
 
@@ -72,12 +90,11 @@ header .menu-title {
  */
 
 main {
-  display: flex;
+  padding: 40px 0 60px 0;
 }
 
 .content {
-  width: 100%;
-  padding: 40px 20px 60px 20px;
+  padding: 20px;
 }
 
 /**
@@ -86,7 +103,7 @@ main {
 
 footer {
   position: fixed;
-  z-index: 100;
+  z-index: 40;
   bottom: 0;
   height: 60px;
   width: 100%;
@@ -109,14 +126,10 @@ footer .sharing .social-link {
  * HOME PAGE
  */
 
-.content.home-page {
-  margin: auto;
+.home-page {
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-}
-
-.home-page .description,
-.home-page .buttons {
-  margin: auto;
 }
 
 .home-page .description-title {
@@ -147,8 +160,10 @@ footer .sharing .social-link {
  * FORM PAGE
  */
 
-.content.form-page {
-  margin: auto;
+.form-page {
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .form-page sup {
@@ -178,31 +193,6 @@ footer .sharing .social-link {
   height: 1em;
 }
 
-
-/* Customization to limit height of the menu */
-.form-page .search-cities {
-    margin: 10px 0;
-    max-height: 160px;
-}
-
-.loading-cover {
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 40px);
-  z-index: 100;
-  background: #f6f6ef;
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  font-size: 40px;
-  padding-top: 40px;
-}
-
-.form-page .loading-cover {
-  width: calc(100% - 40px);
-  height: calc(100% - 180px);
-}
-
 /**
  * MEDIA QUERIES
  */
@@ -213,21 +203,12 @@ footer .sharing .social-link {
     width: 50% !important;
   }
 
-  main, footer {
+  main, footer, header .menu-title {
     font-size: 1em;
   }
 
   .content.form-page {
     text-align: center;
-  }
-
-  .content.vis-page {
-    height: calc(100% - 80px);
-  }
-
-  .form-page .loading-cover {
-    padding-top: 0;
-    align-items: center;
   }
 }
 

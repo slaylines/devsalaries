@@ -1,16 +1,32 @@
 (() => {
-  //TODO: zoom in to see cities
-  const coverContainer = document.getElementById('cover');
-  const page = {
-    loading: true
+  // TODO: show a message 'zoom in to see cities'.
+
+  const model = {
+    page: {
+      loading: true,
+    },
+    statistics: {
+      onShowAllCompanies: onShowAllCompanies,
+      onShowAllRoles: onShowAllRoles,
+    },
+    table: {
+      show: false,
+      onTableLinkClick: onTableLinkClick,
+    },
   };
-  rivets.bind(
-    coverContainer,
-    {page}
-  );
 
   const minShownCompanies = 5;
   const minShownRoles = 3;
+
+  const bindModel = () => {
+    const container = document.querySelector('main');
+
+    rivets.bind(
+      container,
+      model
+    );
+  };
+
   const initFormatters = () => {
     rivets.formatters.location = function (location) {
       if (!location) {
@@ -102,32 +118,31 @@
     downloadLink.setAttribute('href', href);
   };
 
-  initFormatters();
+  function onShowAllCompanies() {
+    model.statistics.company.showAll = !model.statistics.company.showAll;
+  }
+
+  function onShowAllRoles() {
+    model.statistics.role.showAll = !model.statistics.role.showAll;
+  }
+
+  function onTableLinkClick(e) {
+    const table = document.querySelector('.vis-table-control');
+  }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const dataContainer = document.getElementById('data');
+    const tableContainer = document.querySelector('.vis-table-link');
+
+    initFormatters();
+    bindModel();
 
     window.addEventListener('resize', function() {
       DS.WorldMap.resize();
     });
 
-    const onShowAllCompanies = () => {
-      statistics.company.showAll = !statistics.company.showAll;
-    };
-    const onShowAllRoles = () => {
-      statistics.role.showAll = !statistics.role.showAll;
-    };
-
-    const statistics = {
-      onShowAllCompanies: onShowAllCompanies,
-      onShowAllRoles: onShowAllRoles
-    };
-    rivets.bind(
-      dataContainer,
-      {statistics}
-    );
-
     const onSelectLocation = (id, name) => {
+      const { statistics } = model;
+
       if (id) {
         if (typeof(id) === 'string') {
           const newStats = DS.DataApi.getCountryData(id);
@@ -143,14 +158,14 @@
         updateStatistics(statistics, newStats, null);
         initDataGraphs(statistics);
       }
-    }
+    };
 
     DS.DataApi.init(firebase).then(() => {
       const countries = DS.DataApi.getEnabledCountries();
       DS.WorldMap.init(onSelectLocation, countries);
 
       onSelectLocation();
-      page.loading = false;
+      model.page.loading = false;
 
       // When data is available, enable download link in the header.
       initDownloadLink();

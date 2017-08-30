@@ -154,10 +154,10 @@
    * INITIALIZERS
    */
 
-  const bindFormContainer = () => {
-    const formContainer = document.getElementById('form-container');
-    rivets.bind(formContainer, model);
-  }
+  const bindModel = () => {
+    const container = document.querySelector('main');
+    rivets.bind(container, model);
+  };
 
   const initSearch = () => {
     const searchInput = document.querySelector('#search');
@@ -232,7 +232,7 @@
    */
 
   document.addEventListener('DOMContentLoaded', () => {
-    bindFormContainer();
+    bindModel();
     initSearch();
     initCurrencies();
     initRoles();
