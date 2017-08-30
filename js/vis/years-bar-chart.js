@@ -3,10 +3,17 @@
   const tooltipFontSize = 12;
   const tooltip = d3.select('#data .bar-tooltip');
 
-  function showTooltip(x, y, name) {
+  function showTooltip(x, y, w, name) {
+    const text = document.querySelector('#data .bar-tooltip');
+
+    tooltip.html(name);
+
+    const textWidth = tooltip.node().clientWidth;
+    const left = x + (w / 2 - textWidth/2);
+    const top = y
+
     tooltip.classed('__hidden', false)
-      .attr('style', 'left:' + (x + margin.left) + 'px;top:' + (y + margin.top) + 'px')
-      .html(name);
+           .attr('style', `left:${left}px;top:${top}px`)
   }
 
   // Years bar graphs graph object
@@ -53,10 +60,12 @@
         .attr('width', x.rangeBand())
         .attr('height', function(d) { return height - y(d.count); })
         .on('mousemove', function(d) {
-          const value = d.count + ''
-          const xTip = x(d.name) + offsetXFromParent - (value.length > 2 ? value.length : 0);
-          const yTip =  y(d.count) < tooltipFontSize ? tooltipFontSize : y(d.count)
-          showTooltip(xTip, yTip, value);
+          const value = d.count
+          const xTip = margin.left + x(d.name) + offsetXFromParent
+          const yTip =  y(d.count) < tooltipFontSize
+                        ? margin.top + tooltipFontSize
+                        : margin.top + y(d.count)
+          showTooltip(xTip, yTip, x.rangeBand(), value);
         })
         .on('mouseleave',  function() { tooltip.classed('__hidden', true); });
 
