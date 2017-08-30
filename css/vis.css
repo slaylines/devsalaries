@@ -29,7 +29,6 @@
 }
 
 .vis-page #data svg {
-
   pointer-events: all;
 }
 
@@ -78,19 +77,6 @@ header .download-text {
 }
 
 .vis-tooltip.__hidden {
-  display: none;
-}
-
-.bar-tooltip {
-  position: absolute;
-  font-size: 12px;
-  color: #c85000;
-  background: #f6f6ef;
-  opacity: 0.8;
-  pointer-events: none;
-}
-
-.bar-tooltip.__hidden {
   display: none;
 }
 
@@ -210,6 +196,26 @@ header .download-text {
 
 .vis-years-y-title {
   margin-left: 35px;
+}
+
+.vis-years-charts rect {
+  fill: #aaa;
+}
+
+.vis-years-charts rect:hover {
+  fill: #333;
+}
+
+.vis-years-charts .bar-tooltip {
+  position: absolute;
+  font-size: 12px;
+  color: #c85000;
+  background: #f6f6ef;
+  pointer-events: none;
+}
+
+.vis-years-charts .bar-tooltip.__hidden {
+  display: none;
 }
 
 .vis-years-charts .axis {
