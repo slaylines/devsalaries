@@ -1,7 +1,24 @@
 ((window) => {
   // Years bar graphs graph object
+  //
+  let tooltipLeft = 0;
+  let tooltipTop = 0;
+  const tooltipFontSize = 12;
+  let tooltip;
+
+  // show tooltip near mouse pointer with given text
+  function showTooltip(svg, x, y, name) {
+    const mouse = d3.mouse(svg.node())
+      .map(function(v) { return parseInt(v); } );
+    tooltip.classed('__hidden', false)
+      .attr('style', 'left:' + (x + 40) + 'px;top:' + (y + 10) + 'px')
+      .html(name);
+  }
+
   const BarGraph = {
     init(divId, data) {
+      tooltip = d3.select('#data .bar-tooltip');
+      let offsetXFromParent = document.getElementById(divId).offsetLeft
       // TODO: show value on hover of each bar
       const margin = {top: 10, right: 0, bottom: 20, left: 40};
       const width = 18 * data.length;
@@ -42,7 +59,17 @@
         .attr('x', function(d) { return x(d.name); })
         .attr('y', function(d) { return y(d.count); })
         .attr('width', x.rangeBand())
-        .attr('height', function(d) { return height - y(d.count); });
+        .attr('height', function(d) { return height - y(d.count); })
+        .on('mousemove', function(d) {
+          let value = d.count + ''
+          let xTip = x(d.name) + offsetXFromParent
+          if (value.length > 2) {
+            xTip -= value.length
+          }
+          let yTip =  y(d.count) < tooltipFontSize ? tooltipFontSize : y(d.count)
+          showTooltip(svg, xTip, yTip, value);
+        })
+        .on('mouseleave',  function() { tooltip.classed('__hidden', true); });
 
       g.append('g')
         .attr('class', 'axis')
