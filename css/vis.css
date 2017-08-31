@@ -326,6 +326,8 @@ header .download-text {
 .vis-table-wrapper table th {
   position: relative;
   vertical-align: middle;
+  text-align: center;
+  padding: 25px;
 }
 
 .vis-table-wrapper table sup {
@@ -373,17 +375,7 @@ header .download-text {
   opacity: 1;
 }
 
-#data-table {
-  font-size: 0.8em;
-}
-
-#data-table thead th {
-  text-align: center;
-  padding: 20px;
-  font-size: 1.3em;
-}
-
-#data-table thead th .legend {
+.vis-table-wrapper thead th .legend {
   position: absolute;
   left: 0;
   right: 0;
@@ -393,6 +385,34 @@ header .download-text {
   font-size: 0.8em;
   font-weight: lighter;
 }
+
+#data-table {
+  font-size: 0.8em;
+}
+
+#data-table th {
+  font-size: 1.3em;
+}
+
+#modal-table th {
+  font-size: 1.3em;
+}
+
+/**
+ * TABLE COLUMNS
+ */
+
+#data-table th:nth-child(1) { width: 20%; }
+#data-table th:nth-child(2) { width: 20%; }
+#data-table th:nth-child(3) { width: 25%; min-width: 100px; }
+#data-table th:nth-child(4) { width: 25%; min-width: 100px; }
+#data-table th:nth-child(5) { width: 10%; }
+
+#modal-table th:nth-child(1) { width: 20%; }
+#modal-table th:nth-child(2) { width: 20%; }
+#modal-table th:nth-child(3) { width: 25%; min-width: 160px; }
+#modal-table th:nth-child(4) { width: 25%; min-width: 160px; }
+#modal-table th:nth-child(5) { width: 10%; }
 
 /**
  * MEDIA QUERIES
