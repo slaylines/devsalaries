@@ -51,7 +51,7 @@
     <div class="pure-g vis-page content" id="content">
       <div class="pure-u-1" id="map">
         <svg></svg>
-        <div id="vis-map-hint" rv-class="hint.class">Zoom in to see cities</div>
+        <div id="vis-map-hint">Zoom in to see cities</div>
         <div class="vis-tooltip __hidden"></div>
       </div>
 
@@ -60,7 +60,7 @@
           <div class="vis-location" rv-text="statistics.location | location"></div>
           <div class="vis-notice">
             <i class="fa fa-asterisk"></i>
-            salaries are shown in USD
+            salaries are shown in $
           </div>
           <div
             class="vis-table-link"
@@ -128,7 +128,7 @@
             <div rv-show="statistics.companyYears">
               <div class="vis-years-y-title">Number of people</div>
               <div id="years-company"></div>
-              <div class="vis-years-x-title">Years at last company</div>
+              <div class="vis-years-x-title">Years at current job</div>
             </div>
             <div class="__shift" rv-show="statistics.expYears">
               <div id="years-total"></div>

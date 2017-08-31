@@ -18,6 +18,7 @@
   let initScale;
   const maxZoomExtent = 30;
   const minZoomForCities = 3;
+  let initial;
 
   // currently selected locations
   let selectedLocation = null;
@@ -75,6 +76,17 @@
         onSelectLocation();
       }
     }
+
+    hideHint();
+  };
+
+  function hideHint() {
+    if (initial) {
+      document.querySelector('#vis-map-hint')
+        .classList.add('__hidden');
+      initial = false;
+    }
+
   };
 
   function hideCities() {
@@ -123,6 +135,8 @@
     } else {
       hideCities()
     }
+
+    hideHint();
   };
 
   function updateCities() {
@@ -232,6 +246,8 @@
       getCities();
       initCities();
       updateCities();
+
+      initial = true;
 
       d3.json('data/topology.json', function(error, world) {
         if(error) return console.error(error);

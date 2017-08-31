@@ -304,9 +304,5 @@
       // When data is available, enable download link in the header.
       initDownloadLink();
     });
-
-    setTimeout(() => {
-      model.hint.class = '__hidden';
-    }, 4000);
   });
 })();
