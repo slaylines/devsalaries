@@ -109,7 +109,7 @@
   // zooming map
   function onZoomMap() {
     requestAnimationFrame(() => {
-      const zoomScale = zoom.scale();
+      const zoomScale = zoom.scale()
 
       projection
         .translate(zoom.translate())
@@ -198,7 +198,7 @@
     tooltipTop = map.offsetTop + 10;
 
     zoom = d3.behavior.zoom()
-      .translate([width / 2, height / 1.5])
+      .translate([width / 2, height / 2])
       .scale(initScale)
       .scaleExtent([initScale, maxZoomExtent * initScale])
       .on('zoom', throttle(onZoomMap, 100));

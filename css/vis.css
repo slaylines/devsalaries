@@ -11,6 +11,7 @@
    when touch events are properly handled.
    (check media queries too) */
 .vis-page #map {
+  position: relative;
   margin: 0 20px;
   width: calc(100% - 40px);
   height: calc(50vh - 100px);
@@ -19,6 +20,29 @@
 .vis-data #map svg {
   fill: none;
   pointer-events: all;
+}
+
+.vis-page #vis-map-hint {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 3px;
+  letter-spacing: 0.5px;
+  font-weight: lighter;
+  font-size: 16px;
+  pointer-events: none;
+  color: #666;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 700ms, visibility 700ms;
+  transition: opacity 700ms, visibility 700ms;
+}
+
+.vis-page #vis-map-hint.__hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .vis-page #data {

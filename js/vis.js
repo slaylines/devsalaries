@@ -21,6 +21,9 @@
       onTableLinkClick,
       onModalCloseClick,
     },
+    hint: {
+      class: '',
+    }
   };
 
   const minShownCompanies = 5;
@@ -192,8 +195,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const tableContainer = document.querySelector('.vis-table-link');
-
     initFormatters();
     bindModel();
 
@@ -250,5 +251,9 @@
       // When data is available, enable download link in the header.
       initDownloadLink();
     });
+
+    setTimeout(() => {
+      model.hint.class = '__hidden';
+    }, 4000);
   });
 })();
