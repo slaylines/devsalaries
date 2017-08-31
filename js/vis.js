@@ -201,14 +201,14 @@
       DS.WorldMap.resize();
     });
 
-    const onSelectLocation = (query, name) => {
+    const onSelectLocation = (query) => {
       const { statistics } = model;
 
-      // Country code.
-      const isCountry = query && typeof query === 'string';
+      // Country location object.
+      const isCountry = query && query.code;
 
       // City location object.
-      const isCity = query && typeof query === 'object';
+      const isCity = query && query.city;
 
       // We do different API calls depending on query.
       let getData = DS.DataApi.getWorldData.bind(DS.DataApi);
@@ -217,14 +217,14 @@
 
       if (isCountry) {
         getData = DS.DataApi.getCountryData.bind(DS.DataApi);
-        loc = { country: name };
-        params = query;
+        loc = { country: query.name };
+        params = query.code;
       } else if (isCity) {
-        const { country, city } = name;
+        const { country, city } = query;
 
         getData = DS.DataApi.getCityData.bind(DS.DataApi);
         loc = { city, country };
-        params = { city, country, coords: query };
+        params = { city, country, coords: query.coords };
       }
 
       // Get new statistics from API.

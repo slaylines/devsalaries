@@ -40,6 +40,7 @@
 
   // array of avaliable cities
   let cities;
+  let citiesVisible = true;
 
   // show tooltip near mouse pointer with given text
   function showTooltip(name) {
@@ -55,7 +56,7 @@
   };
 
   // select location: world, country or city
-  function onClick(id, name, isCity) {
+  function onClick(id, object, isCity) {
     d3.event.preventDefault();
     d3.event.stopPropagation();
 
@@ -68,54 +69,95 @@
       selectedLocation = id;
 
       if (id) {
-        d3.select(`#${isCity ? getCityId(id, name.city) : id}`).classed('__selected', true);
-        onSelectLocation(id, name);
+        d3.select(`#${id}`).classed('__selected', true);
+        onSelectLocation(object);
       } else {
         onSelectLocation();
       }
     }
   };
 
-  // zooming map
-  function onZoomMap() {
-    projection
-      .translate(zoom.translate())
-      .scale(zoom.scale());
-
-    mainGroup.selectAll('path')
-      .attr('d', path);
-
-    if (cities) {
-      updateCities();
+  function hideCities() {
+    if (citiesVisible) {
+      citiesGroup.style('display', 'none');
+      citiesVisible = false;
     }
   };
 
-  // rerender cities after pan or zoom
+  function showCities() {
+    if (!citiesVisible) {
+      citiesGroup.style('display', 'inline-block');
+      citiesVisible = true;
+    }
+  };
+
+  // add throttle for zoom event
+  function throttle (callback, limit) {
+    let wait = false;
+
+    return function () {
+      if (!wait) {
+        callback();
+        wait = true;
+        setTimeout(function () {
+          wait = false;
+        }, limit);
+      }
+    }
+  }
+
+  // zooming map
+  function onZoomMap() {
+    requestAnimationFrame(() => {
+      const zoomScale = zoom.scale();
+
+      projection
+        .translate(zoom.translate())
+        .scale(zoomScale);
+
+      mainGroup.selectAll('path')
+        .attr('d', path);
+
+      if (zoomScale >= initScale * minZoomForCities) {
+        showCities();
+        updateCities();
+      } else {
+        hideCities()
+      }
+    });
+  };
+
   function updateCities() {
-    citiesGroup
-      .style('display', zoom.scale() < initScale * minZoomForCities ? 'none' : 'inline-block')
-      .selectAll('.vis-city')
-      .remove()
+    cities.forEach((city) => {
+      const coords = projection([city.coords.lon, city.coords.lat]);
+      const lon = coords[0] - markerShift;
+
+      const cityObj = citiesGroup
+        .select(`.vis-cities #${city.id}`)
+        .attr('x', lon)
+        .attr('y', coords[1]);
+
+      if (selectedLocation === city.id) {
+        cityObj.attr('class', 'vis-city __selected');
+      }
+    });
+  };
+
+  // rerender cities after pan or zoom
+  function initCities() {
+    hideCities();
 
     citiesGroup
       .selectAll('.vis-cities')
       .data(cities).enter()
       .append('text')
-      .attr('class', function(d) {
-        return d.coords === selectedLocation
-          ? 'vis-city __selected'
-          : 'vis-city';
-      })
-      .attr('id', function(d) { return getCityId(d.coords, d.city); })
-      .attr('x', function(d) { return projection([d.coords.lon, d.coords.lat])[0] - markerShift; })
-      .attr('y', function(d) { return projection([d.coords.lon, d.coords.lat])[1]; })
+      .attr('class', 'vis-city')
+      .attr('id', function(city) { return city.id })
       .attr('font-family','FontAwesome')
       .attr('font-size', fontAwesomeSize)
       .text(function(d) { return '\uf041'; })
-      .on('click', function(d) {
-        onClick(d.coords, {city: d.city, country: d.country}, true);
-      })
-      .on('mousemove', function(d) { showTooltip(d.city); })
+      .on('click', function(city) { onClick(city.id, city, true); })
+      .on('mousemove', function(city) { showTooltip(city.city); })
       .on('mouseout',  function() { tooltip.classed('__hidden', true); });
   };
 
@@ -140,6 +182,10 @@
       width: bottomRight[0] - topLeft[0],
       height: topLeft[1] - bottomRight[1]
     });
+
+    cities.forEach((city) => {
+      city.id = getCityId(city.coords, city.city);
+    });
   };
 
   // init map after loading or resize
@@ -155,7 +201,7 @@
       .translate([width / 2, height / 1.5])
       .scale(initScale)
       .scaleExtent([initScale, maxZoomExtent * initScale])
-      .on('zoom', onZoomMap);
+      .on('zoom', throttle(onZoomMap, 100));
 
     svg
       .attr('width', width)
@@ -186,6 +232,7 @@
 
       initMap();
       getCities();
+      initCities();
       updateCities();
 
       d3.json('data/topology.json', function(error, world) {
@@ -203,7 +250,7 @@
             const filter = avaliableCountries.filter((country) => country.code === d.id);
             if (filter.length > 0) {
               item
-                .on('click', function(d) { onClick(d.id, filter[0].name); })
+                .on('click', function(d) { onClick(d.id, filter[0]); })
                 .on('mousemove', function(d) { showTooltip(filter[0].name); })
                 .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
             } else {
