@@ -290,6 +290,11 @@ header .download-text {
   vertical-align: middle;
 }
 
+.vis-table-wrapper table sup {
+  font-size: 0.7em;
+  font-weight: lighter;
+}
+
 .vis-table-wrapper table tfoot {
   display: none;
 }
