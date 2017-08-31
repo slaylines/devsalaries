@@ -20,8 +20,7 @@
   const minZoomForCities = 3;
 
   // currently selected locations
-  let selectedCountry = '';
-  let selectedCity = null;
+  let selectedLocation = null;
 
   // font size and shift for city markers
   const fontAwesomeSize = 20;
@@ -60,31 +59,19 @@
     d3.event.preventDefault();
     d3.event.stopPropagation();
 
-    if (isCity) {
-      if (selectedCountry) {
-        selectedCountry = '';
-        d3.select('.vis-country.__selected').classed('__selected', false);
+    const changed = selectedLocation !== id;
+
+    if (changed) {
+      if (selectedLocation) {
+        d3.select('.__selected').classed('__selected', false);
       }
-      if (selectedCity !== id) {
-        selectedCity = id;
-        d3.select('.vis-city.__selected').classed('__selected', false);
-        d3.select(`#${getCityId(id, name.city)}`).classed('__selected', true);
+      selectedLocation = id;
+
+      if (id) {
+        d3.select(`#${isCity ? getCityId(id, name.city) : id}`).classed('__selected', true);
         onSelectLocation(id, name);
-      }
-    } else {
-      if (selectedCity) {
-        selectedCity = null;
-        d3.select('.vis-city.__selected').classed('__selected', false);
-      }
-      if (selectedCountry !== id) {
-        selectedCountry = id;
-        d3.select('.vis-country.__selected').classed('__selected', false);
-        if (id) {
-          d3.select('#' + id).classed('__selected', true);
-          onSelectLocation(id, name);
-        } else {
-          onSelectLocation();
-        }
+      } else {
+        onSelectLocation();
       }
     }
   };
@@ -115,7 +102,7 @@
       .data(cities).enter()
       .append('text')
       .attr('class', function(d) {
-        return d.coords === selectedCity
+        return d.coords === selectedLocation
           ? 'vis-city __selected'
           : 'vis-city';
       })
