@@ -108,23 +108,21 @@
 
   // zooming map
   function onZoomMap() {
-    requestAnimationFrame(() => {
-      const zoomScale = zoom.scale()
+    const zoomScale = zoom.scale()
 
-      projection
-        .translate(zoom.translate())
-        .scale(zoomScale);
+    projection
+      .translate(zoom.translate())
+      .scale(zoomScale);
 
-      mainGroup.selectAll('path')
-        .attr('d', path);
+    mainGroup.selectAll('path')
+      .attr('d', path);
 
-      if (zoomScale >= initScale * minZoomForCities) {
-        showCities();
-        updateCities();
-      } else {
-        hideCities()
-      }
-    });
+    if (zoomScale >= initScale * minZoomForCities) {
+      showCities();
+      updateCities();
+    } else {
+      hideCities()
+    }
   };
 
   function updateCities() {
@@ -201,7 +199,7 @@
       .translate([width / 2, height / 2])
       .scale(initScale)
       .scaleExtent([initScale, maxZoomExtent * initScale])
-      .on('zoom', throttle(onZoomMap, 100));
+      .on('zoom', throttle(onZoomMap, 25));
 
     svg
       .attr('width', width)
