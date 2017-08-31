@@ -91,7 +91,7 @@
                 {statistics.company.values | companies statistics.company.showAll}
               </span>
               <span
-                class="vis-show-all"
+                class="vis-link"
                 rv-show="statistics.company.visible"
                 rv-on-click="statistics.onShowAllCompanies"
               >
@@ -104,7 +104,7 @@
                 {statistics.role.values | roles statistics.role.showAll}
               </span>
               <span
-                class="vis-show-all"
+                class="vis-link"
                 rv-show="statistics.role.visible"
                 rv-on-click="statistics.onShowAllRoles"
               >
@@ -135,6 +135,31 @@
               <div class="vis-years-x-title">Total experience</div>
             </div>
             <div class="bar-tooltip __hidden"></div>
+          </div>
+
+          <div class="vis-whisker">
+            <div class=x-label>
+              <span
+                rv-class="graphs.net"
+                rv-on-click="graphs.onSetNetSalary"
+              >Net</span> /
+              <span
+                rv-class="graphs.gross"
+                rv-on-click="graphs.onSetGrossSalary"
+              >gross</span> salary in thousands $
+            </div>
+            <div id="whisker-graph"></div>
+            <div class=y-label>
+              Years
+              <span
+                rv-class="graphs.job"
+                rv-on-click="graphs.onSetJobYears"
+              >at current job</span> /
+              <span
+                rv-class="graphs.total"
+                rv-on-click="graphs.onSetTotalYears"
+              >of total experience</span>
+            </div>
           </div>
         </div>
 
@@ -275,6 +300,7 @@
   <script type="text/javascript" src="js/vis/world-map.js"></script>
   <script type="text/javascript" src="js/vis/salary-sparkline.js"></script>
   <script type="text/javascript" src="js/vis/years-bar-chart.js"></script>
+  <script type="text/javascript" src="js/vis/salary-chart.js"></script>
   <script type="text/javascript" src="js/vis.js"></script>
 
   <script>

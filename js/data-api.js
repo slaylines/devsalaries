@@ -84,7 +84,7 @@
       const len = clone.length;
       const result = {};
 
-      clone.sort();
+      clone.sort((a, b) => a - b);
 
       percentiles.forEach((p) => {
         // Handle 0% and 100% percentiles.

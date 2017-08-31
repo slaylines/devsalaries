@@ -1,6 +1,4 @@
 (() => {
-  // TODO: show a message 'zoom in to see cities'.
-
   const MODAL_TABLE_ID = 'modal-table';
   const DATA_TABLE_ID = 'data-table';
   const TABLE_OPTIONS = {
@@ -23,7 +21,21 @@
     },
     hint: {
       class: '',
+    },
+    graphs: {
+      activeSalary: 'grossSalary',
+      net: 'vis-link',
+      gross: '',
+      onSetNetSalary,
+      onSetGrossSalary,
+
+      activeYears: 'expYears',
+      job: 'vis-link',
+      total: '',
+      onSetJobYears,
+      onSetTotalYears,
     }
+
   };
 
   const minShownCompanies = 5;
@@ -87,7 +99,12 @@
     DS.Sparkline.init('gross-salary', statistics.grossSalary, statistics.netSalary);
     DS.BarGraph.init('years-company', statistics.companyYears);
     DS.BarGraph.init('years-total', statistics.expYears);
+    initWhiskerGraph(statistics, model.graphs);
   };
+
+  const initWhiskerGraph = (statistics, graphs) => {
+    DS.WhiskerGraph.init(statistics[graphs.activeYears], statistics[graphs.activeSalary]);
+  }
 
   const initDataTable = (statistics) => {
     const table = document.querySelector(`#${DATA_TABLE_ID}`);
@@ -192,6 +209,42 @@
     while (tbody.hasChildNodes()) {
       tbody.removeChild(tbody.lastChild);
     }
+  }
+
+  function onSetNetSalary() {
+    const {statistics, graphs} = model;
+
+    graphs.net = '';
+    graphs.gross = 'vis-link';
+    graphs.activeSalary = 'netSalary';
+    initWhiskerGraph(statistics, model.graphs);
+  }
+
+  function onSetGrossSalary() {
+    const {statistics, graphs} = model;
+
+    graphs.gross = '';
+    graphs.net = 'vis-link';
+    graphs.activeSalary = 'grossSalary';
+    initWhiskerGraph(statistics, model.graphs);
+  }
+
+  function onSetJobYears() {
+    const {statistics, graphs} = model;
+
+    graphs.job = '';
+    graphs.total = 'vis-link';
+    graphs.activeYears = 'companyYears';
+    initWhiskerGraph(statistics, model.graphs);
+  }
+
+  function onSetTotalYears() {
+    const {statistics, graphs} = model;
+
+    graphs.total = '';
+    graphs.job = 'vis-link';
+    graphs.activeYears = 'expYears';
+    initWhiskerGraph(statistics, model.graphs);
   }
 
   document.addEventListener('DOMContentLoaded', () => {

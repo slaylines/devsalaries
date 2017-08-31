@@ -180,7 +180,7 @@ header .download-text {
   border-bottom: 1px solid #666;
 }
 
-.vis-show-all {
+.vis-link {
   font-size: 12px;
   color: #428bca;
   border-bottom: 1px dotted;
@@ -244,15 +244,29 @@ header .download-text {
   visibility: hidden;
 }
 
-.vis-years-charts .axis {
+.axis {
   font: 10px sans-serif;
 }
 
-.vis-years-charts .axis path,
-.vis-years-charts .axis line {
+.axis path,
+.axis line {
   fill: none;
   stroke: #333;
   shape-rendering: crispEdges;
+}
+
+.vis-whisker {
+  margin-top: 30px;
+}
+
+.vis-whisker .x-label {
+  margin-left: 35px;
+  font-size: 12px;
+}
+
+.vis-whisker .y-label {
+  text-align: right;
+  font-size: 12px;
 }
 
 /**
