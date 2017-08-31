@@ -98,8 +98,8 @@
     const values = DS.DataApi.formatForTable(statistics.source);
     const list = new List(DATA_TABLE_ID, TABLE_OPTIONS, values);
 
-    // Sort by location by default.
-    list.sort('salary', { order: 'asc' });
+    // Sort by salary by default.
+    list.sort('salary', { order: 'desc' });
   };
 
   const sortYearsArray = (years) => {
