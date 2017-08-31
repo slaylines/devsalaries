@@ -232,7 +232,7 @@ header .download-text {
 }
 
 /**
- * TABLE
+ * TABLE MODAL
  */
 
 .vis-table-modal {
@@ -246,7 +246,7 @@ header .download-text {
   background: #f6f6ef;
 }
 
-.vis-table-modal-close {
+.vis-table-modal .vis-table-modal-close {
   position: absolute;
   right: 0;
   padding: 5px 10px;
@@ -254,49 +254,56 @@ header .download-text {
   cursor: pointer;
 }
 
-.vis-table-modal-search {
+.vis-table-modal .vis-table-modal-search {
   position: absolute;
   margin: 18px 50px;
   left: 0;
 }
 
-.vis-table-modal-search .fuzzy-search {
+.vis-table-modal .vis-table-modal-search .fuzzy-search {
   margin: 0;
 }
 
-.vis-table-wrapper {
+.vis-table-modal .vis-table-wrapper {
   width: calc(100% - 100px);
   height: calc(100% - 110px);
   margin: 70px 50px 30px;
-  overflow: scroll;
+}
+
+/**
+ * TABLES
+ */
+
+.vis-table-wrapper {
+  overflow: auto;
   border-top: 1px solid #cbcbcb;
   border-bottom: 1px solid #cbcbcb;
 }
 
-#modal-table {
+.vis-table-wrapper table {
   position: relative;
   width: 100%;
 }
 
-#modal-table th {
+.vis-table-wrapper table th {
+  position: relative;
   vertical-align: middle;
 }
 
-#modal-table tfoot {
+.vis-table-wrapper table tfoot {
   display: none;
 }
 
-.pure-table tbody tr:hover {
+.vis-table-wrapper table tbody tr:hover {
   background: #d1ccf3;
 }
 
-.sort {
-  position: relative;
+.vis-table-wrapper .sort {
   padding-right: 25px !important;
   cursor: pointer;
 }
 
-.sort:after {
+.vis-table-wrapper .sort:after {
   display: flex;
   position: absolute;
   top: 0;
@@ -308,19 +315,40 @@ header .download-text {
   opacity: 1;
 }
 
-.sort:hover:after {
+.vis-table-wrapper .sort:hover:after {
   content: '\f15d'; /* fa-sort-alpha-asc */
   opacity: 0.5;
 }
 
-.sort.asc:after {
+.vis-table-wrapper .sort.asc:after {
   content: '\f15d'; /* fa-sort-alpha-asc */
   opacity: 1;
 }
 
-.sort.desc:after {
+.vis-table-wrapper .sort.desc:after {
   content: '\f15e'; /* fa-sort-alpha-desc */
   opacity: 1;
+}
+
+#data-table {
+  font-size: 0.8em;
+}
+
+#data-table thead th {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.3em;
+}
+
+#data-table thead th .legend {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 5px 0;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: lighter;
 }
 
 /**

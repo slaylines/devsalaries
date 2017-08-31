@@ -3,7 +3,7 @@
    * CONSTANTS
    */
 
-  const MIN_ENTRIES_FOR_VISDATA = 1;
+  const MIN_ENTRIES_FOR_VISDATA = 5;
   const QUANTILES = [5, 25, 50, 75, 95];
   const XCHANGE_API_KEY = 'c7dcb6596c4245b1b38f9b282bf8abe1';
   const XCHANGE_API_URL = `https://openexchangerates.org/api/latest.json?app_id=${XCHANGE_API_KEY}&base=USD`;

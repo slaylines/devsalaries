@@ -1,8 +1,9 @@
 (() => {
   // TODO: show a message 'zoom in to see cities'.
 
+  const MODAL_TABLE_ID = 'modal-table';
+  const DATA_TABLE_ID = 'data-table';
   const TABLE_OPTIONS = {
-    id: 'modal-table',
     item: 'modal-table-row-template',
     valueNames: ['location', 'role', 'experience', 'salary', 'gender'],
   };
@@ -85,6 +86,22 @@
     DS.BarGraph.init('years-total', statistics.expYears);
   };
 
+  const initDataTable = (statistics) => {
+    const table = document.querySelector(`#${DATA_TABLE_ID}`);
+    const tbody = table.querySelector('tbody');
+
+    // Clear table data before new data is filled.
+    while (tbody.hasChildNodes()) {
+      tbody.removeChild(tbody.lastChild);
+    }
+
+    const values = DS.DataApi.formatForTable(statistics.source);
+    const list = new List(DATA_TABLE_ID, TABLE_OPTIONS, values);
+
+    // Sort by location by default.
+    list.sort('salary', { order: 'asc' });
+  };
+
   const sortYearsArray = (years) => {
     return years.sort((a, b) => {
       if (a.name[0] === '<' || b.name[0] === '>') { return -1; }
@@ -94,28 +111,33 @@
   };
 
   const updateStatistics = (statistics, newStats, location) => {
+    if (!newStats.empty) {
+      statistics.gender = newStats.gender.reduce((res, item) => {
+        res[item.name] = item.count;
+        return res;
+      }, {});
+      statistics.netSalary = newStats.netSalary;
+      statistics.grossSalary = newStats.grossSalary;
+      statistics.company = location && newStats.company.length
+        ? {
+          values: newStats.company.sort((a, b) => a.localeCompare(b)),
+          showAll: newStats.company.length <= minShownCompanies,
+          visible: newStats.company.length > minShownCompanies
+        }
+        : null,
+      statistics.role = {
+        values: newStats.role.sort((a, b) => b.count - a.count),
+        showAll: newStats.role.length <= minShownRoles,
+        visible: newStats.role.length > minShownRoles
+      };
+      statistics.companyYears = sortYearsArray(newStats.companyYears);
+      statistics.expYears = sortYearsArray(newStats.expYears);
+    }
+
     statistics.location = location;
-    statistics.gender = newStats.gender.reduce((res, item) => {
-      res[item.name] = item.count;
-      return res;
-    }, {});
-    statistics.netSalary = newStats.netSalary;
-    statistics.grossSalary = newStats.grossSalary;
-    statistics.company = location && newStats.company.length
-      ? {
-        values: newStats.company.sort((a, b) => a.localeCompare(b)),
-        showAll: newStats.company.length <= minShownCompanies,
-        visible: newStats.company.length > minShownCompanies
-      }
-      : null,
-    statistics.role = {
-      values: newStats.role.sort((a, b) => b.count - a.count),
-      showAll: newStats.role.length <= minShownRoles,
-      visible: newStats.role.length > minShownRoles
-    };
-    statistics.companyYears = sortYearsArray(newStats.companyYears);
-    statistics.expYears = sortYearsArray(newStats.expYears);
     statistics.source = newStats.source;
+    statistics.showCharts = !newStats.empty;
+    statistics.showTable = newStats.empty;
   };
 
   const setupTableSearch = (list) => {
@@ -147,9 +169,8 @@
   }
 
   function onTableLinkClick() {
-    const tableId = TABLE_OPTIONS.id;
     const values = DS.DataApi.formatForTable(model.statistics.source);
-    const list = new List(tableId, TABLE_OPTIONS, values);
+    const list = new List(MODAL_TABLE_ID, TABLE_OPTIONS, values);
 
     // Sort by location by default.
     list.sort('location', { order: 'asc' });
@@ -159,8 +180,7 @@
   }
 
   function onModalCloseClick() {
-    const tableId = TABLE_OPTIONS.id;
-    const table = document.querySelector(`#${tableId}`);
+    const table = document.querySelector(`#${MODAL_TABLE_ID}`);
     const tbody = table.querySelector('tbody');
 
     model.table.show = false;
@@ -181,22 +201,41 @@
       DS.WorldMap.resize();
     });
 
-    const onSelectLocation = (id, name) => {
+    const onSelectLocation = (query, name) => {
       const { statistics } = model;
 
-      if (id) {
-        if (typeof(id) === 'string') {
-          const newStats = DS.DataApi.getCountryData(id);
-          updateStatistics(statistics, newStats, { country: name });
-          initDataGraphs(statistics);
-        } else {
-          const newStats = DS.DataApi.getCityData({city: name.city, country: name.country, coords: id});
-          updateStatistics(statistics, newStats, { city: name.city, country: name.country });
-          initDataGraphs(statistics);
-        }
+      // Country code.
+      const isCountry = query && typeof query === 'string';
+
+      // City location object.
+      const isCity = query && typeof query === 'object';
+
+      // We do different API calls depending on query.
+      let getData = DS.DataApi.getWorldData.bind(DS.DataApi);
+      let params = null;
+      let loc = null;
+
+      if (isCountry) {
+        getData = DS.DataApi.getCountryData.bind(DS.DataApi);
+        loc = { country: name };
+        params = query;
+      } else if (isCity) {
+        const { country, city } = name;
+
+        getData = DS.DataApi.getCityData.bind(DS.DataApi);
+        loc = { city, country };
+        params = { city, country, coords: query };
+      }
+
+      // Get new statistics from API.
+      const newStats = getData(params);
+
+      // Update graphs and right panel.
+      updateStatistics(statistics, newStats, loc);
+
+      if (newStats.empty) {
+        initDataTable(statistics);
       } else {
-        const newStats = DS.DataApi.getWorldData();
-        updateStatistics(statistics, newStats, null);
         initDataGraphs(statistics);
       }
     };

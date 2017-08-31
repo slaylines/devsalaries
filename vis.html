@@ -53,6 +53,7 @@
         <svg></svg>
         <div class="vis-tooltip __hidden"></div>
       </div>
+
       <div class="pure-u-1" id="data">
         <div class="vis-title">
           <div class="vis-location" rv-text="statistics.location | location"></div>
@@ -60,70 +61,119 @@
             <i class="fa fa-asterisk"></i>
             salaries are shown in USD
           </div>
-          <div class="vis-table-link" rv-on-click="table.onTableLinkClick">
+          <div
+            class="vis-table-link"
+            rv-on-click="table.onTableLinkClick"
+            rv-show="statistics.showCharts"
+          >
             <i class="fa fa-table"></i>
           </div>
         </div>
-        <div class="vis-people" rv-show="statistics.gender">
-          <span rv-show="statistics.gender.Male" title="Males">
-            <i class="fa fa-mars"></i>{statistics.gender.Male}
-          </span>
-          <span rv-show="statistics.gender.Female" title="Females">
-            <i class="fa fa-venus"></i>{statistics.gender.Female}
-          </span>
-          <span rv-show="statistics.gender.Other" title="Others">
-            <i class="fa fa-neuter"></i>{statistics.gender.Other}
-          <span>
+
+        <div rv-show="statistics.showCharts">
+          <div class="vis-people" rv-show="statistics.gender">
+            <span rv-show="statistics.gender.Male" title="Males">
+              <i class="fa fa-mars"></i>{statistics.gender.Male}
+            </span>
+            <span rv-show="statistics.gender.Female" title="Females">
+              <i class="fa fa-venus"></i>{statistics.gender.Female}
+            </span>
+            <span rv-show="statistics.gender.Other" title="Others">
+              <i class="fa fa-neuter"></i>{statistics.gender.Other}
+            <span>
+          </div>
+
+          <div class="vis-lists">
+            <div class="vis-list" rv-show="statistics.company">
+              <span class="__bordered">Companies</span>:
+              <span class="__margin">
+                {statistics.company.values | companies statistics.company.showAll}
+              </span>
+              <span
+                class="vis-show-all"
+                rv-show="statistics.company.visible"
+                rv-on-click="statistics.onShowAllCompanies"
+              >
+                {statistics.company.showAll | showAll}
+              </span>
+            </div>
+            <div class="vis-list" rv-show="statistics.role">
+              <span class="__bordered">Roles</span>:
+              <span class="__margin">
+                {statistics.role.values | roles statistics.role.showAll}
+              </span>
+              <span
+                class="vis-show-all"
+                rv-show="statistics.role.visible"
+                rv-on-click="statistics.onShowAllRoles"
+              >
+                {statistics.role.showAll | showAll}
+              </span>
+            </div>
+          </div>
+
+          <div class="vis-salary-charts">
+            <div class="vis-salary" rv-show="statistics.netSalary">
+              <span>Net salary:</span>
+              <div id="net-salary"></div>
+            </div>
+            <div class="vis-salary" rv-show="statistics.netSalary">
+              <span>Gross salary:</span>
+              <div id="gross-salary"></div>
+            </div>
+          </div>
+
+          <div class="vis-years-charts" id="vis-years-charts">
+            <div rv-show="statistics.companyYears">
+              <div class="vis-years-y-title">Number of people</div>
+              <div id="years-company"></div>
+              <div class="vis-years-x-title">Years at last company</div>
+            </div>
+            <div class="__shift" rv-show="statistics.expYears">
+              <div id="years-total"></div>
+              <div class="vis-years-x-title">Total experience</div>
+            </div>
+            <div class="bar-tooltip __hidden"></div>
+          </div>
         </div>
-        <div class="vis-lists">
-          <div class="vis-list" rv-show="statistics.company">
-            <span class="__bordered">Companies</span>:
-            <span class="__margin">
-              {statistics.company.values | companies statistics.company.showAll}
-            </span>
-            <span
-              class="vis-show-all"
-              rv-show="statistics.company.visible"
-              rv-on-click="statistics.onShowAllCompanies"
-            >
-              {statistics.company.showAll | showAll}
-            </span>
+
+        <div rv-show="statistics.showTable">
+          <div class="vis-table-wrapper">
+            <table id="data-table" class="pure-table pure-table-bordered">
+              <thead>
+                <tr>
+                  <th width="15%">
+                    <i class="fa fa-map-marker"></i>
+                  </th>
+                  <th width="15%">
+                    <i class="fa fa-user"></i>
+                  </th>
+                  <th width="20%">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="legend">company / total</span>
+                  </th>
+                  <th width="30%">
+                    <i class="fa fa-usd"></i>
+                    <span class="legend">gross / net</span>
+                  </th>
+                  <th width="5%">
+                    <i class="fa fa-venus-mars"></i>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="list">
+              </tbody>
+              <tfoot>
+                <tr id="modal-table-row-template">
+                  <td class="location"></td>
+                  <td class="role"></td>
+                  <td class="experience"></td>
+                  <td class="salary"></td>
+                  <td class="gender"></td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
-          <div class="vis-list" rv-show="statistics.role">
-            <span class="__bordered">Roles</span>:
-            <span class="__margin">
-              {statistics.role.values | roles statistics.role.showAll}
-            </span>
-            <span
-              class="vis-show-all"
-              rv-show="statistics.role.visible"
-              rv-on-click="statistics.onShowAllRoles"
-            >
-              {statistics.role.showAll | showAll}
-            </span>
-          </div>
-        </div>
-        <div class="vis-salary-charts">
-          <div class="vis-salary" rv-show="statistics.netSalary">
-            <span>Net salary:</span>
-            <div id="net-salary"></div>
-          </div>
-          <div class="vis-salary" rv-show="statistics.netSalary">
-            <span>Gross salary:</span>
-            <div id="gross-salary"></div>
-          </div>
-        </div>
-        <div class="vis-years-charts" id="vis-years-charts">
-          <div rv-show="statistics.companyYears">
-            <div class="vis-years-y-title">Number of people</div>
-            <div id="years-company"></div>
-            <div class="vis-years-x-title">Years at last company</div>
-          </div>
-          <div class="__shift" rv-show="statistics.expYears">
-            <div id="years-total"></div>
-            <div class="vis-years-x-title">Total experience</div>
-          </div>
-          <div class="bar-tooltip __hidden"></div>
         </div>
       </div>
     </div>
