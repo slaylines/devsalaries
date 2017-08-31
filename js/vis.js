@@ -1,6 +1,12 @@
 (() => {
   // TODO: show a message 'zoom in to see cities'.
 
+  const TABLE_OPTIONS = {
+    id: 'modal-table',
+    item: 'modal-table-row-template',
+    valueNames: ['location', 'role', 'experience', 'salary', 'gender'],
+  };
+
   const model = {
     page: {
       loading: true,
@@ -11,7 +17,8 @@
     },
     table: {
       show: false,
-      onTableLinkClick: onTableLinkClick,
+      onTableLinkClick,
+      onModalCloseClick,
     },
   };
 
@@ -108,6 +115,19 @@
     };
     statistics.companyYears = sortYearsArray(newStats.companyYears);
     statistics.expYears = sortYearsArray(newStats.expYears);
+    statistics.source = newStats.source;
+  };
+
+  const setupTableSearch = (list) => {
+    const oldSearchInput = document.querySelector('.vis-table-modal-search .fuzzy-search');
+    const searchInput = oldSearchInput.cloneNode(true);
+
+    // Replace node to reset events.
+    oldSearchInput.parentNode.replaceChild(searchInput, oldSearchInput);
+
+    searchInput.addEventListener('input', () => {
+      list.fuzzySearch(searchInput.value);
+    });
   };
 
   const initDownloadLink = () => {
@@ -126,8 +146,29 @@
     model.statistics.role.showAll = !model.statistics.role.showAll;
   }
 
-  function onTableLinkClick(e) {
-    const table = document.querySelector('.vis-table-control');
+  function onTableLinkClick() {
+    const tableId = TABLE_OPTIONS.id;
+    const values = DS.DataApi.formatForTable(model.statistics.source);
+    const list = new List(tableId, TABLE_OPTIONS, values);
+
+    // Sort by location by default.
+    list.sort('location', { order: 'asc' });
+
+    setupTableSearch(list);
+    model.table.show = true;
+  }
+
+  function onModalCloseClick() {
+    const tableId = TABLE_OPTIONS.id;
+    const table = document.querySelector(`#${tableId}`);
+    const tbody = table.querySelector('tbody');
+
+    model.table.show = false;
+
+    // Clear table data after modal close.
+    while (tbody.hasChildNodes()) {
+      tbody.removeChild(tbody.lastChild);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {

@@ -7,6 +7,7 @@
   const QUANTILES = [5, 25, 50, 75, 95];
   const XCHANGE_API_KEY = 'c7dcb6596c4245b1b38f9b282bf8abe1';
   const XCHANGE_API_URL = `https://openexchangerates.org/api/latest.json?app_id=${XCHANGE_API_KEY}&base=USD`;
+
   const DOMAIN = {
     companyYears: ['<1', '1', '2', '3', '4', '5', '>5'],
     expYears: ['<1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '>10'],
@@ -173,10 +174,15 @@
   const convertToUsd = (entries, rates) => {
     return entries.map((entry) => {
       const rate = rates && rates[entry.currency];
+
       if (rate && entry.currency !== 'USD') {
         entry.netSalary /= rate;
         entry.grossSalary /= rate;
       }
+
+      // Round salaries for better readability.
+      entry.netSalary = Math.floor(entry.netSalary);
+      entry.grossSalary = Math.floor(entry.grossSalary);
 
       return entry;
     });
@@ -209,10 +215,9 @@
   const updateRates = (db) => {
     fetch(XCHANGE_API_URL)
       .then((resp) => resp.json())
-      .then((data) => {
-        let rates = data.rates;
-        // convert to ms
-        rates.timestamp = data.timestamp * 1000;
+      .then(({ rates, timestamp }) => {
+        // Convert timestamp to ms.
+        rates.timestamp = timestamp * 1000;
         db.ref().child('rates').set(rates);
       });
   };
@@ -302,6 +307,30 @@
 
     getRawData() {
       return this.raw;
+    },
+
+    formatForTable(entries) {
+      const nf = Intl.NumberFormat();
+
+      return entries.map((entry) => {
+        const {
+          location,
+          role,
+          companyYears,
+          expYears,
+          grossSalary,
+          netSalary,
+          gender,
+        } = entry;
+
+        return {
+          role,
+          gender,
+          location: `${location.city}, ${location.country.name}`,
+          experience: `${companyYears} / ${expYears}`,
+          salary: `${nf.format(grossSalary)} / ${nf.format(netSalary)}`
+        };
+      });
     },
   };
 

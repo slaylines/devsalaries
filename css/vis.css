@@ -236,32 +236,91 @@ header .download-text {
  */
 
 .vis-table-modal {
-  display: none;
-  position: absolute;
+  position: fixed;
   z-index: 20;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  padding: 40px;
+  width: 100vw;
+  height: 100vh;
+  padding: inherit;
   background: #f6f6ef;
-  overflow: scroll;
 }
 
-.vis-table-control {
-  width: 100%;
-  height: 100%;
+.vis-table-modal-close {
+  position: absolute;
+  right: 0;
+  padding: 5px 10px;
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
+.vis-table-modal-search {
+  position: absolute;
+  margin: 18px 50px;
+  left: 0;
+}
+
+.vis-table-modal-search .fuzzy-search {
+  margin: 0;
+}
+
+.vis-table-wrapper {
+  width: calc(100% - 100px);
+  height: calc(100% - 110px);
+  margin: 70px 50px 30px;
+  overflow: scroll;
+  border-top: 1px solid #cbcbcb;
+  border-bottom: 1px solid #cbcbcb;
 }
 
 #modal-table {
-  margin: 0 auto;
+  position: relative;
+  width: 100%;
 }
 
-.pure-table thead th {
+#modal-table th {
+  vertical-align: middle;
+}
+
+#modal-table tfoot {
+  display: none;
 }
 
 .pure-table tbody tr:hover {
   background: #d1ccf3;
+}
+
+.sort {
+  position: relative;
+  padding-right: 25px !important;
+  cursor: pointer;
+}
+
+.sort:after {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 8px;
+  align-items: center;
+  font-family: 'FontAwesome';
+  opacity: 1;
+}
+
+.sort:hover:after {
+  content: '\f15d'; /* fa-sort-alpha-asc */
+  opacity: 0.5;
+}
+
+.sort.asc:after {
+  content: '\f15d'; /* fa-sort-alpha-asc */
+  opacity: 1;
+}
+
+.sort.desc:after {
+  content: '\f15e'; /* fa-sort-alpha-desc */
+  opacity: 1;
 }
 
 /**
@@ -290,7 +349,7 @@ header .download-text {
   .vis-page #map {
     margin: 0;
     width: calc(100% - 34em);
-    height: 100%;
+    height: 99%;
   }
 
   .vis-page #data {

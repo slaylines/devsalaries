@@ -126,33 +126,53 @@
           <div class="bar-tooltip __hidden"></div>
         </div>
       </div>
-      <div class="vis-table-modal pure-u-1">
+    </div>
+
+    <div class="vis-table-modal" rv-show="table.show">
+      <div class="vis-table-modal-search pure-form">
+        <input class="fuzzy-search" type="text" placeholder="Search"/>
+      </div>
+
+      <div class="vis-table-modal-close" rv-on-click="table.onModalCloseClick">
+        <i class="fa fa-close"></i>
+      </div>
+
+      <div class="vis-table-wrapper">
         <table id="modal-table" class="pure-table pure-table-bordered">
           <thead>
             <tr>
-              <th width="30%">Location</th>
-              <th width="20%">Role</th>
-              <th width="15%">Experience, years<br/>(company / total)</th>
-              <th width="20%">Salary, USD<br/>(gross / net)</th>
-              <th width="15%">Gender</th>
+              <th class="sort" data-sort="location" width="15%">
+                Location
+              </th>
+              <th class="sort" data-sort="role" width="20%">
+                Role
+              </th>
+              <th class="sort" data-sort="experience" width="20%">
+                Experience, years
+                <br/>
+                (company / total)
+              </th>
+              <th class="sort" data-sort="salary" width="20%">
+                Salary, USD
+                <br/>
+                (gross / net)
+              </th>
+              <th class="sort" data-sort="gender" width="10%">
+                Gender
+              </th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Moscow, Russia</td>
-              <td>Full Stack Developer</td>
-              <td>1 / 5</td>
-              <td>100000 / 50000</td>
-              <td>Male</td>
-            </tr>
-            <tr>
-              <td>Moscow, Russia</td>
-              <td>Full Stack Developer</td>
-              <td>1 / 5</td>
-              <td>100000 / 50000</td>
-              <td>Male</td>
-            </tr>
+          <tbody class="list">
           </tbody>
+          <tfoot>
+            <tr id="modal-table-row-template">
+              <td class="location"></td>
+              <td class="role"></td>
+              <td class="experience"></td>
+              <td class="salary"></td>
+              <td class="gender"></td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
