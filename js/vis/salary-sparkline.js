@@ -7,11 +7,9 @@
       const padding = 11;
       const top = height / 2;
       const barHeight = 5.5;
-      const radius = 3;
 
-      const mainColor = '#333',
-          lineColor = '#999',
-          accentColor = '#c85000';
+      const mainColor = '#333';
+      const accentColor = '#c85000';
 
       const fontFamily = 'sans-serif';
       const fontSize = '12px';
@@ -38,14 +36,14 @@
 
       // add main line
       g.append('line')
-        .style('stroke', lineColor)
+        .style('stroke', mainColor)
         .attr('x1', min)
         .attr('y1', top)
         .attr('x2', minQ)
         .attr('y2', top);
 
       g.append('line')
-        .style('stroke', lineColor)
+        .style('stroke', mainColor)
         .attr('x1', maxQ)
         .attr('y1', top)
         .attr('x2', max)
@@ -53,34 +51,68 @@
 
       // add min and max points on line
       [min, max].forEach((value) => {
-        g.append('circle')
-          .style('fill', mainColor)
-          .attr('cx', value)
-          .attr('cy', top)
-          .attr('r', radius);
-      });
-
-      // add quantile lines
-      [minQ, median, maxQ].forEach((value) => {
-        const isMedian = value === median;
         g.append('line')
-          .style('stroke', isMedian ? accentColor : mainColor)
-          .style('stroke-width', isMedian ? 2 : 1)
+          .style('stroke', mainColor)
           .attr('x1', value)
-          .attr('y1', top - barHeight)
+          .attr('y1', top - barHeight / 2)
           .attr('x2', value)
-          .attr('y2', top + barHeight);
+          .attr('y2', top + barHeight / 2);
       });
 
-      // add additional lines
-      [-barHeight, barHeight].forEach((h) => {
+      // add median point
+      g.append('line')
+        .style('stroke', accentColor)
+        .style('stroke-width', 2)
+        .attr('x1', median)
+        .attr('y1', top - barHeight)
+        .attr('x2', median)
+        .attr('y2', top + barHeight);
+
+      // add box rect
+      g.append('rect')
+        .style('fill', 'none')
+        .style('stroke', mainColor)
+        .attr('x', minQ)
+        .attr('y', top - barHeight)
+        .attr('width', maxQ - minQ)
+        .attr('height', barHeight * 2);
+
+      // add opaque lines
+      if (salary.min < mainSalary.min) {
         g.append('line')
-          .style('stroke', lineColor)
-          .attr('x1', minQ)
-          .attr('y1', top + h)
-          .attr('x2', maxQ)
-          .attr('y2', top + h);
-      });
+          .style('stroke', mainColor)
+          .style('stroke-dasharray', '5, 5')
+          .style('opacity', 0.6)
+          .attr('x1', padding)
+          .attr('y1', top)
+          .attr('x2', min)
+          .attr('y2', top);
+
+        g.append('circle')
+          .style('stroke', mainColor)
+          .style('opacity', 0.6)
+          .attr('r', 0.5)
+          .attr('cx', padding)
+          .attr('cy', top);
+      }
+
+      if (salary.max > mainSalary.max) {
+        g.append('line')
+          .style('stroke', mainColor)
+          .style('stroke-dasharray', '5, 5')
+          .style('opacity', 0.6)
+          .attr('x1', width + padding)
+          .attr('y1', top)
+          .attr('x2', max)
+          .attr('y2', top);
+
+        g.append('circle')
+          .style('stroke', mainColor)
+          .style('opacity', 0.6)
+          .attr('r', 0.5)
+          .attr('cx', width + padding)
+          .attr('cy', top);
+      }
 
       // add text values - shift by half of width
       const medianText = g.append('text')
