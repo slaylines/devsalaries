@@ -7,13 +7,13 @@
   font-size: 14px;
 }
 
-// TODO: Remove margin and set width to 100%
-//       when touch events are properly handled.
-//       (check media queries too)
+/* TODO: Remove margin and set width to 100%
+   when touch events are properly handled.
+   (check media queries too) */
 .vis-page #map {
   margin: 0 20px;
   width: calc(100% - 40px);
-  height: 50%;
+  height: calc(50vh - 100px);
 }
 
 .vis-data #map svg {
@@ -362,12 +362,6 @@ header .download-text {
 
 /* sm */
 @media (min-width: 35.5em) {
-  .vis-page #map {
-    margin: 0 20px;
-    width: calc(100% - 40px);
-    height: 50%;
-  }
-
   header .download-text {
     display: initial;
   }
@@ -382,7 +376,7 @@ header .download-text {
   .vis-page #map {
     margin: 0;
     width: calc(100% - 34em);
-    height: 99%;
+    height: calc(100vh - 100px);
   }
 
   .vis-page #data {
