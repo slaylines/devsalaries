@@ -131,6 +131,14 @@
     });
   };
 
+  const sortRolesArray = (roles) => {
+    return roles.sort((a, b) => {
+      if (a.name === 'Other') return 1;
+      if (b.name === 'Other') return -1;
+      return b.count - a.count;
+    });
+  };
+
   const updateStatistics = (statistics, newStats, location) => {
     if (!newStats.empty) {
       statistics.gender = newStats.gender.reduce((res, item) => {
@@ -147,7 +155,7 @@
         }
         : null,
       statistics.role = {
-        values: newStats.role.sort((a, b) => a.name === 'Other' ? 1 : b.count - a.count),
+        values: sortRolesArray(newStats.role),
         showAll: newStats.role.length <= minShownRoles,
         visible: newStats.role.length > minShownRoles
       };
