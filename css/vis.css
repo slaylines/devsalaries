@@ -155,7 +155,7 @@ header .download-text {
 }
 
 .vis-people {
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 .vis-people .fa {
@@ -171,7 +171,8 @@ header .download-text {
 }
 
 .vis-list {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  line-height: 1.3;
 }
 
 .vis-list .__margin {
@@ -201,19 +202,19 @@ header .download-text {
 
 .vis-salary {
   display: flex;
-  width: 420px;
   align-items: center;
 }
 
-.vis-salary span {
-  width: 35px;
+.vis-salary .vis-salary-title {
+  min-width: 35px;
   margin-right: 5px;
+  text-align: right;
+  font-size: 0.9em;
 }
 
 .vis-years-charts {
   position: relative;
   display: flex;
-  font-size: 12px;
 }
 
 .vis-years-charts .__shift {
@@ -223,26 +224,27 @@ header .download-text {
 .vis-years-x-title {
   text-align: center;
   margin-left: 40px;
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .vis-years-y-title {
-  margin-left: 13px;
-  font-size: 0.8em;
+  margin-left: 8px;
+  font-size: 0.9em;
 }
 
 .vis-years-charts rect {
-  fill: #aaa;
+  fill: transparent;
+  stroke: #333;
 }
 
 .vis-years-charts rect:hover {
-  fill: #333;
+  fill: #d1ccf3;
 }
 
 .vis-years-charts .bar-tooltip {
   position: absolute;
-  font-size: 12px;
-  color: #c85000;
+  font-size: 0.9em;
+  color: #333;
   background: #f6f6ef;
   min-width: 14px;
   text-align: center;
@@ -264,18 +266,15 @@ header .download-text {
   shape-rendering: crispEdges;
 }
 
-.vis-whisker {
-  margin-top: 30px;
-}
-
 .vis-whisker .x-label {
-  margin-left: 35px;
-  font-size: 12px;
+  text-align: center;
+  margin-left: 40px;
+  font-size: 0.9em;
 }
 
 .vis-whisker .y-label {
-  text-align: right;
-  font-size: 12px;
+  margin-left: 8px;
+  font-size: 0.9em;
 }
 
 /**

@@ -2,7 +2,7 @@
   // Sparkline graph object
   const Sparkline = {
     init(divId, mainSalary, salary) {
-      const width = 300;
+      const width = 460;
       const height = 38;
       const padding = 11;
       const top = height / 2;

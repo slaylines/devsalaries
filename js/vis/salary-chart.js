@@ -2,8 +2,8 @@
   // Salary whisker graph graph object
   const WhiskerGraph = {
     init(years, prop, stats) {
-      const margin = {top: 10, right: 0, bottom: 20, left: 40};
-      const width = 380;
+      const margin = { top: 10, right: 0, bottom: 20, left: 40 };
+      const width = 480;
       const height = width * 0.6;
 
       const mainColor = '#333';
@@ -33,7 +33,7 @@
         .domain([stats.min - size * 0.1, stats.max + size * 0.1]);
 
       const maxBoxWidth = x.rangeBand();
-      const boxWidth = 10;
+      const boxWidth = 18;
       const shift = (maxBoxWidth - boxWidth) / 2;
 
       const xAxis = d3.svg.axis()
@@ -55,7 +55,7 @@
           if (!data) { return; }
 
           const box = d3.select(this);
-          const cx = x(d.name) + boxWidth / 2;
+          const cx = shift + x(d.name) + boxWidth / 2;
 
           const max = y(data.min);
           const quant95 = y(data.quantiles[5]);

@@ -56,21 +56,22 @@
 
       g.selectAll('.bar')
         .data(data)
-        .enter().append('rect')
-        .attr('fill', '#aaa')
+        .enter()
+        .append('rect')
         .attr('x', function(d) { return x(d.name); })
         .attr('y', function(d) { return y(d.count); })
         .attr('width', x.rangeBand())
         .attr('height', function(d) { return height - y(d.count); })
         .on('mousemove', function(d) {
-          const value = d.count
-          const xTip = margin.left + x(d.name) + offsetXFromParent
-          const yTip =  y(d.count) < tooltipFontSize
-                        ? margin.top + tooltipFontSize
-                        : margin.top + y(d.count)
+          const value = d.count;
+          const xTip = margin.left + x(d.name) + offsetXFromParent;
+          const yTip = margin.top + y(d.count) - tooltipFontSize;
+
           showTooltip(xTip, yTip, x.rangeBand(), value);
         })
-        .on('mouseleave',  function() { tooltip.classed('__hidden', true); });
+        .on('mouseleave', function() {
+          tooltip.classed('__hidden', true);
+        });
 
       g.append('g')
         .attr('class', 'axis')

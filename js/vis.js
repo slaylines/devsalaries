@@ -147,7 +147,7 @@
         }
         : null,
       statistics.role = {
-        values: newStats.role.sort((a, b) => b.count - a.count),
+        values: newStats.role.sort((a, b) => a.name === 'Other' ? 1 : b.count - a.count),
         showAll: newStats.role.length <= minShownRoles,
         visible: newStats.role.length > minShownRoles
       };

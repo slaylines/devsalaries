@@ -72,7 +72,7 @@
         </div>
 
         <div rv-show="statistics.showCharts">
-          <div class="vis-people" rv-show="statistics.gender">
+          <div class="vis-people noselect" rv-show="statistics.gender">
             <span rv-show="statistics.gender.Male" title="Males">
               <i class="fa fa-mars"></i>{statistics.gender.Male}
             </span>
@@ -114,23 +114,25 @@
           </div>
 
           <h2 class="vis-chart-title">
-            Employees distribution by years of work experience
+            Salary distribution of employees
           </h2>
-          <div class="vis-salary-charts">
+          <div class="vis-salary-charts noselect">
             <div class="vis-salary" rv-show="statistics.netSalary">
-              <span>Net</span>
+              <span class="vis-salary-title">net</span>
               <div id="net-salary"></div>
             </div>
             <div class="vis-salary" rv-show="statistics.netSalary">
-              <span>Gross</span>
+              <span class="vis-salary-title">gross</span>
               <div id="gross-salary"></div>
             </div>
           </div>
 
           <h2 class="vis-chart-title">
-            Employees distribution by years of work experience
+            Employees distribution
+            <br/>
+            by years of work experience
           </h2>
-          <div class="vis-years-charts" id="vis-years-charts">
+          <div class="vis-years-charts noselect" id="vis-years-charts">
             <div rv-show="statistics.companyYears">
               <div class="vis-years-y-title">employees</div>
               <div id="years-company"></div>
@@ -144,28 +146,34 @@
             <div class="bar-tooltip __hidden"></div>
           </div>
 
-          <div class="vis-whisker">
-            <div class=x-label>
+          <h2 class="vis-chart-title">
+            Salary distributions of employees
+            <br/>
+            by years of work experience
+          </h2>
+          <div class="vis-whisker noselect">
+            <div class=y-label>
               <span
                 rv-class="graphs.net"
                 rv-on-click="graphs.onSetNetSalary"
-              >Net</span> /
+              >net</span> /
               <span
                 rv-class="graphs.gross"
                 rv-on-click="graphs.onSetGrossSalary"
-              >gross</span> salary in thousands $
+              >gross</span>,
+              <br/>
+              thousands
             </div>
             <div id="whisker-graph"></div>
-            <div class=y-label>
-              Years
+            <div class=x-label>
               <span
                 rv-class="graphs.job"
                 rv-on-click="graphs.onSetJobYears"
-              >at current job</span> /
+              >current job</span> /
               <span
                 rv-class="graphs.total"
                 rv-on-click="graphs.onSetTotalYears"
-              >of total experience</span>
+              >total</span>
             </div>
           </div>
         </div>
