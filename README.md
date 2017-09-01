@@ -1,10 +1,21 @@
 # tehcookies.github.io/devsalaries
 
-How much developers earn? A better form and visualizations for [Ask HN post](https://news.ycombinator.com/item?id=15088840).
+How much developers earn? D3.js visualization of dev salaries across the globe based on [Ask HN post](https://news.ycombinator.com/item?id=15088840).
 
 ## Why?
-In the original post it is hard to read data and make any conclusions from it because it is sparse and unstructured table with 500+ rows. Since we love visualizations, we decided to give more insight into this amazing salary dataset. We don't limit it to Europe though and we hope to collect data for other regions too.
+
+[Ask HN post](https://news.ycombinator.com/item?id=15088840) by @ciaoben collected an amazing dataset
+with dev salaries in Europe. However the result table is sparse, unstructured and hard to analyze. At
+[TehCookies](http://tehcookies.com) we love to make visualizations which give insight into data.
+This salary dataset is no exception. And why on Earth we need to limit it to Europe only?
+
+## Data
+
+We got original data from HN and cleaned it up by removing spam and sparse rows.
+We also restricted possible table values. See clean
+[CSV dataset](https://github.com/tehcookies/devsalaries/blob/master/data/raw-entries.csv).
 
 ## Contributions
 
-The initial goal was to provide a visual representation of the dataset. Have your own visualization in mind? Want to improve the existing ones? PRs are more than welcome!
+Have your own visualization in mind? Want to improve the existing one? PRs to
+this GitHub repo are more than welcome!
