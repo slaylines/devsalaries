@@ -7,7 +7,8 @@
   // main svg element
   const svg = d3
     .select('#map svg')
-    .on('click', function() { onClick(''); });
+    .on('click', function() { onClick(''); })
+    .on('touchend', function() { onClick(''); });
 
   // variables for tooltip container
   let tooltip;
@@ -169,6 +170,7 @@
       .attr('font-size', fontAwesomeSize)
       .text(function(d) { return '\uf041'; })
       .on('click', function(city) { onClick(city.id, city, true); })
+      .on('touchend', function(city) { onClick(city.id, city, true); })
       .on('mousemove', function(city) { showTooltip(city.city); })
       .on('mouseout',  function() { tooltip.classed('__hidden', true); });
   };
@@ -265,6 +267,7 @@
             if (filter.length > 0) {
               item
                 .on('click', function(d) { onClick(d.id, filter[0]); })
+                .on('touchend', function(d) { onClick(d.id, filter[0]); })
                 .on('mousemove', function(d) { showTooltip(filter[0].name); })
                 .on('mouseout',  function(d, i) { tooltip.classed('__hidden', true); });
             } else {
