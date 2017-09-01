@@ -222,6 +222,13 @@
       .attr('height', height)
       .call(zoom)
       .call(zoom.event);
+
+    // Handle mobile pinch gesture.
+    const hammertime = new Hammer(svg.node());
+    hammertime.get('pinch').set({ enable: true });
+    hammertime.on('pinch', () => {
+      svg.call(zoom.event);
+    });
   }
 
   // Public methods
