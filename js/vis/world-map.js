@@ -53,7 +53,7 @@
   };
 
   function getCityId(coords, name) {
-    return `${name}${coords.lon}${coords.lat}`.replace(/[.]/g, '');
+    return `${name}${coords.lon}${coords.lat}`.replace(/[., ]/g, '');
   };
 
   // select location: world, country or city
