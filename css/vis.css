@@ -264,6 +264,7 @@ header .download-text {
   fill: none;
   stroke: #333;
   shape-rendering: crispEdges;
+   font-size: 12px;
 }
 
 .vis-whisker .x-label {
@@ -275,6 +276,24 @@ header .download-text {
 .vis-whisker .y-label {
   margin-left: 8px;
   font-size: 0.9em;
+}
+
+.vis-whisker .tooltip-back {
+  fill: #f6f6ef;
+  stroke: #999;
+  opacity: 0.9;
+  rx: 3px;
+}
+
+.vis-whisker .tooltip {
+  font-size: 12px;
+}
+
+.vis-whisker .tooltip-text-title,
+.vis-whisker .tooltip-text-min,
+.vis-whisker .tooltip-text-median,
+.vis-whisker .tooltip-text-max {
+  font-weight: normal;
 }
 
 /**

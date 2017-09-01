@@ -1,7 +1,7 @@
 ((window) => {
   const margin = { top: 10, right: 0, bottom: 20, left: 40 };
 
-  const tooltipFontSize = 12;
+  const tooltipBottomMargin = 2;
   const tooltip = d3.select('#data .bar-tooltip');
 
   const barWidth = 23;
@@ -62,10 +62,10 @@
         .attr('y', function(d) { return y(d.count); })
         .attr('width', x.rangeBand())
         .attr('height', function(d) { return height - y(d.count); })
-        .on('mousemove', function(d) {
+        .on('mouseenter', function(d) {
           const value = d.count;
           const xTip = margin.left + x(d.name) + offsetXFromParent;
-          const yTip = margin.top + y(d.count) - tooltipFontSize;
+          const yTip = margin.top + y(d.count) - tooltipBottomMargin;
 
           showTooltip(xTip, yTip, x.rangeBand(), value);
         })

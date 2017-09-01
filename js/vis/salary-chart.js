@@ -1,4 +1,46 @@
 ((window) => {
+  const div = d3.selectAll('#whisker-graph');
+
+  function showTooltip(box, name, stats) {
+    div.selectAll('.tooltip-back')
+      .style('display', 'block');
+
+    div.selectAll('.tooltip-text-title')
+      .text(`${name} year${name[0] === '<' || name[0] === '1' ? '' : 's'}`);
+
+    div.selectAll('.tooltip-text-min')
+      .text(`min = ${stats.min.toFixed(2)};`)
+
+    div.selectAll('.tooltip-text-mins')
+      .text(`5% = ${stats.quantiles[5].toFixed(2)}; 25% = ${stats.quantiles[25].toFixed(2)};`)
+
+    div.selectAll('.tooltip-text-median')
+      .text(`50% = ${stats.quantiles[50].toFixed(2)};`)
+
+    div.selectAll('.tooltip-text-maxs')
+      .text(`75% = ${stats.quantiles[75].toFixed(2)}; 95% = ${stats.quantiles[95].toFixed(2)};`)
+
+    div.selectAll('.tooltip-text-max')
+      .text(`max = ${stats.max.toFixed(2)};`)
+
+    div.selectAll('.tooltip')
+      .style('display', 'block');
+
+    box.selectAll('rect')
+      .style('fill', '#d1ccf3');
+  }
+
+  function hideTooltip(box) {
+    div.selectAll('.tooltip-back')
+      .style('display', 'none');
+
+    div.selectAll('.tooltip')
+      .style('display', 'none');
+
+    box.selectAll('rect')
+      .style('fill', 'none');
+  }
+
   // Salary whisker graph graph object
   const WhiskerGraph = {
     init(years, prop, stats) {
@@ -10,8 +52,8 @@
       const accentColor = '#c85000';
       const radius = 2;
       const lineWidth = 5;
+      const textHeight = 10;
 
-      const div = d3.selectAll('#whisker-graph');
       div.selectAll('svg').remove();
 
       const svg = div
@@ -66,7 +108,7 @@
           const min = y(data.max);
 
           // box - quantiles from 25 to 75
-          g.append('rect')
+          box.append('rect')
             .style('fill', 'none')
             .style('stroke', mainColor)
             .attr('x', cx - boxWidth / 2)
@@ -75,7 +117,7 @@
             .attr('height', quant75 - quant25);
 
           // horizontal median line
-          g.append('line')
+          box.append('line')
             .style('stroke', accentColor)
             .style('stroke-width', 2)
             .attr('x1', cx - boxWidth / 2)
@@ -85,14 +127,14 @@
 
           // lines between 25 and 75 quantiles and 5 and 95 quantiles with points
           if (quant5 < quant25) {
-            g.append('line')
+            box.append('line')
               .style('stroke', mainColor)
               .attr('x1', cx)
               .attr('y1', quant5)
               .attr('x2', cx)
               .attr('y2', quant25);
 
-            g.append('line')
+            box.append('line')
               .style('stroke', mainColor)
               .attr('x1', cx - lineWidth)
               .attr('y1', quant5)
@@ -100,14 +142,14 @@
               .attr('y2', quant5);
           }
           if (quant95 > quant75) {
-            g.append('line')
+            box.append('line')
               .style('stroke', mainColor)
               .attr('x1', cx)
               .attr('y1', quant95)
               .attr('x2', cx)
               .attr('y2', quant75);
 
-            g.append('line')
+            box.append('line')
               .style('stroke', mainColor)
               .attr('x1', cx - lineWidth)
               .attr('y1', quant95)
@@ -117,7 +159,7 @@
 
           // min and max - as circles
           if (min < quant5) {
-            g.append('circle')
+            box.append('circle')
               .style('fill', 'none')
               .style('stroke', mainColor)
               .attr('cx', cx)
@@ -125,15 +167,23 @@
               .attr('r', radius);
           }
           if (max > quant95) {
-            g.append('circle')
+            box.append('circle')
               .style('fill', 'none')
               .style('stroke', mainColor)
               .attr('cx', cx)
               .attr('cy', max)
               .attr('r', radius);
           }
+
+          box.on('mouseenter', function(d) {
+            showTooltip(box, d.name, data);
+          })
+          .on('mouseleave', function() {
+            hideTooltip(box);
+          });
         });
 
+      // add two axes
       g.append('g')
         .attr('class', 'axis')
         .attr('transform', `translate(0,${height})`)
@@ -144,6 +194,58 @@
         .call(yAxis)
         .append('text')
         .attr('transform', 'rotate(-90)');
+
+      // add background for tooltip
+      g.append('rect')
+        .attr('class', 'tooltip-back')
+        .style('display', 'none')
+        .attr('x', shift * 2)
+        .attr('y', 0)
+        .attr('width', 220)
+        .attr('height', 110);
+
+      // add tooltip text
+      const tooltip = g
+        .append('g')
+        .attr('class', 'tooltip')
+        .style('display', 'none');
+      const x0 = shift * 3;
+      const y0 = shift + textHeight;
+
+      tooltip.append('text')
+        .attr('class', 'tooltip-text-title')
+        .attr('x', x0)
+        .attr('y', y0);
+
+      const tooltipStats = tooltip
+        .append('text')
+        .attr('x', x0)
+        .attr('y', y0 * 2 + 2)
+
+      tooltipStats
+        .append('tspan')
+        .attr('class', 'tooltip-text-min')
+        .attr('x', x0);
+      tooltipStats
+        .append('tspan')
+        .attr('class', 'tooltip-text-mins')
+        .attr('x', x0)
+        .attr('dy', textHeight + shift);
+      tooltipStats
+        .append('tspan')
+        .attr('class', 'tooltip-text-median')
+        .attr('x', x0)
+        .attr('dy', textHeight + shift);
+      tooltipStats
+        .append('tspan')
+        .attr('class', 'tooltip-text-maxs')
+        .attr('x', x0)
+        .attr('dy', textHeight + shift);
+      tooltipStats
+        .append('tspan')
+        .attr('class', 'tooltip-text-max')
+        .attr('x', x0)
+        .attr('dy', textHeight + shift);
     },
   };
 
