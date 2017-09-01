@@ -1,7 +1,10 @@
 ((window) => {
-  const margin = {top: 10, right: 0, bottom: 20, left: 40};
+  const margin = { top: 10, right: 0, bottom: 20, left: 40 };
+
   const tooltipFontSize = 12;
   const tooltip = d3.select('#data .bar-tooltip');
+
+  const barWidth = 23;
 
   function showTooltip(x, y, w, name) {
     const text = document.querySelector('#data .bar-tooltip');
@@ -20,7 +23,7 @@
   const BarGraph = {
     init(divId, data) {
       const offsetXFromParent = document.getElementById(divId).offsetLeft;
-      const width = 18 * data.length;
+      const width = barWidth * data.length;
       const height = 130;
 
       const div = d3.select('#' + divId);

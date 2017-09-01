@@ -23,10 +23,15 @@ main, .content {
 body {
   color: #333;
   background: #f6f6ef;
+  font-weight: lighter;
 }
 
 main, footer {
   font-size: 0.8em;
+}
+
+h1, h2, h3, h4, th {
+  font-weight: normal;
 }
 
 a {

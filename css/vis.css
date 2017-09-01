@@ -30,7 +30,6 @@
   background: rgba(255, 255, 255, 0.5);
   padding: 3px;
   letter-spacing: 0.5px;
-  font-weight: lighter;
   font-size: 16px;
   pointer-events: none;
   color: #666;
@@ -46,9 +45,10 @@
 }
 
 .vis-page #data {
-  width: 34em;
+  position: relative;
+  width: 40em;
   overflow: auto;
-  padding: 20px 16px;
+  padding: 25px 16px 20px 16px;
   background: #f6f6ef;
 }
 
@@ -127,15 +127,17 @@ header .download-text {
 }
 
 .vis-location {
-  font-size: 1.35em;
+  margin: 0;
+  font-size: 1.8em;
 }
 
 .vis-notice {
-  color: #999;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 8px 16px 0 0;
   font-size: 12px;
-  font-weight: lighter;
-  margin-left: 20px;
-  display: inline-block;
+  color: #999;
 }
 
 .vis-notice .fa-asterisk {
@@ -149,7 +151,7 @@ header .download-text {
 }
 
 .vis-table-link .fa-table {
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .vis-people {
@@ -188,6 +190,11 @@ header .download-text {
   display: inline-block;
 }
 
+.vis-chart-title {
+  margin: 20px 0;
+  font-size: 1.4em;
+}
+
 .vis-salary-charts {
   margin-bottom: 20px;
 }
@@ -205,21 +212,23 @@ header .download-text {
 
 .vis-years-charts {
   position: relative;
-  font-size: 12px;
   display: flex;
+  font-size: 12px;
 }
 
 .vis-years-charts .__shift {
   margin-left: 10px;
-  margin-top: 14px;
 }
 
 .vis-years-x-title {
-  text-align: right;
+  text-align: center;
+  margin-left: 40px;
+  font-size: 0.8em;
 }
 
 .vis-years-y-title {
-  margin-left: 35px;
+  margin-left: 13px;
+  font-size: 0.8em;
 }
 
 .vis-years-charts rect {
@@ -332,7 +341,6 @@ header .download-text {
 
 .vis-table-wrapper table sup {
   font-size: 0.7em;
-  font-weight: lighter;
 }
 
 .vis-table-wrapper table tfoot {
@@ -383,7 +391,6 @@ header .download-text {
   margin: 5px 0;
   text-align: center;
   font-size: 0.8em;
-  font-weight: lighter;
 }
 
 #data-table {
@@ -433,7 +440,7 @@ header .download-text {
 @media (min-width: 64em) {
   .vis-page #map {
     margin: 0;
-    width: calc(100% - 34em);
+    width: calc(100% - 40em);
     height: calc(100vh - 100px);
   }
 

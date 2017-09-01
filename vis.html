@@ -57,7 +57,7 @@
 
       <div class="pure-u-1" id="data">
         <div class="vis-title">
-          <div class="vis-location" rv-text="statistics.location | location"></div>
+          <h1 class="vis-location" rv-text="statistics.location | location"></h1>
           <div class="vis-notice">
             <i class="fa fa-asterisk"></i>
             salaries are shown in $
@@ -113,6 +113,9 @@
             </div>
           </div>
 
+          <h2 class="vis-chart-title">
+            Employees distribution by years of work experience
+          </h2>
           <div class="vis-salary-charts">
             <div class="vis-salary" rv-show="statistics.netSalary">
               <span>Net</span>
@@ -124,15 +127,19 @@
             </div>
           </div>
 
+          <h2 class="vis-chart-title">
+            Employees distribution by years of work experience
+          </h2>
           <div class="vis-years-charts" id="vis-years-charts">
             <div rv-show="statistics.companyYears">
-              <div class="vis-years-y-title">Number of people</div>
+              <div class="vis-years-y-title">employees</div>
               <div id="years-company"></div>
-              <div class="vis-years-x-title">Years at current job</div>
+              <div class="vis-years-x-title">current job</div>
             </div>
             <div class="__shift" rv-show="statistics.expYears">
+              <div class="vis-years-y-title">employees</div>
               <div id="years-total"></div>
-              <div class="vis-years-x-title">Total experience</div>
+              <div class="vis-years-x-title">total</div>
             </div>
             <div class="bar-tooltip __hidden"></div>
           </div>
@@ -215,7 +222,7 @@
       </div>
 
       <div class="vis-table-modal-close" rv-on-click="table.onModalCloseClick">
-        <i class="fa fa-close"></i>
+        ✕
       </div>
 
       <div class="vis-table-wrapper">
@@ -270,14 +277,14 @@
         target="_blank"
       >
       </a>
-      &emsp;|&emsp;
+      &emsp;&emsp;
       <a
         class="social-link fa fa-reddit-alien"
         href="https://www.reddit.com/submit?url=http%3A%2F%2Fbit.ly%2Fdevsalaries&title=How+much+%23developers+earn%3F"
         target="_blank"
       >
       </a>
-      &emsp;|&emsp;
+      &emsp;&emsp;
       <a
         class="social-link fa fa-facebook"
         href="https://www.facebook.com/sharer/sharer.php?u=http%3A//bit.ly/devsalaries"
