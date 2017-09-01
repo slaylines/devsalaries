@@ -62,7 +62,7 @@
         .attr('y', function(d) { return y(d.count); })
         .attr('width', x.rangeBand())
         .attr('height', function(d) { return height - y(d.count); })
-        .on('mouseenter', function(d) {
+        .on('mousemove', function(d) {
           const value = d.count;
           const xTip = margin.left + x(d.name) + offsetXFromParent;
           const yTip = margin.top + y(d.count) - tooltipBottomMargin;

@@ -175,7 +175,7 @@
               .attr('r', radius);
           }
 
-          box.on('mouseenter', function(d) {
+          box.on('mousemove', function(d) {
             showTooltip(box, d.name, data);
           })
           .on('mouseleave', function() {
