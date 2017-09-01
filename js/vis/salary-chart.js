@@ -196,21 +196,22 @@
         .attr('transform', 'rotate(-90)');
 
       // add background for tooltip
+      const shiftT = 6;
       g.append('rect')
         .attr('class', 'tooltip-back')
         .style('display', 'none')
-        .attr('x', shift * 2)
+        .attr('x', shiftT * 2)
         .attr('y', 0)
         .attr('width', 220)
-        .attr('height', 110);
+        .attr('height', 108);
 
       // add tooltip text
       const tooltip = g
         .append('g')
         .attr('class', 'tooltip')
         .style('display', 'none');
-      const x0 = shift * 3;
-      const y0 = shift + textHeight;
+      const x0 = shiftT * 3;
+      const y0 = shiftT + textHeight;
 
       tooltip.append('text')
         .attr('class', 'tooltip-text-title')
@@ -230,22 +231,22 @@
         .append('tspan')
         .attr('class', 'tooltip-text-mins')
         .attr('x', x0)
-        .attr('dy', textHeight + shift);
+        .attr('dy', textHeight + shiftT);
       tooltipStats
         .append('tspan')
         .attr('class', 'tooltip-text-median')
         .attr('x', x0)
-        .attr('dy', textHeight + shift);
+        .attr('dy', textHeight + shiftT);
       tooltipStats
         .append('tspan')
         .attr('class', 'tooltip-text-maxs')
         .attr('x', x0)
-        .attr('dy', textHeight + shift);
+        .attr('dy', textHeight + shiftT);
       tooltipStats
         .append('tspan')
         .attr('class', 'tooltip-text-max')
         .attr('x', x0)
-        .attr('dy', textHeight + shift);
+        .attr('dy', textHeight + shiftT);
     },
   };
 
