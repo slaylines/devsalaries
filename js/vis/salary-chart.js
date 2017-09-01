@@ -1,7 +1,7 @@
 ((window) => {
   // Salary whisker graph graph object
   const WhiskerGraph = {
-    init(years, data) {
+    init(years, prop, stats) {
       const margin = {top: 10, right: 0, bottom: 20, left: 40};
       const width = 380;
       const height = width * 0.6;
@@ -9,7 +9,7 @@
       const mainColor = '#333';
       const accentColor = '#c85000';
       const radius = 2;
-      const lineWidth = 3;
+      const lineWidth = 5;
 
       const div = d3.selectAll('#whisker-graph');
       div.selectAll('svg').remove();
@@ -23,14 +23,14 @@
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-      const size = data.max - data.min;
+      const size = stats.max - stats.min;
 
       const x = d3.scale.ordinal()
         .rangeRoundBands([0, width], .2)
         .domain(years.map(function(d) { return d.name; }));
       const y = d3.scale.linear()
         .range([height, 0])
-        .domain([data.min - size * 0.1, data.max + size * 0.1]);
+        .domain([stats.min - size * 0.1, stats.max + size * 0.1]);
 
       const maxBoxWidth = x.rangeBand();
       const boxWidth = 10;
@@ -51,63 +51,28 @@
         .enter()
         .append('g')
         .each(function(d) {
+          const data = d.stats[prop];
+          if (!data) { return; }
+
           const box = d3.select(this);
-          const cx = x(d.name) + boxWidth / 2 + shift;
+          const cx = x(d.name) + boxWidth / 2;
 
-          const quant5 = y(data.quantiles[5]);
-          const quant25 = y(data.quantiles[25]);
+          const max = y(data.min);
+          const quant95 = y(data.quantiles[5]);
+          const quant75 = y(data.quantiles[25]);
           const quant50 = y(data.quantiles[50]);
-          const quant75 = y(data.quantiles[75]);
-          const quant95 = y(data.quantiles[95]);
-
-          // min and max - as circles
-          [data.min, data.max].forEach((value) => {
-            g.append('circle')
-              .style('fill', 'none')
-              .style('stroke', mainColor)
-              .attr('cx', cx)
-              .attr('cy', y(value))
-              .attr('r', radius);
-          });
+          const quant25 = y(data.quantiles[75]);
+          const quant5 = y(data.quantiles[95]);
+          const min = y(data.max);
 
           // box - quantiles from 25 to 75
           g.append('rect')
             .style('fill', 'none')
             .style('stroke', mainColor)
             .attr('x', cx - boxWidth / 2)
-            .attr('y', quant75)
+            .attr('y', quant25)
             .attr('width', boxWidth)
-            .attr('height', quant25 - quant75);
-
-          // lines between 25 and 75 quantiles and 5 and 95 quantiles
-          g.append('line')
-            .style('stroke', mainColor)
-            .attr('x1', cx)
-            .attr('y1', quant5)
-            .attr('x2', cx)
-            .attr('y2', quant25);
-
-          g.append('line')
-            .style('stroke', mainColor)
-            .attr('x1', cx)
-            .attr('y1', quant95)
-            .attr('x2', cx)
-            .attr('y2', quant75);
-
-          // horizontal lines on 5 and 95 quantiles
-          g.append('line')
-            .style('stroke', mainColor)
-            .attr('x1', cx - lineWidth)
-            .attr('y1', quant5)
-            .attr('x2', cx + lineWidth)
-            .attr('y2', quant5);
-
-          g.append('line')
-            .style('stroke', mainColor)
-            .attr('x1', cx - lineWidth)
-            .attr('y1', quant95)
-            .attr('x2', cx + lineWidth)
-            .attr('y2', quant95);
+            .attr('height', quant75 - quant25);
 
           // horizontal median line
           g.append('line')
@@ -118,6 +83,55 @@
             .attr('x2', cx + boxWidth / 2)
             .attr('y2', quant50);
 
+          // lines between 25 and 75 quantiles and 5 and 95 quantiles with points
+          if (quant5 < quant25) {
+            g.append('line')
+              .style('stroke', mainColor)
+              .attr('x1', cx)
+              .attr('y1', quant5)
+              .attr('x2', cx)
+              .attr('y2', quant25);
+
+            g.append('line')
+              .style('stroke', mainColor)
+              .attr('x1', cx - lineWidth)
+              .attr('y1', quant5)
+              .attr('x2', cx + lineWidth)
+              .attr('y2', quant5);
+          }
+          if (quant95 > quant75) {
+            g.append('line')
+              .style('stroke', mainColor)
+              .attr('x1', cx)
+              .attr('y1', quant95)
+              .attr('x2', cx)
+              .attr('y2', quant75);
+
+            g.append('line')
+              .style('stroke', mainColor)
+              .attr('x1', cx - lineWidth)
+              .attr('y1', quant95)
+              .attr('x2', cx + lineWidth)
+              .attr('y2', quant95);
+          }
+
+          // min and max - as circles
+          if (min < quant5) {
+            g.append('circle')
+              .style('fill', 'none')
+              .style('stroke', mainColor)
+              .attr('cx', cx)
+              .attr('cy', min)
+              .attr('r', radius);
+          }
+          if (max > quant95) {
+            g.append('circle')
+              .style('fill', 'none')
+              .style('stroke', mainColor)
+              .attr('cx', cx)
+              .attr('cy', max)
+              .attr('r', radius);
+          }
         });
 
       g.append('g')

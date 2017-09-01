@@ -103,7 +103,8 @@
   };
 
   const initWhiskerGraph = (statistics, graphs) => {
-    DS.WhiskerGraph.init(statistics[graphs.activeYears], statistics[graphs.activeSalary]);
+    const prop = graphs.activeSalary;
+    DS.WhiskerGraph.init(statistics[graphs.activeYears], prop, statistics[prop]);
   }
 
   const initDataTable = (statistics) => {

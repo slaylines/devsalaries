@@ -52,6 +52,22 @@
     return result;
   };
 
+  const groupBy = (array, key) => {
+    const groups = {};
+
+    array.forEach((item) => {
+      const k = key(item);
+
+      if (groups.hasOwnProperty(k)) {
+        groups[k].push(item);
+      } else {
+        groups[k] = [item];
+      }
+    });
+
+    return groups;
+  };
+
   /**
    * STATISTICS METHODS
    */
@@ -139,6 +155,25 @@
     return { min, max, mean, quantiles };
   };
 
+  const groupAggrStats = (entries, groupProp, aggrProps) => {
+    const key = (item) => item[groupProp];
+    const groups = groupBy(entries, key);
+    const counted = groupStats(entries, groupProp);
+
+    return counted.map((group) => {
+      const groupEntries = groups[group.name];
+      group.stats = {};
+
+      aggrProps.forEach((prop) => {
+        group.stats[prop] = groupEntries
+          ? aggrStats(groupEntries, prop)
+          : null;
+      });
+
+      return group;
+    });
+  };
+
   /**
    * VISDATA CLASS
    */
@@ -150,8 +185,8 @@
     if (entries.length >= MIN_ENTRIES_FOR_VISDATA) {
       this.company = uniqStats(entries, 'company');
       this.role = groupStats(entries, 'role');
-      this.companyYears = groupStats(entries, 'companyYears');
-      this.expYears = groupStats(entries, 'expYears');
+      this.companyYears = groupAggrStats(entries, 'companyYears', ['netSalary', 'grossSalary']);
+      this.expYears = groupAggrStats(entries, 'expYears', ['netSalary', 'grossSalary']);
       this.grossSalary = aggrStats(entries, 'grossSalary');
       this.netSalary = aggrStats(entries, 'netSalary');
       this.gender = groupStats(entries, 'gender');
