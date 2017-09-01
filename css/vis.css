@@ -68,6 +68,18 @@ header .download-text {
   display: none;
 }
 
+header .submit-link {
+  float: right;
+  margin-right: 20px;
+  text-decoration: none;
+  line-height: 30px;
+  color: black;
+}
+
+header .submit-text {
+  display: none;
+}
+
 /**
  * MAP GRAPH
  */
@@ -446,6 +458,10 @@ header .download-text {
 /* sm */
 @media (min-width: 35.5em) {
   header .download-text {
+    display: initial;
+  }
+
+  header .submit-text {
     display: initial;
   }
 }
