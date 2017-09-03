@@ -16894,5 +16894,467 @@
     },
     "netSalary": 78500,
     "role": "Backend Developer"
+  },
+  "-Kt1eg5hCesWecpD9Jve": {
+    "company": "",
+    "companyYears": "1",
+    "createdAt": 1504357041031,
+    "currency": "EUR",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 36000,
+    "location": {
+      "city": "Bordeaux",
+      "coords": {
+        "lat": 44.837789,
+        "lon": -0.5791799999999512
+      },
+      "country": {
+        "code": "FR",
+        "name": "France"
+      }
+    },
+    "netSalary": 24000,
+    "role": "Full Stack Developer"
+  },
+  "-Kt1pATWFeEfNq9A9ZZW": {
+    "company": "",
+    "companyYears": "5",
+    "createdAt": 1504359790609,
+    "currency": "GBP",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 49000,
+    "location": {
+      "city": "London",
+      "coords": {
+        "lat": 51.5073509,
+        "lon": -0.12775829999998223
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 35000,
+    "role": "Backend Developer"
+  },
+  "-Kt1plF9BLDfENpYvQB4": {
+    "company": "Self-Employeed",
+    "companyYears": "1",
+    "createdAt": 1504359946718,
+    "currency": "COP",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 39000000,
+    "location": {
+      "city": "Cartagena",
+      "coords": {
+        "lat": 10.3910485,
+        "lon": -75.47942569999998
+      },
+      "country": {
+        "code": "CO",
+        "name": "Colombia"
+      }
+    },
+    "netSalary": 35000000,
+    "role": "Other"
+  },
+  "-Kt1rh78nGU9jKFGiSRw": {
+    "company": "Tumblr",
+    "companyYears": "<1",
+    "createdAt": 1504360452639,
+    "currency": "USD",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 135000,
+    "location": {
+      "city": "San Francisco",
+      "coords": {
+        "lat": 37.7749295,
+        "lon": -122.41941550000001
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 90000,
+    "role": "Frontend Developer"
+  },
+  "-Kt1zPdjjFgHNiBB-xmF": {
+    "company": "-",
+    "companyYears": "5",
+    "createdAt": 1504362474262,
+    "currency": "INR",
+    "expYears": "8",
+    "gender": "Male",
+    "grossSalary": 3200000,
+    "location": {
+      "city": "Bengaluru",
+      "coords": {
+        "lat": 12.9715987,
+        "lon": 77.59456269999998
+      },
+      "country": {
+        "code": "IN",
+        "name": "India"
+      }
+    },
+    "netSalary": 2200000,
+    "role": "Software Architect"
+  },
+  "-Kt207TWmHC6QBdsJt1N": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504362924079,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 55000,
+    "location": {
+      "city": "Hanoi",
+      "coords": {
+        "lat": 21.0277644,
+        "lon": 105.83415979999995
+      },
+      "country": {
+        "code": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "netSalary": 50000,
+    "role": "Technical Lead"
+  },
+  "-Kt26_scj8BLS-xScJU2": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504364622982,
+    "currency": "VND",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 300000000,
+    "location": {
+      "city": "Hanoi",
+      "coords": {
+        "lat": 21.0277644,
+        "lon": 105.83415979999995
+      },
+      "country": {
+        "code": "VN",
+        "name": "Vietnam"
+      }
+    },
+    "netSalary": 280000000,
+    "role": "Backend Developer"
+  },
+  "-Kt26iuZwhueo6o1rI0a": {
+    "company": "",
+    "companyYears": "5",
+    "createdAt": 1504365022160,
+    "currency": "USD",
+    "expYears": "10",
+    "gender": "Male",
+    "grossSalary": 100000,
+    "location": {
+      "city": "Grand Rapids",
+      "coords": {
+        "lat": 42.96335990000001,
+        "lon": -85.66808630000003
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 66000,
+    "role": "Full Stack Developer"
+  },
+  "-Kt2V9OR88Zo4CZE6fWl": {
+    "company": "Fitbit",
+    "companyYears": "<1",
+    "createdAt": 1504371058010,
+    "currency": "USD",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 110000,
+    "location": {
+      "city": "Boston",
+      "coords": {
+        "lat": 42.3600825,
+        "lon": -71.05888010000001
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 73294,
+    "role": "Embedded Systems Engineer"
+  },
+  "-Kt2sZU60KA3ndFVyYpw": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504377454753,
+    "currency": "EUR",
+    "expYears": ">10",
+    "gender": "Male",
+    "grossSalary": 48000,
+    "location": {
+      "city": "Berlin",
+      "coords": {
+        "lat": 52.52000659999999,
+        "lon": 13.404953999999975
+      },
+      "country": {
+        "code": "DE",
+        "name": "Germany"
+      }
+    },
+    "netSalary": 30000,
+    "role": "Mobile Developer"
+  },
+  "-Kt31Co38qHnGCM1p2-n": {
+    "company": "Anonymous",
+    "companyYears": "<1",
+    "createdAt": 1504379984847,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 60000,
+    "location": {
+      "city": "Portland",
+      "coords": {
+        "lat": 45.52306220000001,
+        "lon": -122.67648150000002
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 40849,
+    "role": "Full Stack Developer"
+  },
+  "-Kt35-0_r3oGZtUHf0t4": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504380977330,
+    "currency": "SEK",
+    "expYears": "2",
+    "gender": "Male",
+    "grossSalary": 30000,
+    "location": {
+      "city": "Malmö",
+      "coords": {
+        "lat": 55.604981,
+        "lon": 13.003822000000014
+      },
+      "country": {
+        "code": "SE",
+        "name": "Sweden"
+      }
+    },
+    "netSalary": 22500,
+    "role": "Full Stack Developer"
+  },
+  "-Kt35FzJxqcBPTrmJ7DO": {
+    "company": "CGI",
+    "companyYears": "5",
+    "createdAt": 1504381046659,
+    "currency": "USD",
+    "expYears": "6",
+    "gender": "Male",
+    "grossSalary": 54000,
+    "location": {
+      "city": "Birmingham",
+      "coords": {
+        "lat": 33.5206608,
+        "lon": -86.80248999999998
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 36960,
+    "role": "DevOps"
+  },
+  "-Kt3xbc-BjIcMD071yg5": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504395557329,
+    "currency": "CAD",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 102000,
+    "location": {
+      "city": "Montreal",
+      "coords": {
+        "lat": 45.5016889,
+        "lon": -73.56725599999999
+      },
+      "country": {
+        "code": "CA",
+        "name": "Canada"
+      }
+    },
+    "netSalary": 70445,
+    "role": "Frontend Developer"
+  },
+  "-Kt41PI2LkImSXY-WKhM": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504396813491,
+    "currency": "GBP",
+    "expYears": "2",
+    "gender": "Male",
+    "grossSalary": 25000,
+    "location": {
+      "city": "Cambridge",
+      "coords": {
+        "lat": 52.205337,
+        "lon": 0.12181699999996454
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 20222,
+    "role": "Full Stack Developer"
+  },
+  "-Kt45_VxWeoXJeohqa2D": {
+    "company": "startup",
+    "companyYears": "<1",
+    "createdAt": 1504397907953,
+    "currency": "EUR",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 60000,
+    "location": {
+      "city": "Berlin",
+      "coords": {
+        "lat": 52.52000659999999,
+        "lon": 13.404953999999975
+      },
+      "country": {
+        "code": "DE",
+        "name": "Germany"
+      }
+    },
+    "netSalary": 32243,
+    "role": "Full Stack Developer"
+  },
+  "-Kt4X3zh8nXzXjUiVfnF": {
+    "company": "Abc",
+    "companyYears": "<1",
+    "createdAt": 1504405114947,
+    "currency": "GBP",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 28000,
+    "location": {
+      "city": "Sheffield",
+      "coords": {
+        "lat": 53.38112899999999,
+        "lon": -1.47008500000004
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 24000,
+    "role": "Full Stack Developer"
+  },
+  "-Kt5QpslpPbBTX4cE-6D": {
+    "company": "",
+    "companyYears": "5",
+    "createdAt": 1504420256088,
+    "currency": "CAD",
+    "expYears": ">10",
+    "gender": "Male",
+    "grossSalary": 80000,
+    "location": {
+      "city": "Vancouver",
+      "coords": {
+        "lat": 49.2827291,
+        "lon": -123.12073750000002
+      },
+      "country": {
+        "code": "CA",
+        "name": "Canada"
+      }
+    },
+    "netSalary": 60000,
+    "role": "Technical Lead"
+  },
+  "-Kt69Wpbqmg2YUOJaFN_": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504432496221,
+    "currency": "CHF",
+    "expYears": "10",
+    "gender": "Male",
+    "grossSalary": 130000,
+    "location": {
+      "city": "Saint Gallen",
+      "coords": {
+        "lat": 47.4244818,
+        "lon": 9.376717299999996
+      },
+      "country": {
+        "code": "CH",
+        "name": "Switzerland"
+      }
+    },
+    "netSalary": 105000,
+    "role": "Full Stack Developer"
+  },
+  "-Kt6NxZ87GALvs-fHOz-": {
+    "company": "Self-Employed",
+    "companyYears": "2",
+    "createdAt": 1504436273090,
+    "currency": "EUR",
+    "expYears": "2",
+    "gender": "Male",
+    "grossSalary": 35000,
+    "location": {
+      "city": "Brussels",
+      "coords": {
+        "lat": 50.8503396,
+        "lon": 4.351710300000036
+      },
+      "country": {
+        "code": "BE",
+        "name": "Belgium"
+      }
+    },
+    "netSalary": 16640,
+    "role": "Backend Developer"
+  },
+  "-Kt6SGB5oiySivgjV-8h": {
+    "company": "",
+    "companyYears": "1",
+    "createdAt": 1504437407766,
+    "currency": "EUR",
+    "expYears": "2",
+    "gender": "Male",
+    "grossSalary": 39000,
+    "location": {
+      "city": "Paris",
+      "coords": {
+        "lat": 48.85661400000001,
+        "lon": 2.3522219000000177
+      },
+      "country": {
+        "code": "FR",
+        "name": "France"
+      }
+    },
+    "netSalary": 30000,
+    "role": "Full Stack Developer"
   }
 }
