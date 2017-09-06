@@ -17356,5 +17356,687 @@
     },
     "netSalary": 30000,
     "role": "Full Stack Developer"
+  },
+  "-Kt6ghsaEExUcrq7mv60": {
+    "company": "Irish Life",
+    "companyYears": "5",
+    "createdAt": 1504441542458,
+    "currency": "EUR",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 70600,
+    "location": {
+      "city": "Dublin",
+      "coords": {
+        "lat": 53.3498053,
+        "lon": -6.260309699999993
+      },
+      "country": {
+        "code": "IE",
+        "name": "Ireland"
+      }
+    },
+    "netSalary": 35300,
+    "role": "Other"
+  },
+  "-Kt6oXibrNj1BO21Hope": {
+    "company": "Self",
+    "companyYears": "2",
+    "createdAt": 1504443510598,
+    "currency": "USD",
+    "expYears": ">10",
+    "gender": "Male",
+    "grossSalary": 150000,
+    "location": {
+      "city": "Cambridge",
+      "coords": {
+        "lat": 42.3736158,
+        "lon": -71.1097335
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 115000,
+    "role": "Systems Software Engineer"
+  },
+  "-Kt7TGVDXW7Vn4lCEOOr": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504454449956,
+    "currency": "SEK",
+    "expYears": "6",
+    "gender": "Male",
+    "grossSalary": 453600,
+    "location": {
+      "city": "Malmö",
+      "coords": {
+        "lat": 55.604981,
+        "lon": 13.003822000000014
+      },
+      "country": {
+        "code": "SE",
+        "name": "Sweden"
+      }
+    },
+    "netSalary": 312984,
+    "role": "Backend Developer"
+  },
+  "-Kt7ayoimcFFLTZN9Ven": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504456731886,
+    "currency": "EUR",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 23500,
+    "location": {
+      "city": "Berlin",
+      "coords": {
+        "lat": 52.52000659999999,
+        "lon": 13.404953999999975
+      },
+      "country": {
+        "code": "DE",
+        "name": "Germany"
+      }
+    },
+    "netSalary": 17500,
+    "role": "Frontend Developer"
+  },
+  "-Kt8C0F2lPHBPctff9mM": {
+    "company": "",
+    "companyYears": "4",
+    "createdAt": 1504466703448,
+    "currency": "EUR",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 40000,
+    "location": {
+      "city": "Salzburg",
+      "coords": {
+        "lat": 47.80949,
+        "lon": 13.055010000000038
+      },
+      "country": {
+        "code": "AT",
+        "name": "Austria"
+      }
+    },
+    "netSalary": 25000,
+    "role": "Backend Developer"
+  },
+  "-Kt8IY0bBNUYRVJmw7AN": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504468414618,
+    "currency": "GBP",
+    "expYears": "2",
+    "gender": "Male",
+    "grossSalary": 46000,
+    "location": {
+      "city": "Bristol",
+      "coords": {
+        "lat": 51.454513,
+        "lon": -2.5879099999999653
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 42500,
+    "role": "Other"
+  },
+  "-Kt9sr-0HrIXn8tZb30D": {
+    "company": "",
+    "companyYears": "3",
+    "createdAt": 1504494972789,
+    "currency": "NZD",
+    "expYears": "9",
+    "gender": "Male",
+    "grossSalary": 93000,
+    "location": {
+      "city": "Auckland",
+      "coords": {
+        "lat": -36.8484597,
+        "lon": 174.76333150000005
+      },
+      "country": {
+        "code": "NZ",
+        "name": "New Zealand"
+      }
+    },
+    "netSalary": 65000,
+    "role": "Mobile Developer"
+  },
+  "-KtAjUjLAmDeWrwE-Gpl": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504509294925,
+    "currency": "ZAR",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 25000,
+    "location": {
+      "city": "Stellenbosch",
+      "coords": {
+        "lat": -33.9321045,
+        "lon": 18.86015199999997
+      },
+      "country": {
+        "code": "ZA",
+        "name": "South Africa"
+      }
+    },
+    "netSalary": 25000,
+    "role": "Backend Developer"
+  },
+  "-KtBPTU-3jdkyUl14rUg": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504520562799,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 44400,
+    "location": {
+      "city": "Kraków",
+      "coords": {
+        "lat": 50.06465009999999,
+        "lon": 19.94497990000002
+      },
+      "country": {
+        "code": "PL",
+        "name": "Poland"
+      }
+    },
+    "netSalary": 31900,
+    "role": "Full Stack Developer"
+  },
+  "-KtBgdhp1qMKPogeihP3": {
+    "company": "",
+    "companyYears": "4",
+    "createdAt": 1504525054863,
+    "currency": "EUR",
+    "expYears": "10",
+    "gender": "Male",
+    "grossSalary": 60000,
+    "location": {
+      "city": "Tbilisi",
+      "coords": {
+        "lat": 41.7151377,
+        "lon": 44.82709599999998
+      },
+      "country": {
+        "code": "GE",
+        "name": "Georgia"
+      }
+    },
+    "netSalary": 60000,
+    "role": "Desktop Developer"
+  },
+  "-KtCOlVbxjtFvy1f0rDU": {
+    "company": "",
+    "companyYears": "3",
+    "createdAt": 1504537155709,
+    "currency": "EUR",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 25800,
+    "location": {
+      "city": "Strasbourg",
+      "coords": {
+        "lat": 48.57340529999999,
+        "lon": 7.752111300000024
+      },
+      "country": {
+        "code": "FR",
+        "name": "France"
+      }
+    },
+    "netSalary": 19866,
+    "role": "Full Stack Developer"
+  },
+  "-KtDIPsc9FnMg7hTZIp8": {
+    "company": "",
+    "companyYears": "1",
+    "createdAt": 1504552269289,
+    "currency": "RUB",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 2160000,
+    "location": {
+      "city": "Moscow",
+      "coords": {
+        "lat": 55.755826,
+        "lon": 37.617299900000035
+      },
+      "country": {
+        "code": "RU",
+        "name": "Russia"
+      }
+    },
+    "netSalary": 1920000,
+    "role": "Game Developer"
+  },
+  "-KtDMPK3T50ZxIkrrIHn": {
+    "company": "ArMax",
+    "companyYears": "<1",
+    "createdAt": 1504553312711,
+    "currency": "RUB",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 40000,
+    "location": {
+      "city": "Kursk",
+      "coords": {
+        "lat": 51.7091957,
+        "lon": 36.15622410000003
+      },
+      "country": {
+        "code": "RU",
+        "name": "Russia"
+      }
+    },
+    "netSalary": 40000,
+    "role": "Frontend Developer"
+  },
+  "-KtDMo8NZgDtaqvXiZcK": {
+    "company": "360bound Inc.",
+    "companyYears": "<1",
+    "createdAt": 1504553419480,
+    "currency": "USD",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 18000,
+    "location": {
+      "city": "Kennesaw",
+      "coords": {
+        "lat": 34.0234337,
+        "lon": -84.61548970000001
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 17250,
+    "role": "QA Developer"
+  },
+  "-KtDNTx_GGOco7d2-qMA": {
+    "company": "",
+    "companyYears": "<1",
+    "createdAt": 1504553594814,
+    "currency": "EUR",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 35000,
+    "location": {
+      "city": "Tallinn",
+      "coords": {
+        "lat": 59.43696079999999,
+        "lon": 24.753574699999945
+      },
+      "country": {
+        "code": "EE",
+        "name": "Estonia"
+      }
+    },
+    "netSalary": 27540,
+    "role": "Full Stack Developer"
+  },
+  "-KtDUL-aX5laG9L-S156": {
+    "company": "",
+    "companyYears": "4",
+    "createdAt": 1504555393139,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 32700,
+    "location": {
+      "city": "Minsk",
+      "coords": {
+        "lat": 53.9045398,
+        "lon": 27.561524400000053
+      },
+      "country": {
+        "code": "BY",
+        "name": "Belarus"
+      }
+    },
+    "netSalary": 30000,
+    "role": "Frontend Developer"
+  },
+  "-KtDZKS4vAIoznfdSc7a": {
+    "company": "Kaspersky Lab HQ",
+    "companyYears": "2",
+    "createdAt": 1504556701625,
+    "currency": "RUB",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 1680000,
+    "location": {
+      "city": "Moscow",
+      "coords": {
+        "lat": 55.755826,
+        "lon": 37.617299900000035
+      },
+      "country": {
+        "code": "RU",
+        "name": "Russia"
+      }
+    },
+    "netSalary": 1461600,
+    "role": "Full Stack Developer"
+  },
+  "-KtDbCjTCXe0T2EuBA0s": {
+    "company": "",
+    "companyYears": "3",
+    "createdAt": 1504557456017,
+    "currency": "USD",
+    "expYears": "3",
+    "gender": "Male",
+    "grossSalary": 18000,
+    "location": {
+      "city": "Minsk",
+      "coords": {
+        "lat": 53.9045398,
+        "lon": 27.561524400000053
+      },
+      "country": {
+        "code": "BY",
+        "name": "Belarus"
+      }
+    },
+    "netSalary": 18000,
+    "role": "Full Stack Developer"
+  },
+  "-KtDfPmnJTp-pzMYVETh": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504558558432,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 15200,
+    "location": {
+      "city": "Minsk",
+      "coords": {
+        "lat": 53.9045398,
+        "lon": 27.561524400000053
+      },
+      "country": {
+        "code": "BY",
+        "name": "Belarus"
+      }
+    },
+    "netSalary": 14400,
+    "role": "Frontend Developer"
+  },
+  "-KtDpiZpDlGlh8e6gt2a": {
+    "company": "",
+    "companyYears": "3",
+    "createdAt": 1504561260950,
+    "currency": "RUB",
+    "expYears": "9",
+    "gender": "Male",
+    "grossSalary": 3000000,
+    "location": {
+      "city": "Moscow",
+      "coords": {
+        "lat": 55.755826,
+        "lon": 37.617299900000035
+      },
+      "country": {
+        "code": "RU",
+        "name": "Russia"
+      }
+    },
+    "netSalary": 3000000,
+    "role": "Chief Technology Officer (CTO)"
+  },
+  "-KtEhmKrnkHLi-1hmaF-": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504575956258,
+    "currency": "USD",
+    "expYears": "1",
+    "gender": "Male",
+    "grossSalary": 55000,
+    "location": {
+      "city": "Rockford",
+      "coords": {
+        "lat": 42.2711311,
+        "lon": -89.0939952
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 55000,
+    "role": "Full Stack Developer"
+  },
+  "-KtErcyPt9Htn_vfEQl4": {
+    "company": "",
+    "companyYears": "3",
+    "createdAt": 1504578539811,
+    "currency": "USD",
+    "expYears": "8",
+    "gender": "Male",
+    "grossSalary": 170000,
+    "location": {
+      "city": "New York",
+      "coords": {
+        "lat": 40.7127837,
+        "lon": -74.00594130000002
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 170000,
+    "role": "Full Stack Developer"
+  },
+  "-KtF6RECdQOSbWtBhL4K": {
+    "company": "FORFORCE",
+    "companyYears": "<1",
+    "createdAt": 1504582681958,
+    "currency": "USD",
+    "expYears": ">10",
+    "gender": "Male",
+    "grossSalary": 30000,
+    "location": {
+      "city": "Dnipro",
+      "coords": {
+        "lat": 48.46471700000001,
+        "lon": 35.04618299999993
+      },
+      "country": {
+        "code": "UA",
+        "name": "Ukraine"
+      }
+    },
+    "netSalary": 30000,
+    "role": "Mobile Developer"
+  },
+  "-KtF8k0c3StLgC9bISgt": {
+    "company": "NCT",
+    "companyYears": "3",
+    "createdAt": 1504583284556,
+    "currency": "USD",
+    "expYears": "6",
+    "gender": "Male",
+    "grossSalary": 38000,
+    "location": {
+      "city": "Saint Petersburg",
+      "coords": {
+        "lat": 59.9342802,
+        "lon": 30.335098600000038
+      },
+      "country": {
+        "code": "RU",
+        "name": "Russia"
+      }
+    },
+    "netSalary": 33000,
+    "role": "Backend Developer"
+  },
+  "-KtFZ1WCtDCNuhMREkUu": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504590178531,
+    "currency": "USD",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 72000,
+    "location": {
+      "city": "Kuala Lumpur",
+      "coords": {
+        "lat": 3.139003,
+        "lon": 101.68685499999992
+      },
+      "country": {
+        "code": "MY",
+        "name": "Malaysia"
+      }
+    },
+    "netSalary": 72000,
+    "role": "Full Stack Developer"
+  },
+  "-KtFbX84zfryhFHA6p0d": {
+    "company": "Tripletex",
+    "companyYears": "2",
+    "createdAt": 1504591095509,
+    "currency": "NOK",
+    "expYears": "10",
+    "gender": "Male",
+    "grossSalary": 624000,
+    "location": {
+      "city": "Oslo",
+      "coords": {
+        "lat": 59.9138688,
+        "lon": 10.752245399999993
+      },
+      "country": {
+        "code": "NO",
+        "name": "Norway"
+      }
+    },
+    "netSalary": 431000,
+    "role": "Full Stack Developer"
+  },
+  "-KtFxqhOD782rjnUNf61": {
+    "company": "Capital B. Solutions",
+    "companyYears": "2",
+    "createdAt": 1504596945845,
+    "currency": "EUR",
+    "expYears": "7",
+    "gender": "Male",
+    "grossSalary": 46442,
+    "location": {
+      "city": "Monaco-Ville",
+      "coords": {
+        "lat": 43.73741099999999,
+        "lon": 7.420816000000059
+      },
+      "country": {
+        "code": "MC",
+        "name": "Monaco"
+      }
+    },
+    "netSalary": 35760,
+    "role": "Frontend Developer"
+  },
+  "-KtG70Kz5HHQLpnpLu4f": {
+    "company": "iTechArt",
+    "companyYears": "<1",
+    "createdAt": 1504599609594,
+    "currency": "USD",
+    "expYears": "<1",
+    "gender": "Male",
+    "grossSalary": 500,
+    "location": {
+      "city": "Minsk",
+      "coords": {
+        "lat": 53.9045398,
+        "lon": 27.561524400000053
+      },
+      "country": {
+        "code": "BY",
+        "name": "Belarus"
+      }
+    },
+    "netSalary": 460,
+    "role": "Full Stack Developer"
+  },
+  "-KtGpzeTvrr1v2hW1FUI": {
+    "company": "",
+    "companyYears": "1",
+    "createdAt": 1504611662206,
+    "currency": "GBP",
+    "expYears": "1",
+    "gender": "Male",
+    "grossSalary": 30000,
+    "location": {
+      "city": "Milton Keynes",
+      "coords": {
+        "lat": 52.0406224,
+        "lon": -0.7594171000000642
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 23681,
+    "role": "Full Stack Developer"
+  },
+  "-KtGsgdOuZPiJQOVX0Dr": {
+    "company": "Company",
+    "companyYears": "2",
+    "createdAt": 1504612371119,
+    "currency": "USD",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 31000,
+    "location": {
+      "city": "Minsk",
+      "coords": {
+        "lat": 53.9045398,
+        "lon": 27.561524400000053
+      },
+      "country": {
+        "code": "BY",
+        "name": "Belarus"
+      }
+    },
+    "netSalary": 28000,
+    "role": "Frontend Developer"
+  },
+  "-KtKaHuAe9K7hU0Ex8bP": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504674655984,
+    "currency": "AUD",
+    "expYears": "8",
+    "gender": "Male",
+    "grossSalary": 150000,
+    "location": {
+      "city": "Melbourne",
+      "coords": {
+        "lat": -37.81361100000001,
+        "lon": 144.96305600000005
+      },
+      "country": {
+        "code": "AU",
+        "name": "Australia"
+      }
+    },
+    "netSalary": 115000,
+    "role": "DevOps"
   }
 }
