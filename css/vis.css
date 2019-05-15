@@ -97,7 +97,7 @@ header .submit-text {
 
 .vis-country.__selected,
 .vis-country:hover {
-  fill: #d1ccf3;
+  fill: #ba7fd9;
   cursor: default;
 }
 
