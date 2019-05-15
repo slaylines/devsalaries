@@ -17,17 +17,28 @@
   <meta property="og:image:height" content="829"/>
   <meta property="og:image:alt" content="Dev salaries visualization"/>
 
-  <title>How much developers earn? | TehCookies</title>
+  <title>Explore Salaries | TehCookies</title>
 
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/vis.css">
 </head>
 <body>
   <header>
     <div class="pure-menu pure-menu-horizontal pure-menu-fixed">
+      <a href="#" class="download-link" download="salaries.json">
+        <i class="fa fa-download"></i>
+        <span class="download-text">JSON</span>
+      </a>
+
+      <a href="about.html" class="submit-link">
+        <i class="fa fa-question-circle"></i>
+        <span class="submit-text">What is this page</span>
+      </a>
+
       <a class="pure-menu-heading" href="index.html">
         DS
       </a>
@@ -38,75 +49,235 @@
   </header>
 
   <main>
-    <div class="home-page content">
-      <div class="pure-g-r">
-        <div class="description pure-u-sm-1 pure-u-md-2-5">
-          <h2 class="description-title">
-            Why
-          </h2>
+    <div class="loading-cover" id="cover" rv-show="page.loading">
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
 
-          <p>
-            <a href="https://news.ycombinator.com/item?id=15088840" target="_blank">
-              Ask HN post
-            </a>
-            by @ciaoben collected an amazing dataset
-            with dev salaries in Europe. However the result table is sparse,
-            unstructured and hard to analyze. At
-            <a href="http://tehcookies.com" target="_blank">
-              TehCookies
-            </a>
-            we love to make
-            <span class="nowrap">
-              visualizations
-              <i class="fa fa-bar-chart"></i>
-            </span>
-            which give insight into data. This salary dataset is no exception.
-            And why on Earth we need to limit it to Europe only?
-          </p>
-
-          <h2 class="description-title">
-            Data
-          </h2>
-
-          <p>
-            We got original data from HN and cleaned it up by removing spam
-            and sparse rows. We also restricted possible table
-            values. See clean
-            <span class="nowrap">
-              <a href="https://github.com/tehcookies/devsalaries/blob/master/data/raw-entries.csv" target="_blank">
-                CSV dataset
-                <i class="fa fa-table"></i>
-              </a>
-            </span>
-            .
-          </p>
-
-          <h2 class="description-title">
-            Contribute
-          </h2>
-
-          <p>
-            Have your own visualization in mind? Want to improve the existing one? PRs to
-            <span class="nowrap">
-              <a href="https://github.com/tehcookies/devsalaries" target="_blank">
-                our GitHub repo
-                <i class="fa fa-github"></i>
-              </a>
-            </span>
-            are more than welcome!
-          </p>
-        </div>
+    <div class="pure-g vis-page content" id="content">
+      <div class="pure-u-1" id="map">
+        <svg></svg>
+        <div id="vis-map-hint">Zoom in to see cities.<br>Click on the country or city to explore data.</div>
+        <div class="vis-tooltip __hidden"></div>
       </div>
 
-      <div class="pure-g-r">
-        <div class="buttons pure-u-sm-1 pure-u-md-2-5">
-          <a href="form.html" class="pure-button ds-button">
-            Submit Salary
-          </a>
-          <a href="vis.html" class="pure-button ds-button">
-            Explore Salaries
-          </a>
+      <div class="pure-u-1" id="data">
+        <div class="vis-title">
+          <h1 class="vis-location" rv-text="statistics.location | location"></h1>
+          <div class="vis-notice">
+            <i class="fa fa-asterisk"></i>
+            salaries are shown in $
+          </div>
+          <div
+            class="vis-table-link"
+            rv-on-click="table.onTableLinkClick"
+            rv-show="statistics.showCharts"
+          >
+            <i class="fa fa-table"></i>
+          </div>
         </div>
+
+        <div rv-show="statistics.showCharts">
+          <div class="vis-people noselect" rv-show="statistics.gender">
+            <span rv-show="statistics.gender.Male" title="Males">
+              <i class="fa fa-mars"></i>{statistics.gender.Male}
+            </span>
+            <span rv-show="statistics.gender.Female" title="Females">
+              <i class="fa fa-venus"></i>{statistics.gender.Female}
+            </span>
+            <span rv-show="statistics.gender.Other" title="Others">
+              <i class="fa fa-neuter"></i>{statistics.gender.Other}
+            <span>
+          </div>
+
+          <div class="vis-lists">
+            <div class="vis-list" rv-show="statistics.company">
+              <span class="__bordered">Companies</span>:
+              <span class="__margin">
+                {statistics.company.values | companies statistics.company.showAll}
+              </span>
+              <span
+                class="vis-link"
+                rv-show="statistics.company.visible"
+                rv-on-click="statistics.onShowAllCompanies"
+              >
+                {statistics.company.showAll | showAll}
+              </span>
+            </div>
+            <div class="vis-list" rv-show="statistics.role">
+              <span class="__bordered">Roles</span>:
+              <span class="__margin">
+                {statistics.role.values | roles statistics.role.showAll}
+              </span>
+              <span
+                class="vis-link"
+                rv-show="statistics.role.visible"
+                rv-on-click="statistics.onShowAllRoles"
+              >
+                {statistics.role.showAll | showAll}
+              </span>
+            </div>
+          </div>
+
+          <h2 class="vis-chart-title">
+            Salary distribution of employees
+          </h2>
+          <div class="vis-salary-charts noselect">
+            <div class="vis-salary" rv-show="statistics.netSalary">
+              <span class="vis-salary-title">net</span>
+              <div id="net-salary"></div>
+            </div>
+            <div class="vis-salary" rv-show="statistics.netSalary">
+              <span class="vis-salary-title">gross</span>
+              <div id="gross-salary"></div>
+            </div>
+          </div>
+
+          <h2 class="vis-chart-title">
+            Employees distribution
+            <br/>
+            by years of work experience
+          </h2>
+          <div class="vis-years-charts noselect" id="vis-years-charts">
+            <div rv-show="statistics.companyYears">
+              <div class="vis-years-y-title">employees</div>
+              <div id="years-company"></div>
+              <div class="vis-years-x-title">current job</div>
+            </div>
+            <div class="__shift" rv-show="statistics.expYears">
+              <div class="vis-years-y-title">employees</div>
+              <div id="years-total"></div>
+              <div class="vis-years-x-title">total</div>
+            </div>
+            <div class="bar-tooltip __hidden"></div>
+          </div>
+
+          <h2 class="vis-chart-title">
+            Salary distributions of employees
+            <br/>
+            by years of work experience
+          </h2>
+          <div class="vis-whisker noselect">
+            <div class=y-label>
+              <span
+                rv-class="graphs.net"
+                rv-on-click="graphs.onSetNetSalary"
+              >net</span> /
+              <span
+                rv-class="graphs.gross"
+                rv-on-click="graphs.onSetGrossSalary"
+              >gross</span>,
+              <br/>
+              thousands
+            </div>
+            <div id="whisker-graph"></div>
+            <div class=x-label>
+              <span
+                rv-class="graphs.job"
+                rv-on-click="graphs.onSetJobYears"
+              >current job</span> /
+              <span
+                rv-class="graphs.total"
+                rv-on-click="graphs.onSetTotalYears"
+              >total</span>
+            </div>
+          </div>
+        </div>
+
+        <div rv-show="statistics.showTable">
+          <div class="vis-table-wrapper">
+            <table id="data-table" class="pure-table pure-table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    <i class="fa fa-map-marker"></i>
+                  </th>
+                  <th>
+                    <i class="fa fa-user"></i>
+                  </th>
+                  <th>
+                    <i class="fa fa-calendar"></i>
+                    <sup>yr</sup>
+                    <span class="legend">
+                      current job / total
+                    </span>
+                  </th>
+                  <th>
+                    <i class="fa fa-usd"></i>
+                    <span class="legend">
+                      gross / net
+                    </span>
+                  </th>
+                  <th>
+                    <i class="fa fa-venus-mars"></i>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="list">
+              </tbody>
+              <tfoot>
+                <tr id="modal-table-row-template">
+                  <td class="location"></td>
+                  <td class="role"></td>
+                  <td class="experience"></td>
+                  <td class="salary"></td>
+                  <td class="gender"></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vis-table-modal" rv-show="table.show">
+      <div class="vis-table-modal-search pure-form">
+        <input class="fuzzy-search" type="text" placeholder="Search"/>
+      </div>
+
+      <div class="vis-table-modal-close" rv-on-click="table.onModalCloseClick">
+        ✕
+      </div>
+
+      <div class="vis-table-wrapper">
+        <table id="modal-table" class="pure-table pure-table-bordered">
+          <thead>
+            <tr>
+              <th class="sort" data-sort="location">
+                <i class="fa fa-map-marker"></i>
+              </th>
+              <th class="sort" data-sort="role">
+                <i class="fa fa-user"></i>
+              </th>
+              <th class="sort" data-sort="experience">
+                <i class="fa fa-calendar"></i>
+                <sup>yr</sup>
+                <span class="legend">
+                  current job / total
+                </span>
+              </th>
+              <th class="sort" data-sort="salary">
+                <i class="fa fa-usd"></i>
+                <span class="legend">
+                  gross / net
+                </span>
+              </th>
+              <th class="sort" data-sort="gender">
+                <i class="fa fa-venus-mars"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="list">
+          </tbody>
+          <tfoot>
+            <tr id="modal-table-row-template">
+              <td class="location"></td>
+              <td class="role"></td>
+              <td class="experience"></td>
+              <td class="salary"></td>
+              <td class="gender"></td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   </main>
@@ -144,9 +315,22 @@
 
     Made with love by
     <a href="http://tehcookies.com" target="_blank">TehCookies</a>
-    for
-    <a href="https://news.ycombinator.com" target="_blank">Hacker News</a>
   </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+  <script src="https://d3js.org/d3.v3.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.9.6/rivets.bundled.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+  <script type="text/javascript" src="js/firebase.js"></script>
+  <script type="text/javascript" src="js/data-api.js"></script>
+  <script type="text/javascript" src="js/vis/world-map.js"></script>
+  <script type="text/javascript" src="js/vis/salary-sparkline.js"></script>
+  <script type="text/javascript" src="js/vis/years-bar-chart.js"></script>
+  <script type="text/javascript" src="js/vis/salary-chart.js"></script>
+  <script type="text/javascript" src="js/vis.js"></script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -171,3 +355,4 @@
   </script>
 </body>
 </html>
+

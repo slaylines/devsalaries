@@ -40,12 +40,12 @@ a {
 
 .ds-button {
   color: white;
-  background: #ff6600;
+  background: #ba7fd9;
   border-radius: 0;
 }
 
 .ds-button:hover {
-  background-color: black;
+  background-color: #333;
 }
 
 .loading-cover {
@@ -83,7 +83,7 @@ header {
 header .pure-menu {
   height: 40px;
   padding: 0.3em;
-  background: #ff6600;
+  background: #ba7fd9;
 }
 
 header .pure-menu-heading {
@@ -124,7 +124,7 @@ footer {
   width: 100%;
   padding: 10px;
   background: #f6f6ef;
-  border-top: 2px solid #ff6600;
+  border-top: 2px solid #ba7fd9;
   text-align: center;
 }
 

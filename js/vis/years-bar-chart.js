@@ -16,7 +16,7 @@
     const top = y
 
     tooltip.classed('__hidden', false)
-           .attr('style', `left:${left}px;top:${top}px`)
+           .attr('style', `left:${left}px; top:${top}px`)
   }
 
   // Years bar graphs graph object

@@ -9,7 +9,7 @@
       const barHeight = 5.5;
 
       const mainColor = '#333';
-      const accentColor = '#c85000';
+      const accentColor = '#ba7fd9';
 
       const fontFamily = 'sans-serif';
       const fontSize = '12px';

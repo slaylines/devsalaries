@@ -124,7 +124,7 @@ header .submit-text {
 
 .vis-city.__selected,
 .vis-city:hover {
-  fill: #ff6600;
+  fill: #ba7fd9;
   opacity: 1;
 }
 
@@ -250,7 +250,7 @@ header .submit-text {
 }
 
 .vis-years-charts rect:hover {
-  fill: #d1ccf3;
+  fill: rgba(186, 127, 217, 0.2);
 }
 
 .vis-years-charts .bar-tooltip {
@@ -378,7 +378,7 @@ header .submit-text {
 }
 
 .vis-table-wrapper table tbody tr:hover {
-  background: #d1ccf3;
+  background: rgba(186, 127, 217, 0.2);
 }
 
 .vis-table-wrapper .sort {

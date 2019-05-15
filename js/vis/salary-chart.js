@@ -49,7 +49,7 @@
       const height = width * 0.6;
 
       const mainColor = '#333';
-      const accentColor = '#c85000';
+      const accentColor = '#ba7fd9';
       const radius = 2;
       const lineWidth = 5;
       const textHeight = 10;
