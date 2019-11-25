@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@google/maps@^0.4.3":
+"@google/maps@0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@google/maps/-/maps-0.4.3.tgz#b468961114d6e0749c15802e0da149dcea2283a5"
 
@@ -18,7 +18,7 @@ dom-storage@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/dom-storage/-/dom-storage-2.0.2.tgz#ed17cbf68abd10e0aef8182713e297c5e4b500b0"
 
-dotenv@^4.0.0:
+dotenv@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
 
@@ -35,7 +35,7 @@ faye-websocket@0.9.3:
   dependencies:
     websocket-driver ">=0.5.1"
 
-firebase@^4.3.0:
+firebase@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-4.3.0.tgz#21d95a92f862c7e406ddf871c173b50f153f8d46"
   dependencies:
@@ -93,9 +93,9 @@ lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
-moment@2.18.1, moment@2.x.x:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+moment@2.19.3, moment@2.x.x:
+  version "2.19.3"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.3.tgz#bdb99d270d6d7fda78cc0fbace855e27fe7da69f"
 
 ms@^2.0.0:
   version "2.0.0"
@@ -113,7 +113,7 @@ safe-buffer@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-sleep@^5.1.1:
+sleep@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/sleep/-/sleep-5.1.1.tgz#878fa1d44d08eeb0f26fb2018ef8629eb1a3ab94"
   dependencies:
