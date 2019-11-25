@@ -1,10 +1,10 @@
 {
   "name": "utils",
   "version": "1.0.0",
-  "description": "tehcookies.github.io/devsalaries helper scripts for data processing.",
+  "description": "slaylines.github.io/devsalaries helper scripts for data processing.",
   "main": "index.js",
-  "repository": "https://github.com/tehcookies/devsalaries",
-  "author": "TehCookies",
+  "repository": "https://github.com/slaylines/devsalaries",
+  "author": "slay_lines",
   "license": "MIT",
   "scripts": {
     "convert": "node convert.js",
