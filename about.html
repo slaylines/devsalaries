@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="D3.js visualization of dev salaries across the globe.">
+  <meta name="author" content="slay_lines">
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="How much developers earn?"/>
+  <meta property="og:description" content="D3.js visualization of dev salaries across the globe."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="http://devsalaries.slaylines.io"/>
+  <meta property="og:image" content="http://devsalaries.slaylines.io/img/ogimage.jpg?v=2"/>
+  <meta property="og:image:type" content="image/jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="829"/>
+  <meta property="og:image:alt" content="Dev salaries visualization"/>
+
+  <title>How much developers earn? | slay_lines</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header>
+    <div class="pure-menu pure-menu-horizontal pure-menu-fixed">
+      <a class="pure-menu-heading" href="index.html">
+        DS
+      </a>
+      <h1 class="menu-title">
+        How Much Developers Earn?
+      </h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="home-page content">
+      <div class="pure-g-r">
+        <div class="description pure-u-sm-1 pure-u-md-2-5">
+          <h2 class="description-title">
+            Why
+          </h2>
+
+          <p>
+            <a href="https://news.ycombinator.com/item?id=15088840" target="_blank">
+              Ask HN post
+            </a>
+            by @ciaoben collected an amazing dataset
+            with dev salaries in Europe. However the result table is sparse,
+            unstructured and hard to analyze. At
+            <a href="https://slaylines.io" target="_blank">
+              slay_lines
+            </a>
+            we love to make
+            <span class="nowrap">
+              visualizations
+              <i class="fa fa-bar-chart"></i>
+            </span>
+            which give insight into data. This salary dataset is no exception.
+            And why on Earth we need to limit it to Europe only?
+          </p>
+
+          <h2 class="description-title">
+            Data
+          </h2>
+
+          <p>
+            We got original data from HN and cleaned it up by removing spam
+            and sparse rows. We also restricted possible table
+            values. See clean
+            <span class="nowrap">
+              <a href="https://github.com/slaylines/devsalaries/blob/master/data/raw-entries.csv" target="_blank">
+                CSV dataset
+                <i class="fa fa-table"></i>
+              </a>
+            </span>
+            .
+          </p>
+
+          <h2 class="description-title">
+            Contribute
+          </h2>
+
+          <p>
+            Have your own visualization in mind? Want to improve the existing one? PRs to
+            <span class="nowrap">
+              <a href="https://github.com/slaylines/devsalaries" target="_blank">
+                our GitHub repo
+                <i class="fa fa-github"></i>
+              </a>
+            </span>
+            are more than welcome!
+          </p>
+        </div>
+      </div>
+
+      <div class="pure-g-r">
+        <div class="buttons pure-u-sm-1 pure-u-md-2-5">
+          <a href="index.html" class="pure-button ds-button">
+            Explore Salaries
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="sharing">
+      <a
+        class="social-link fa fa-github"
+        href="https://github.com/slaylines/devsalaries"
+        target="_blank"
+      >
+      </a>
+      &emsp;&emsp;
+      <a
+        class="social-link fa fa-twitter"
+        href="https://twitter.com/intent/tweet?text=How+much+%23developers+earn%3F+Check+out+this+awesome+%23d3js+%23visualization+made+for+%40hackernews%21&url=http%3A%2F%2Fbit.ly%2Fdevsalaries&hashtags=js"
+        target="_blank"
+      >
+      </a>
+      &emsp;&emsp;
+      <a
+        class="social-link fa fa-reddit-alien"
+        href="https://www.reddit.com/submit?url=http%3A%2F%2Fbit.ly%2Fdevsalaries&title=How+much+developers+earn%3F"
+        target="_blank"
+      >
+      </a>
+      &emsp;&emsp;
+      <a
+        class="social-link fa fa-facebook"
+        href="https://www.facebook.com/sharer/sharer.php?u=http%3A//bit.ly/devsalaries"
+        target="_blank"
+      >
+      </a>
+    </div>
+
+    Made with love by
+    <a href="https://slaylines.io" target="_blank">slay_lines</a>
+  </footer>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-62550522-4', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>
