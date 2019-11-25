@@ -18038,5 +18038,137 @@
     },
     "netSalary": 115000,
     "role": "DevOps"
+  },
+  "-KtOLPGxw0TTyxHB80Lq": {
+    "company": "Microsoft",
+    "companyYears": ">5",
+    "createdAt": 1504737600702,
+    "currency": "EUR",
+    "expYears": ">10",
+    "gender": "Male",
+    "grossSalary": 72000,
+    "location": {
+      "city": "Prague",
+      "coords": {
+        "lat": 50.0755381,
+        "lon": 14.43780049999998
+      },
+      "country": {
+        "code": "CZ",
+        "name": "Czechia"
+      }
+    },
+    "netSalary": 50000,
+    "role": "Backend Developer"
+  },
+  "-KtYGfdzv7fpGrou87Ov": {
+    "company": "",
+    "companyYears": "2",
+    "createdAt": 1504904133272,
+    "currency": "USD",
+    "expYears": "8",
+    "gender": "Male",
+    "grossSalary": 145000,
+    "location": {
+      "city": "Seattle",
+      "coords": {
+        "lat": 47.6062095,
+        "lon": -122.3320708
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 106000,
+    "role": "Chief Technology Officer (CTO)"
+  },
+  "-KtkliFi8j3EtzyzkGtG": {
+    "company": "QVC",
+    "companyYears": "2",
+    "createdAt": 1505130636338,
+    "currency": "GBP",
+    "expYears": "4",
+    "gender": "Male",
+    "grossSalary": 42000,
+    "location": {
+      "city": "London",
+      "coords": {
+        "lat": 51.5073509,
+        "lon": -0.12775829999998223
+      },
+      "country": {
+        "code": "GB",
+        "name": "United Kingdom"
+      }
+    },
+    "netSalary": 28800,
+    "role": "Data Analyst"
+  },
+  "-KtklulT13_ZJkHfUu87": {
+    "company": "The Irish Times",
+    "companyYears": "1",
+    "createdAt": 1505130687586,
+    "currency": "EUR",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 50000,
+    "location": {
+      "city": "Dublin",
+      "coords": {
+        "lat": 53.3498053,
+        "lon": -6.260309699999993
+      },
+      "country": {
+        "code": "IE",
+        "name": "Ireland"
+      }
+    },
+    "netSalary": 38124,
+    "role": "Data Analyst"
+  },
+  "-Kwknn_RJ2ZWwOY0rXjr": {
+    "company": "",
+    "companyYears": ">5",
+    "createdAt": 1508352407561,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 64000,
+    "location": {
+      "city": "Cincinnati",
+      "coords": {
+        "lat": 39.1031182,
+        "lon": -84.51201960000003
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 46720,
+    "role": "Data Analyst"
+  },
+  "-LV6lRDlciDiUkYb7E74": {
+    "company": "Elegant Themes, Inc.",
+    "companyYears": "5",
+    "createdAt": 1546318627825,
+    "currency": "USD",
+    "expYears": "5",
+    "gender": "Male",
+    "grossSalary": 69000,
+    "location": {
+      "city": "Biloxi",
+      "coords": {
+        "lat": 30.3960318,
+        "lon": -88.88530779999996
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      }
+    },
+    "netSalary": 54000,
+    "role": "Full Stack Developer"
   }
 }
