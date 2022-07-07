@@ -14,7 +14,7 @@
     "@google/maps": "0.4.3",
     "dotenv": "4.0.0",
     "firebase": "4.3.0",
-    "moment": "2.19.3",
+    "moment": "2.29.4",
     "sleep": "5.1.1"
   }
 }
