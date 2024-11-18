@@ -13,7 +13,7 @@
   "dependencies": {
     "@google/maps": "0.4.3",
     "dotenv": "4.0.0",
-    "firebase": "4.3.0",
+    "firebase": "10.9.0",
     "moment": "2.19.3",
     "sleep": "5.1.1"
   }
